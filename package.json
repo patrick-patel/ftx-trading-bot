@@ -1,0 +1,42 @@
+{
+  "name": "ftx-trading-bot",
+  "version": "0.0.0",
+  "description": "nom-nom",
+  "main": "index.js",
+  "scripts": {
+    "react-dev": "webpack --mode development --watch",
+    "server-dev": "npx nodemon server/index.js",
+    "dev": "npx nodemon server/index.js & webpack --mode development --watch",
+    "build": "webpack --mode production",
+    "start": "node ./server/index.js"
+  },
+  "author": "Patrick Patel",
+  "license": "",
+  "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.5",
+    "babel-loader": "^8.2.1",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^5.1.1",
+    "express": "^4.15.0",
+    "ftx-api": "^1.0.14",
+    "hmac": "^1.0.1",
+    "jquery": "^3.1.1",
+    "mongoose": "^5.10.15",
+    "node-forge": "^0.10.0",
+    "react": "^16.4",
+    "react-bootstrap": "^2.0.0-rc.0",
+    "react-dom": "^16.4",
+    "react-redux": "^7.2.5",
+    "react-router-dom": "^5.3.0",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0"
+  }
+}

@@ -43,7 +43,11 @@ app.post('/tradingview', function (req, res) {
   getCandle() // change to 3600000
   .then(data => {
     console.log(data)
+    return data;
   })
+  // .then(data => {
+
+  // })
   .then(() => {
     res.redirect('/');
   })

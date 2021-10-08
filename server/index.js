@@ -17,20 +17,33 @@ app.use('/', express.static(__dirname + '/../client/dist'));
 
 app.get('/accountValue', function (req, res) {
   console.log('----------------get request-----------------');
-  getAccountValue('sub1')
-  .then((data) => {
+  getAccountValue()
+  .then(data => {
     console.log(data)
-    res.send({ accountValue: data.accountValue });
+    var total = 0;
+    data.result.forEach(coin => {
+      total += coin.usdValue;
+    })
+    return total;
+  })
+  .then(accountValue => {
+    var responseObj = {
+      accountValue: accountValue
+    }
+    res.send(responseObj);
+  })
+  .catch(err => {
+    console.log(err);
   })
 });
 
-app.post('/', function (req, res) {
-  getAccountValue(req.body.user)
-  .then(repos => {
-    return save(repos.data);
+app.post('/tradingview', function (req, res) {
+  setTimeout(getNextCandle, 5000) // change to 3600000
+  .then(data => {
+    console.log(data)
   })
   .then(() => {
-    res.redirect('/repos');
+    res.redirect('/');
   })
 });
 

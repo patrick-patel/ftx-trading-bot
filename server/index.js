@@ -26,11 +26,14 @@ app.get('/accountValue', function (req, res) {
     data.result.forEach(coin => {
       total += coin.usdValue;
     })
-    return total;
+    data.total = total;
+    return data;
   })
-  .then(accountValue => {
+  .then(data => {
     var responseObj = {
-      accountValue: accountValue
+      accountValue: data.total,
+      link: data.result[2].total,
+      btc: data.result[0].total
     }
     res.send(responseObj);
   })

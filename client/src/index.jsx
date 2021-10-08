@@ -8,7 +8,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      accountValue: 0
+      accountValue: 0,
+      link: 0,
+      btc: 0
     }
 
   }
@@ -22,7 +24,9 @@ class App extends React.Component {
       'context': this,
       'success': function(res) {
         this.setState({
-          accountValue: res.accountValue
+          accountValue: res.accountValue,
+          link: res.link,
+          btc: res.btc
         })
       }
     })
@@ -39,7 +43,9 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>FTX Trading Bot</h1>
-      <p>{this.state.accountValue}</p>
+      <p>Account Value USD:  {this.state.accountValue}</p>
+      <p>Link:  {this.state.link}</p>
+      <p>BTC:  {this.state.btc}</p>
     </div>)
   }
 }

@@ -15,14 +15,21 @@ class Search extends React.Component {
     });
   }
 
-  startBot() {
+  test() {
     $.ajax({
-      'url': 'http://localhost:1128/startBot',
+      'url': 'http://localhost:1128/tradingview',
       // 'url': '/repos',
-      'type': 'GET',
+      'type': 'POST',
       'context': this,
-      'success': function(top25Repos) {
-        console.log('Bot Started');
+      'data': {
+        event: 'bullish reversal',
+        open: 0.0004984,
+        close: 0.0004987,
+        high: 0.0004989,
+        low: 0.0004981
+      },
+      'success': function() {
+        console.log('success');
       },
       'error': function(error) {
         console.log(error);
@@ -33,7 +40,7 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.startBot.bind(this)}> Start Bot </button>
+        <button onClick={this.test.bind(this)}> Test Signal </button>
       </div>
     )
   }

@@ -40,14 +40,52 @@ app.get('/accountValue', function (req, res) {
 });
 
 app.post('/tradingview', function (req, res) {
-  getCandle() // change to 3600000
+  console.log(req.body);
+  getAccountValue()
   .then(data => {
-    console.log(data)
-    return data;
+    if (req.body.event === 'bullish reversal') {
+      if (data.result[0].free > 0) {
+        postStopMarketBuyOrder(req.body.high, data.result[0].free)
+        .then(() => {
+          console.log('successfully posted stop market buy order');
+          return;
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      } else {
+        console.log('no btc to trade');
+      }
+    }
+    if (req.body.event === 'bearish reversal') {
+      if (data.result[2].free > 0) {
+        postStopMarketSellOrder(req.body.low, data.result[2].free)
+        .then(() => {
+          console.log('successfully posted stop market sell order');
+          return;
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      } else {
+        console.log('no link to trade');
+      }
+    }
+    if (req.body.event === 'local top') {
+      if (data.result[0].free > 0) {
+        postMarketSellOrder(data.result[0].free)
+        .then(() => {
+          console.log('successfully posted market sell order');
+          return;
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      } else {
+        console.log('no link to trade');
+      }
+    }
   })
-  // .then(data => {
-
-  // })
   .then(() => {
     res.redirect('/');
   })

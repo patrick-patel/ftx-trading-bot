@@ -16,8 +16,8 @@ class App extends React.Component {
   componentDidMount() {
     console.log('comp did mount')
     $.ajax({
-      'url': 'http://localhost:1128/accountValue',
-      // 'url': '/repos',
+      // 'url': 'http://localhost:1128/accountValue',
+      'url': '/accountValue',
       'type': 'GET',
       'context': this,
       'success': function(res) {

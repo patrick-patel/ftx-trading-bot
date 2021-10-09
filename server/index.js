@@ -44,7 +44,7 @@ app.get('/accountValue', function (req, res) {
 });
 
 app.post('/tradingview', function (req, res) {
-  console.log(req.body);
+  console.log(req);
   getAccountValue()
   .then(data => {
     if (req.body.event === 'bullish reversal') {

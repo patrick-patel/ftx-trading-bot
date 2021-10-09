@@ -15,6 +15,7 @@ const getMarket = require('../lib/ftx.js').getMarket;
 // const fetchTop25 = require('../database/index.js').fetchTop25;
 
 app.use(bodyParser.json());
+app.use(express.text());
 app.use(bodyParser.urlencoded());
 app.use('/', express.static(__dirname + '/../client/dist'));
 
@@ -44,7 +45,7 @@ app.get('/accountValue', function (req, res) {
 });
 
 app.post('/tradingview', function (req, res) {
-  console.log(req);
+  console.log(req.body);
   getAccountValue()
   .then(data => {
     if (req.body.event === 'bullish reversal') {

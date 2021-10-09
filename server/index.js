@@ -46,7 +46,7 @@ app.get('/accountValue', function (req, res) {
 
 app.post('/tradingview', function (req, res) {
   console.log(req.body);
-  json.parse(req.body);
+  JSON.parse(req.body);
   console.log(typeof req.body.high);
   getAccountValue()
   .then(data => {

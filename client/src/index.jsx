@@ -46,7 +46,6 @@ class App extends React.Component {
       <p>Account Value USD:  {this.state.accountValue}</p>
       <p>Link:  {this.state.link}</p>
       <p>BTC:  {this.state.btc}</p>
-      <Search />
     </div>)
   }
 }

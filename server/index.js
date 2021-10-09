@@ -7,7 +7,7 @@ const getAccountValue = require('../lib/ftx.js').getAccountValue;
 const postMarketSellOrder = require('../lib/ftx.js').postMarketSellOrder;
 const postStopMarketBuyOrder = require('../lib/ftx.js').postStopMarketBuyOrder;
 const postStopMarketSellOrder = require('../lib/ftx.js').postStopMarketSellOrder;
-const getCandle = require('../lib/ftx.js').getCandle;
+const cancelAllOrders = require('../lib/ftx.js').cancelAllOrders;
 
 // database calls
 // const save = require('../database/index.js').save;
@@ -48,10 +48,16 @@ app.post('/tradingview', function (req, res) {
   .then(data => {
     if (req.body.event === 'bullish reversal') {
       if (data.result[0].free > 0) {
-        postStopMarketBuyOrder(req.body.high, data.result[0].free)
+        cancelAllOrders()
         .then(() => {
-          console.log('successfully posted stop market buy order');
-          return;
+          postStopMarketBuyOrder(req.body.high, data.result[0].free)
+          .then(() => {
+            console.log('successfully posted stop market buy order');
+            return;
+          })
+          .catch(err => {
+            console.log(err);
+          })
         })
         .catch(err => {
           console.log(err);
@@ -62,10 +68,16 @@ app.post('/tradingview', function (req, res) {
     }
     if (req.body.event === 'bearish reversal') {
       if (data.result[2].free > 0) {
-        postStopMarketSellOrder(req.body.low, data.result[2].free)
+        cancelAllOrders()
         .then(() => {
-          console.log('successfully posted stop market sell order');
-          return;
+          postStopMarketSellOrder(req.body.low, data.result[2].free)
+          .then(() => {
+            console.log('successfully posted stop market sell order');
+            return;
+          })
+          .catch(err => {
+            console.log(err);
+          })
         })
         .catch(err => {
           console.log(err);
@@ -76,10 +88,16 @@ app.post('/tradingview', function (req, res) {
     }
     if (req.body.event === 'local top') {
       if (data.result[0].free > 0) {
-        postMarketSellOrder(data.result[0].free)
+        cancelAllOrders()
         .then(() => {
-          console.log('successfully posted market sell order');
-          return;
+          postMarketSellOrder(data.result[0].free)
+          .then(() => {
+            console.log('successfully posted market sell order');
+            return;
+          })
+          .catch(err => {
+            console.log(err);
+          })
         })
         .catch(err => {
           console.log(err);

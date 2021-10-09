@@ -22,11 +22,11 @@ class Search extends React.Component {
       'type': 'POST',
       'context': this,
       'data': {
-        event: 'bullish reversal',
+        event: 'local top',
         open: 0.0004984,
         close: 0.0004987,
-        high: 0.0004989,
-        low: 0.0004981
+        high: 0.0006,
+        low: 0.0003
       },
       'success': function() {
         console.log('success');

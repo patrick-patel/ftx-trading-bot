@@ -8,6 +8,7 @@ const postMarketSellOrder = require('../lib/ftx.js').postMarketSellOrder;
 const postStopMarketBuyOrder = require('../lib/ftx.js').postStopMarketBuyOrder;
 const postStopMarketSellOrder = require('../lib/ftx.js').postStopMarketSellOrder;
 const cancelAllOrders = require('../lib/ftx.js').cancelAllOrders;
+const getMarket = require('../lib/ftx.js').getMarket;
 
 // database calls
 // const save = require('../database/index.js').save;
@@ -50,7 +51,11 @@ app.post('/tradingview', function (req, res) {
       if (data.result[0].free > 0) {
         cancelAllOrders()
         .then(() => {
-          postStopMarketBuyOrder(req.body.high, data.result[0].free)
+          return getMarket('LINK/BTC')
+        })
+        .then(marketData => {
+          console.log('marketData: ', marketData)
+          postStopMarketBuyOrder(req.body.high, data.result[0].free, marketData.result.price)
           .then(() => {
             console.log('successfully posted stop market buy order');
             return;
@@ -87,10 +92,10 @@ app.post('/tradingview', function (req, res) {
       }
     }
     if (req.body.event === 'local top') {
-      if (data.result[0].free > 0) {
+      if (data.result[2].free > 0) {
         cancelAllOrders()
         .then(() => {
-          postMarketSellOrder(data.result[0].free)
+          postMarketSellOrder(data.result[2].free)
           .then(() => {
             console.log('successfully posted market sell order');
             return;

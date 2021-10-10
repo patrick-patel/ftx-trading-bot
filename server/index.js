@@ -15,7 +15,7 @@ const getMarket = require('../lib/ftx.js').getMarket;
 // const fetchTop25 = require('../database/index.js').fetchTop25;
 
 app.use(bodyParser.json());
-// app.use(express.text());
+app.use(express.text());
 app.use(bodyParser.urlencoded());
 app.use('/', express.static(__dirname + '/../client/dist'));
 

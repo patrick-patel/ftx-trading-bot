@@ -46,14 +46,15 @@ app.get('/accountValue', function (req, res) {
 
 app.post('/tradingview', function (req, res) {
   console.log(req.body);
-  console.log('raw: ', typeof req.body);
-  var body = req.body.toString();
-  console.log('to string: ', typeof body);
   var json = JSON.stringify(req.body);
-  console.log('json: ', typeof json);
+  console.log('json: ', json);
+
 
   getAccountValue()
   .then(data => {
+    if (json.event === 'event') {
+      console.log('it can be manipulated!');
+    }
     if (req.body.event === 'bullish reversal') {
       if (data.result[0].free > 0) {
         cancelAllOrders()

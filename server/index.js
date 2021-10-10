@@ -48,7 +48,7 @@ app.post('/tradingview', function (req, res) {
   console.log(req.body);
   var string = JSON.stringify(req.body);
   console.log('json: ', json);
-  var json = JSON.parse(JSON.parse(string));
+  var json = JSON.parse(string);
   console.log(typeof json);
   console.log(json);
 

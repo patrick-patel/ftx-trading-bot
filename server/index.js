@@ -51,7 +51,7 @@ app.post('/tradingview', function (req, res) {
 
   getAccountValue()
   .then(data => {
-    if (json.event === 'event') {
+    if (req.body.event === 'test') {
       console.log('it can be manipulated!');
     }
     if (req.body.event === 'bullish reversal') {

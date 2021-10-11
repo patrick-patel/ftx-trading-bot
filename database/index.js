@@ -26,7 +26,7 @@ let save = (candle) => {
 
 let fetchCandle = () => {
   console.log('fetching candle');
-  return Candle.find().sort({ $natural: -1 }).limit(1);
+  return Candle.find().sort({"_id":-1}).limit(1);
 }
 
 module.exports.save = save;

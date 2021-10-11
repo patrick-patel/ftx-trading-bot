@@ -16,7 +16,7 @@ let Candle = mongoose.model('Candle', candleSchema);
 
 let save = (candle) => {
   console.log('saving candle')
-  var candleInstande = new Candle(candle)
+  var candleInstance = new Candle(candle)
   candleInstance.save()
     .then(data => {
       console.log('saved!');

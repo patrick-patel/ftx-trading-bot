@@ -12,7 +12,6 @@ class App extends React.Component {
       link: 0,
       btc: 0
     }
-
   }
 
   componentDidMount() {
@@ -32,21 +31,17 @@ class App extends React.Component {
     })
   }
 
-  // search (term, top25Repos) {
-  //   console.log(`${term} was searched`);
-  //   this.setState({
-  //     repos: top25Repos
-  //   })
-  //   console.log(this.state.repos);
-  // }
-
   render () {
-    return (<div>
-      <h1>FTX Trading Bot</h1>
-      <p>Account Value USD:  {this.state.accountValue}</p>
-      <p>Link:  {this.state.link}</p>
-      <p>BTC:  {this.state.btc}</p>
-    </div>)
+    return (
+    <div>
+      <div style={{color: 'white', backgroundColor: 'black', padding: '20px'}}>
+        <h1>FTX Trading Bot</h1>
+        <p>Account Value USD:  {this.state.accountValue}</p>
+        <p>LINK:  {this.state.link}</p>
+        <p>BTC:  {this.state.btc}</p>
+      </div>
+    </div>
+    )
   }
 }
 

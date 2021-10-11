@@ -7,39 +7,25 @@ const options = {
 
 mongoose.connect(mongoURI, options);
 
-let repoSchema = mongoose.Schema({
-  username: String,
-  repoName: String,
-  repoUrl: { type: String, unique: true, dropDups: true },
-  forks: Number,
+let candleSchema = mongoose.Schema({
+  high: Number,
+  low: Number,
 });
 
-let Repo = mongoose.model('Repo', repoSchema);
+let Candle = mongoose.model('Candle', candleSchema);
 
-let save = (repos) => {
-  var promises = [];
-  repos.forEach(repo => {
-    var repoInstance = new Repo({
-      username: repo.owner.login,
-      repoName: repo.name,
-      repoUrl: repo.html_url,
-      forks: repo.forks,
+let save = (candle) => {
+  candle.save()
+    .then(data => {
+      console.log('saved!');
+      return data;
     })
-    // console.log(repoInstance);
-    promises.push(repoInstance.save()
-      .then((data) => {
-        // console.log('saved!');
-        return data;
-      })
-    )
-  })
-  return Promise.all(promises);
 }
 
-let fetchTop25 = () => {
-  console.log('fetching top 25');
-  return Repo.find().sort({ forks: -1 }).limit(25);
+let fetchCandle = () => {
+  console.log('fetching candle');
+  return Candle.find().sort({ _id: -1 }).limit(1);
 }
 
 module.exports.save = save;
-module.exports.fetchTop25 = fetchTop25;
+module.exports.fetchCandle = fetchCandle;

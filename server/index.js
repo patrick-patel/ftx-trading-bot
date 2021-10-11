@@ -11,11 +11,10 @@ const cancelAllOrders = require('../lib/ftx.js').cancelAllOrders;
 const getMarket = require('../lib/ftx.js').getMarket;
 
 // database calls
-// const save = require('../database/index.js').save;
-// const fetchTop25 = require('../database/index.js').fetchTop25;
+const save = require('../database/index.js').save;
+const fetchCandle = require('../database/index.js').fetchCandle;
 
 app.use(bodyParser.json());
-// app.use(express.text());
 app.use(bodyParser.urlencoded());
 app.use('/', express.static(__dirname + '/../client/dist'));
 
@@ -51,9 +50,6 @@ app.post('/tradingview', function (req, res) {
 
   getAccountValue()
   .then(data => {
-    if (req.body.event === 'test') {
-      console.log('it can be manipulated!');
-    }
     if (req.body.event === 'bullish reversal') {
       if (data.result[0].free > 0) {
         cancelAllOrders()
@@ -70,6 +66,13 @@ app.post('/tradingview', function (req, res) {
           .catch(err => {
             console.log(err);
           })
+        })
+        .then(() => {
+          var candle = {
+            high: req.body.high,
+            low: req.body.low
+          }
+          save(candle);
         })
         .catch(err => {
           console.log(err);
@@ -91,6 +94,13 @@ app.post('/tradingview', function (req, res) {
             console.log(err);
           })
         })
+        .then(() => {
+            var candle = {
+              high: req.body.high,
+              low: req.body.low
+            }
+            save(candle);
+        })
         .catch(err => {
           console.log(err);
         })
@@ -110,6 +120,13 @@ app.post('/tradingview', function (req, res) {
           .catch(err => {
             console.log(err);
           })
+        })
+        .then(() => {
+          var candle = {
+            high: req.body.high,
+            low: req.body.low
+          }
+          save(candle);
         })
         .catch(err => {
           console.log(err);

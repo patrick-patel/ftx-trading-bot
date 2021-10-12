@@ -45,8 +45,6 @@ app.get('/accountValue', function (req, res) {
 
 app.post('/tradingview', function (req, res) {
   console.log(req.body);
-  console.log(typeof req.body);
-
 
   getAccountValue()
   .then(data => {
@@ -140,6 +138,22 @@ app.post('/tradingview', function (req, res) {
     res.redirect('/');
   })
 });
+
+app.post('/test', function (req, res) {
+  console.log(req.body);
+  var coin = req.body.coin;
+  getAccountValue()
+  .then(wallet => {
+    return wallet.find(walletEntity => walletEntity.coin === coin);
+  })
+  .then(walletEntity => {
+    console.log('target: ', walletEntity);
+  })
+  .then(() => {
+    res.redirect('/');
+  })
+});
+
 
 
 let port = process.env.PORT || 1128;

@@ -141,15 +141,50 @@ app.post('/tradingview', function (req, res) {
 
 app.post('/test', function (req, res) {
   console.log(req.body);
+  var high = req.body.high;
   var coin = req.body.coin;
+  var pair = req.body.pair;
   getAccountValue()
   .then(wallet => {
-    console.log(wallet);
-    return wallet.find(walletEntity => walletEntity.coin === coin);
+    console.log('wallet: ', wallet);
+    if (req.body.event === 'bullish reversal') {
+      console.log(wallet);
+      var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === 'BTC'); // coin for others
+      if (walletEntity.free > 0) {
+        console.log('test: canceled orders');
+        // cancelAllOrders() // need to change to specific order
+        .then(() => {
+          return getMarket(pair);
+        })
+        .then(marketData => {
+          console.log('marketData: ', marketData)
+          var currentPrice = marketData.result.price;
+          console.log('test: posting stop market buy order')
+          // postStopMarketBuyOrder(high, walletEntity.free, currentPrice)
+          .then(() => {
+            console.log('successfully posted stop market buy order');
+            return;
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        })
+        // .then(() => {
+        //   var candle = {
+        //     high: req.body.high,
+        //     low: req.body.low
+        //   }
+        //   save(candle);
+        // })
+        .catch(err => {
+          console.log(err);
+        })
+      } else {
+        console.log('no btc to trade');
+      }
+    }
   })
-  .then(walletEntity => {
-    console.log('target: ', walletEntity);
-  })
+
   .then(() => {
     res.redirect('/');
   })

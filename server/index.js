@@ -144,6 +144,7 @@ app.post('/test', function (req, res) {
   var coin = req.body.coin;
   getAccountValue()
   .then(wallet => {
+    console.log(wallet);
     return wallet.find(walletEntity => walletEntity.coin === coin);
   })
   .then(walletEntity => {

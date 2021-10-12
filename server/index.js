@@ -153,9 +153,10 @@ app.post('/test', function (req, res) {
       if (walletEntity.free > 0) {
         console.log('test: canceled orders');
         // cancelAllOrders() // need to change to specific order
-        .then(() => {
-          return getMarket(pair);
-        })
+        // .then(() => {
+          // return getMarket(pair);
+          // })
+        getMarket(pair)
         .then(marketData => {
           console.log('marketData: ', marketData)
           var currentPrice = marketData.result.price;

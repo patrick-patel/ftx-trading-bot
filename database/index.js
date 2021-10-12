@@ -7,14 +7,16 @@ const options = {
 
 mongoose.connect(mongoURI, options);
 
+// Candle Store
 let candleSchema = mongoose.Schema({
+  pair: String,
   high: Number,
   low: Number,
 });
 
 let Candle = mongoose.model('Candle', candleSchema);
 
-let save = (candle) => {
+let saveCandle = (candle) => {
   console.log('saving candle')
   var candleInstance = new Candle(candle)
   candleInstance.save()
@@ -24,10 +26,20 @@ let save = (candle) => {
     })
 }
 
-let fetchCandle = () => {
+let fetchCandle = (pair) => {
   console.log('fetching candle');
-  return Candle.find().sort({"_id":-1}).limit(1);
+  return Candle.find({"pair": pair}).sort({"_id":-1}).limit(1);
 }
 
-module.exports.save = save;
+// Order store
+let orderSchema = mongoose.Schema({
+  pair: String,
+  orderID: Number
+});
+
+let Order = mongoose.model('Order', orderSchema);
+
+
+
+module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;

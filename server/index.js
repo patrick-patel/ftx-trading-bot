@@ -11,7 +11,7 @@ const cancelAllOrders = require('../lib/ftx.js').cancelAllOrders;
 const getMarket = require('../lib/ftx.js').getMarket;
 
 // database calls
-const save = require('../database/index.js').save;
+const saveCandle = require('../database/index.js').saveCandle;
 const fetchCandle = require('../database/index.js').fetchCandle;
 
 app.use(bodyParser.json());
@@ -48,7 +48,12 @@ app.post('/tradingview', function (req, res) {
 
   getAccountValue()
   .then(data => {
-    if (req.body.event === 'bullish reversal') {
+    var event = req.body.event;
+    var high = req.body.high;
+    var low = req.body.high;
+    var pair = req.body.pair;
+    var coin = req.body.coin;
+    if (event === 'bullish reversal') {
       if (data.result[0].free > 0) {
         cancelAllOrders()
         .then(() => {
@@ -56,7 +61,7 @@ app.post('/tradingview', function (req, res) {
         })
         .then(marketData => {
           console.log('marketData: ', marketData)
-          postStopMarketBuyOrder(req.body.high, data.result[0].free, marketData.result.price)
+          postStopMarketBuyOrder(high, data.result[0].free, marketData.result.price)
           .then(() => {
             console.log('successfully posted stop market buy order');
             return;
@@ -67,10 +72,11 @@ app.post('/tradingview', function (req, res) {
         })
         .then(() => {
           var candle = {
-            high: req.body.high,
-            low: req.body.low
+            pair: pair,
+            high: high,
+            low: low
           }
-          save(candle);
+          saveCandle(candle);
         })
         .catch(err => {
           console.log(err);
@@ -79,11 +85,11 @@ app.post('/tradingview', function (req, res) {
         console.log('no btc to trade');
       }
     }
-    if (req.body.event === 'bearish reversal') {
+    if (event === 'bearish reversal') {
       if (data.result[2].free > 0) {
         cancelAllOrders()
         .then(() => {
-          postStopMarketSellOrder(req.body.low, data.result[2].free)
+          postStopMarketSellOrder(low, data.result[2].free)
           .then(() => {
             console.log('successfully posted stop market sell order');
             return;
@@ -94,10 +100,11 @@ app.post('/tradingview', function (req, res) {
         })
         .then(() => {
             var candle = {
-              high: req.body.high,
-              low: req.body.low
+              pair: pair,
+              high: high,
+              low: low
             }
-            save(candle);
+            saveCandle(candle);
         })
         .catch(err => {
           console.log(err);
@@ -106,7 +113,7 @@ app.post('/tradingview', function (req, res) {
         console.log('no link to trade');
       }
     }
-    if (req.body.event === 'local top') {
+    if (event === 'local top') {
       if (data.result[2].free > 0) {
         cancelAllOrders()
         .then(() => {
@@ -121,10 +128,11 @@ app.post('/tradingview', function (req, res) {
         })
         .then(() => {
           var candle = {
-            high: req.body.high,
-            low: req.body.low
+            pair: pair,
+            high: high,
+            low: low
           }
-          save(candle);
+          saveCandle(candle);
         })
         .catch(err => {
           console.log(err);
@@ -139,44 +147,47 @@ app.post('/tradingview', function (req, res) {
   })
 });
 
+// DO NOT USE UNTIL CHANGE ORDER CANCELING
 app.post('/test', function (req, res) {
   console.log(req.body);
   var high = req.body.high;
+  var low = req.body.low
   var coin = req.body.coin;
   var pair = req.body.pair;
   getAccountValue()
   .then(wallet => {
     console.log('wallet: ', wallet);
     if (req.body.event === 'bullish reversal') {
-      console.log(wallet);
       var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === 'BTC'); // coin for others
+      console.log('walletEntity: ', walletEntity)
       if (walletEntity.free > 0) {
         console.log('test: canceled orders');
-        // cancelAllOrders() // need to change to specific order
-        // .then(() => {
-          // return getMarket(pair);
-          // })
-        getMarket(pair)
+        cancelAllOrders() // need to change to specific order (need to store the order id in the db)
+        .then(() => {
+          return getMarket(pair);
+        })
         .then(marketData => {
           console.log('marketData: ', marketData)
           var currentPrice = marketData.result.price;
           console.log('test: posting stop market buy order')
-          // postStopMarketBuyOrder(high, walletEntity.free, currentPrice)
+          postStopMarketBuyOrder(high, walletEntity.free, currentPrice, pair)
           .then(() => {
             console.log('successfully posted stop market buy order');
+            // add saving the order id from the response obj
             return;
           })
           .catch(err => {
             console.log(err);
           })
         })
-        // .then(() => {
-        //   var candle = {
-        //     high: req.body.high,
-        //     low: req.body.low
-        //   }
-        //   save(candle);
-        // })
+        .then(() => {
+          var candle = {
+            pair: pair,
+            high: high,
+            low: low
+          }
+          saveCandle(candle);
+        })
         .catch(err => {
           console.log(err);
         })
@@ -185,7 +196,6 @@ app.post('/test', function (req, res) {
       }
     }
   })
-
   .then(() => {
     res.redirect('/');
   })

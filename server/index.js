@@ -25,7 +25,7 @@ app.get('/accountValue', function (req, res) {
   getAccountValue()
   .then(data => {
     console.log(data)
-    responseObj = {};
+    responseObj = {total: 0};
     data.result.forEach(walletEntity => {
       responseObj.total += walletEntity.usdValue;
       responseObj[walletEntity.coin] = walletEntity.total;

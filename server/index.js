@@ -13,6 +13,8 @@ const getMarket = require('../lib/ftx.js').getMarket;
 // database calls
 const saveCandle = require('../database/index.js').saveCandle;
 const fetchCandle = require('../database/index.js').fetchCandle;
+const saveOrder = require('../database/index.js').saveOrder;
+const fetchOrder = require('../database/index.js').fetchOrder;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
@@ -162,7 +164,7 @@ app.post('/test', function (req, res) {
       console.log('walletEntity: ', walletEntity)
       if (walletEntity.free > 0) {
         console.log('test: canceled orders');
-        cancelAllOrders() // need to change to specific order (need to store the order id in the db)
+        cancelAllOrders() // need to change to cancelOrder(orderID) (need to store the order id in the db)
         .then(() => {
           return getMarket(pair);
         })
@@ -171,10 +173,11 @@ app.post('/test', function (req, res) {
           var currentPrice = marketData.result.price;
           console.log('test: posting stop market buy order')
           postStopMarketBuyOrder(high, walletEntity.free, currentPrice, pair)
-          .then(() => {
+          .then(orderRes => {
             console.log('successfully posted stop market buy order');
-            // add saving the order id from the response obj
-            return;
+            console.log(orderRes);
+            var orderID = orderRes.result.id;
+            saveOrder(pair, orderID);
           })
           .catch(err => {
             console.log(err);

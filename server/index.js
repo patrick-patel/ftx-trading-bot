@@ -64,8 +64,8 @@ app.post('/tradingview', function (req, res) {
         console.log('fetching orderID');
         fetchOrder(pair)
         .then(order => {
-          console.log('orderID: ', orderID);
-          if (orderID) {
+          console.log('orderID: ', order.orderID);
+          if (order.orderID) {
             return cancelOrder(order.orderID);
           }
         })
@@ -93,8 +93,8 @@ app.post('/tradingview', function (req, res) {
         console.log('fetching orderID');
         fetchOrder(pair)
         .then(order => {
-          console.log('orderID: ', orderID);
-          if (orderID) {
+          console.log('orderID: ', order.orderID);
+          if (order.orderID) {
             return cancelOrder(order.orderID);
           }
         })

@@ -38,7 +38,7 @@ class App extends React.Component {
     <div>
       <div style={{color: 'white', backgroundColor: 'black', padding: '20px'}}>
         <h1>FTX Trading Bot</h1>
-        <p>Account Value USD:  {this.state.accountValue}</p>
+        <p>Account Value USD:  {this.state.total}</p>
         <p>MATIC:  {this.state.matic}</p>
         <p>LINK:  {this.state.link}</p>
         <p>BTC:  {this.state.btc}</p>

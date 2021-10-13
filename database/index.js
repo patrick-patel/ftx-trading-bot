@@ -39,7 +39,24 @@ let orderSchema = mongoose.Schema({
 
 let Order = mongoose.model('Order', orderSchema);
 
+let saveOrder = (pair, orderID) => {
+  console.log('saving order')
+  var orderInstance = new Order({ pair: pair, orderID: orderID })
+  orderInstance.save()
+    .then(data => {
+      console.log('saved!');
+      return data;
+    })
+}
+
+let fetchOrder = (pair) => {
+  console.log('fetching order');
+  return Order.find({"pair": pair}).sort({"_id":-1}).limit(1);
+}
 
 
 module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
+module.exports.saveOrder = saveOrder;
+module.exports.fetchOrder = fetchOrder;
+

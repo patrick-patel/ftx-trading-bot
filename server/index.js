@@ -25,19 +25,14 @@ app.get('/accountValue', function (req, res) {
   getAccountValue()
   .then(data => {
     console.log(data)
-    var total = 0;
-    data.result.forEach(coin => {
-      total += coin.usdValue;
+    responseObj = {};
+    data.result.forEach(walletEntity => {
+      responseObj.total += walletEntity.usdValue;
+      responseObj[walletEntity.coin] = walletEntity.total;
     })
-    data.total = total;
-    return data;
+    return responseObj;
   })
-  .then(data => {
-    var responseObj = {
-      accountValue: data.total,
-      link: data.result[2].total,
-      btc: data.result[0].total
-    }
+  .then(responseObj => {
     res.send(responseObj);
   })
   .catch(err => {
@@ -116,8 +111,8 @@ app.post('/tradingview', function (req, res) {
         console.log('fetching orderID');
         fetchOrder(pair)
         .then(order => {
-          console.log('orderID: ', orderID);
-          if (orderID) {
+          console.log('orderID: ', order.orderID);
+          if (order.orderID) {
             return cancelOrder(order.orderID);
           }
         })

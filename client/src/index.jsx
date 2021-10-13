@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      accountValue: 0,
+      total: 0,
+      matic: 0,
       link: 0,
       btc: 0
     }
@@ -23,9 +24,10 @@ class App extends React.Component {
       'context': this,
       'success': function(res) {
         this.setState({
-          accountValue: res.accountValue,
-          link: res.link,
-          btc: res.btc
+          total: res.total,
+          matic: res['MATIC'],
+          link: res['LINK'],
+          btc: res['BTC']
         })
       }
     })
@@ -37,6 +39,7 @@ class App extends React.Component {
       <div style={{color: 'white', backgroundColor: 'black', padding: '20px'}}>
         <h1>FTX Trading Bot</h1>
         <p>Account Value USD:  {this.state.accountValue}</p>
+        <p>MATIC:  {this.state.matic}</p>
         <p>LINK:  {this.state.link}</p>
         <p>BTC:  {this.state.btc}</p>
       </div>

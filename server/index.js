@@ -222,13 +222,11 @@ app.post('/test', function (req, res) {
         })
         .then(() => {
           postMarketSellOrder(freeCoins, pair)
-          .then(() => {
-            .then(orderRes => {
-              console.log('successfully posted market sell order');
-              console.log(orderRes);
-              var orderID = orderRes.result.id;
-              return saveOrder(pair, orderID);
-            })
+          .then(orderRes => {
+            console.log('successfully posted market sell order');
+            console.log(orderRes);
+            var orderID = orderRes.result.id;
+            return saveOrder(pair, orderID);
           })
         })
         .catch(err => {

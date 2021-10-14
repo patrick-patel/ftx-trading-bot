@@ -32,6 +32,12 @@ app.get('/accountValue', function (req, res) {
     })
     return responseObj;
   })
+  .then(() => {
+    fetchOrder('MATIC/BTC');
+  })
+  .then(order => {
+    console.log(order);
+  })
   .then(responseObj => {
     res.send(responseObj);
   })

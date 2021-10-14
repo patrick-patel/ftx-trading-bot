@@ -28,7 +28,7 @@ let saveCandle = (candle) => {
 
 let fetchCandle = (pair) => {
   console.log('fetching candle');
-  return Candle.find({pair: pair}).sort({"_id":-1}).limit(1).exec();
+  return Candle.find({"pair": pair}).sort({"_id":-1}).limit(1).exec();
 
 }
 
@@ -52,7 +52,7 @@ let saveOrder = (pair, orderID) => {
 
 let fetchOrder = (pair) => {
   console.log('fetching order');
-  return Order.find({pair: pair}).sort({"_id":-1}).limit(1).exec();
+  return Order.find({"pair": pair}).sort({"_id":-1}).limit(1).exec();
 }
 
 

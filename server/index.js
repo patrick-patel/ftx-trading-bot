@@ -33,7 +33,7 @@ app.get('/accountValue', function (req, res) {
     return responseObj;
   })
   .then(() => {
-    fetchOrder('MATIC/BTC');
+    fetchOrder("MATIC/BTC");
   })
   .then(order => {
     console.log(order);
@@ -61,12 +61,12 @@ app.post('/tradingview', function (req, res) {
     console.log('walletEntity: ', walletEntity)
     if (freeCoins > 0) {
       if (event === 'bullish reversal') {
-        console.log('test: canceling order');
         console.log('fetching orderID');
         fetchOrder(pair)
         .then(order => {
           console.log('orderID: ', order.orderID);
           if (order.orderID) {
+            console.log('canceling order');
             return cancelOrder(order.orderID);
           }
         })

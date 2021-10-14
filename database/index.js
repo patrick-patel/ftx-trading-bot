@@ -51,7 +51,7 @@ let saveOrder = (pair, orderID) => {
 
 let fetchOrder = (pair) => {
   console.log('fetching order');
-  return Order.find({pair: pair}).sort({"_id":-1}).limit(1);
+  return Order.find({"pair": pair}).sort({"_id":-1}).limit(1);
 }
 
 

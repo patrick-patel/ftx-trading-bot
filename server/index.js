@@ -33,10 +33,10 @@ app.get('/accountValue', function (req, res) {
     return responseObj;
   })
   .then(() => {
-    fetchOrder("MATIC/BTC");
+    fetchCandle("MATIC/BTC");
   })
-  .then(order => {
-    console.log(order);
+  .then(candle => {
+    console.log(candle);
   })
   .then(responseObj => {
     res.send(responseObj);

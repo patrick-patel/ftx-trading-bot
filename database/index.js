@@ -28,8 +28,7 @@ let saveCandle = (candle) => {
 
 let fetchCandle = (pair) => {
   console.log('fetching candle');
-  return Candle.find({pair: pair});
-  // return Candle.find({pair: pair}).sort({"_id":-1}).limit(1);
+  return Candle.find().sort({"_id":-1}).limit(1);
 
 }
 

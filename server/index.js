@@ -62,7 +62,7 @@ app.post('/tradingview', function (req, res) {
     if (freeCoins > 0) {
       if (event === 'bullish reversal') {
         console.log('fetching orderID');
-        fetchOrder(pair)
+        fetchOrder(req.body.pair)
         .then(order => {
           console.log('orderID: ', order.orderID);
           if (order.orderID) {
@@ -92,7 +92,7 @@ app.post('/tradingview', function (req, res) {
       if (event === 'bearish reversal') {
         console.log('test: canceling order');
         console.log('fetching orderID');
-        fetchOrder(pair)
+        fetchOrder(req.body.pair)
         .then(order => {
           console.log('orderID: ', order.orderID);
           if (order.orderID) {
@@ -115,7 +115,7 @@ app.post('/tradingview', function (req, res) {
       if (event === 'local top') {
         console.log('test: canceling order');
         console.log('fetching orderID');
-        fetchOrder(pair)
+        fetchOrder(req.body.pair)
         .then(order => {
           console.log('orderID: ', order.orderID);
           if (order.orderID) {

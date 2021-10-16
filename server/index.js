@@ -9,6 +9,7 @@ const postStopMarketBuyOrder = require('../lib/ftx.js').postStopMarketBuyOrder;
 const postStopMarketSellOrder = require('../lib/ftx.js').postStopMarketSellOrder;
 const cancelAllOrders = require('../lib/ftx.js').cancelAllOrders;
 const getMarket = require('../lib/ftx.js').getMarket;
+const getOpenTriggerOrders = require('../lib/ftx.js').getOpenTriggerOrders;
 
 // database calls
 const saveCandle = require('../database/index.js').saveCandle;
@@ -62,12 +63,13 @@ app.post('/tradingview', function (req, res) {
     if (freeCoins > 0) {
       if (event === 'bullish reversal') {
         console.log('fetching orderID');
-        fetchOrder(req.body.pair)
+        // fetchOrder(req.body.pair)
+        getOpenTriggerOrders(req.body.pair)
         .then(order => {
-          console.log('orderID: ', order.orderID);
-          if (order.orderID) {
+          console.log('orderID: ', order.result[0].id);
+          if (order.result[0].id) {
             console.log('canceling order');
-            return cancelOrder(order.orderID);
+            return cancelOrder(order.result[0].id);
           }
         })
         .then(() => {
@@ -92,11 +94,13 @@ app.post('/tradingview', function (req, res) {
       if (event === 'bearish reversal') {
         console.log('test: canceling order');
         console.log('fetching orderID');
-        fetchOrder(req.body.pair)
+        // fetchOrder(req.body.pair)
+        getOpenTriggerOrders(req.body.pair)
         .then(order => {
-          console.log('orderID: ', order.orderID);
-          if (order.orderID) {
-            return cancelOrder(order.orderID);
+          console.log('orderID: ', order.result[0].id);
+          if (order.result[0].id) {
+            console.log('canceling order');
+            return cancelOrder(order.result[0].id);
           }
         })
         .then(() => {
@@ -115,11 +119,13 @@ app.post('/tradingview', function (req, res) {
       if (event === 'local top') {
         console.log('test: canceling order');
         console.log('fetching orderID');
-        fetchOrder(req.body.pair)
+        // fetchOrder(req.body.pair)
+        getOpenTriggerOrders(req.body.pair)
         .then(order => {
-          console.log('orderID: ', order.orderID);
-          if (order.orderID) {
-            return cancelOrder(order.orderID);
+          console.log('orderID: ', order.result[0].id);
+          if (order.result[0].id) {
+            console.log('canceling order');
+            return cancelOrder(order.result[0].id);
           }
         })
         .then(() => {

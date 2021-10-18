@@ -8,6 +8,7 @@ const postMarketSellOrder = require('../lib/ftx.js').postMarketSellOrder;
 const postStopMarketBuyOrder = require('../lib/ftx.js').postStopMarketBuyOrder;
 const postStopMarketSellOrder = require('../lib/ftx.js').postStopMarketSellOrder;
 const cancelAllOrders = require('../lib/ftx.js').cancelAllOrders;
+const cancelOrder = require('../lib/ftx.js').cancelOrder;
 const getMarket = require('../lib/ftx.js').getMarket;
 const getOpenTriggerOrders = require('../lib/ftx.js').getOpenTriggerOrders;
 
@@ -32,22 +33,6 @@ app.get('/accountValue', function (req, res) {
       responseObj[walletEntity.coin] = walletEntity.total;
     })
     return responseObj;
-  })
-  .then(() => {
-    getOpenTriggerOrders("MATIC/BTC");
-  })
-  .catch(err => {
-    console.log(err);
-  })
-  .then(order => {
-    console.log('order: ', order);
-  })
-  .then(order => {
-    console.log('order: ', order);
-    fetchCandle("MATIC/BTC");
-  })
-  .then(candle => {
-    console.log('candle: ', candle);
   })
   .then(responseObj => {
     res.send(responseObj);

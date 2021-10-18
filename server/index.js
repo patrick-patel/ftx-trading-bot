@@ -34,7 +34,7 @@ app.get('/accountValue', function (req, res) {
     return responseObj;
   })
   .then(() => {
-    getOpenTriggerOrders({market: "MATIC/BTC", type: 'stop'});
+    getOpenTriggerOrders("MATIC/BTC");
   })
   .catch(err => {
     console.log(err);

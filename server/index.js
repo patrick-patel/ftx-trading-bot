@@ -36,11 +36,12 @@ app.get('/accountValue', function (req, res) {
   .then(() => {
     getOpenTriggerOrders("MATIC/BTC");
   })
-  .then(() => {
+  .then(order => {
+    console.log('order: ', order);
     fetchCandle("MATIC/BTC");
   })
   .then(candle => {
-    console.log(candle);
+    console.log('candle: ', candle);
   })
   .then(responseObj => {
     res.send(responseObj);

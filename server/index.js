@@ -66,7 +66,7 @@ app.post('/tradingview', function (req, res) {
         // fetchOrder(req.body.pair)
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
-          console.log('orderID: ', order.result[0].id);
+          console.log('order: ', order);
           if (order.result[0].id) {
             console.log('canceling order');
             return cancelOrder(order.result[0].id);
@@ -100,7 +100,7 @@ app.post('/tradingview', function (req, res) {
         // fetchOrder(req.body.pair)
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
-          console.log('orderID: ', order.result[0].id);
+          console.log('order: ', order);
           if (order.result[0].id) {
             console.log('canceling order');
             return cancelOrder(order.result[0].id);
@@ -128,7 +128,7 @@ app.post('/tradingview', function (req, res) {
         // fetchOrder(req.body.pair)
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
-          console.log('orderID: ', order.result[0].id);
+          console.log('order: ', order);
           if (order.result[0].id) {
             console.log('canceling order');
             return cancelOrder(order.result[0].id);

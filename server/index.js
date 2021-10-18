@@ -64,7 +64,7 @@ app.post('/tradingview', function (req, res) {
       if (event === 'bullish reversal') {
         console.log('fetching orderID');
         // fetchOrder(req.body.pair)
-        getOpenTriggerOrders({'market': req.body.pair})
+        getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
           console.log('orderID: ', order.result[0].id);
           if (order.result[0].id) {
@@ -95,7 +95,7 @@ app.post('/tradingview', function (req, res) {
         console.log('test: canceling order');
         console.log('fetching orderID');
         // fetchOrder(req.body.pair)
-        getOpenTriggerOrders({'market': req.body.pair})
+        getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
           console.log('orderID: ', order.result[0].id);
           if (order.result[0].id) {
@@ -120,7 +120,7 @@ app.post('/tradingview', function (req, res) {
         console.log('test: canceling order');
         console.log('fetching orderID');
         // fetchOrder(req.body.pair)
-        getOpenTriggerOrders({'market': req.body.pair})
+        getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
           console.log('orderID: ', order.result[0].id);
           if (order.result[0].id) {

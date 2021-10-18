@@ -72,6 +72,9 @@ app.post('/tradingview', function (req, res) {
             return cancelOrder(order.result[0].id);
           }
         })
+        .catch(err => {
+          console.log(err);
+        })
         .then(() => {
           return getMarket(pair);
         })
@@ -103,6 +106,9 @@ app.post('/tradingview', function (req, res) {
             return cancelOrder(order.result[0].id);
           }
         })
+        .catch(err => {
+          console.log(err);
+        })
         .then(() => {
           postStopMarketSellOrder(low, freeCoins, pair)
           .then(orderRes => {
@@ -127,6 +133,9 @@ app.post('/tradingview', function (req, res) {
             console.log('canceling order');
             return cancelOrder(order.result[0].id);
           }
+        })
+        .catch(err => {
+          console.log(err);
         })
         .then(() => {
           postMarketSellOrder(freeCoins, pair)

@@ -36,11 +36,11 @@ app.get('/accountValue', function (req, res) {
   .then(() => {
     getOpenTriggerOrders("MATIC/BTC");
   })
-  .then(order => {
-    console.log('order: ', order);
-  })
   .catch(err => {
     console.log(err);
+  })
+  .then(order => {
+    console.log('order: ', order);
   })
   .then(order => {
     console.log('order: ', order);

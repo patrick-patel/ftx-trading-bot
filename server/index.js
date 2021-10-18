@@ -34,6 +34,9 @@ app.get('/accountValue', function (req, res) {
     return responseObj;
   })
   .then(() => {
+    getOpenTriggerOrders("MATIC/BTC");
+  })
+  .then(() => {
     fetchCandle("MATIC/BTC");
   })
   .then(candle => {

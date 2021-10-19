@@ -69,4 +69,5 @@ module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
 module.exports.saveUser = saveUser;
 module.exports.fetchUser = fetchUser;
+module.exports.User = User;
 

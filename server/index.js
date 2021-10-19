@@ -164,7 +164,7 @@ app.post('/tradingview', function (req, res) {
   })
 });
 
-app.post("/register", (req, res) => {
+app.post('/register', (req, res) => {
   // Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
@@ -187,7 +187,7 @@ app.post("/register", (req, res) => {
   });
 });
 
-app.post("/login", (req, res) => {
+app.post('/login', (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
   // Check validation

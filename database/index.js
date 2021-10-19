@@ -47,7 +47,7 @@ let userSchema = mongoose.Schema({
 let User = mongoose.model('User', userSchema);
 
 let saveUser = (email, password) => {
-  console.log('saving order')
+  console.log('saving user')
   var userInstance = new User({
     email: email,
     password: password
@@ -60,8 +60,8 @@ let saveUser = (email, password) => {
 }
 
 let fetchUser = (email) => {
-  console.log('fetching order');
-  return Order.find({"email": email}).exec();
+  console.log('fetching user');
+  return User.find({"email": email}).exec();
 }
 
 

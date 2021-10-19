@@ -33,31 +33,40 @@ let fetchCandle = (pair) => {
 }
 
 // Order store
-let orderSchema = mongoose.Schema({
-  pair: String,
-  orderID: Number
+let userSchema = mongoose.Schema({
+  email: {
+    type: String,
+    required: true
+  },
+  password: {
+    type: String,
+    required: true
+  }
 });
 
-let Order = mongoose.model('Order', orderSchema);
+let User = mongoose.model('User', userSchema);
 
-let saveOrder = (pair, orderID) => {
+let saveUser = (email, password) => {
   console.log('saving order')
-  var orderInstance = new Order({ pair: pair, orderID: orderID })
-  orderInstance.save()
+  var userInstance = new User({
+    email: email,
+    password: password
+  })
+  userInstance.save()
     .then(data => {
-      console.log('saved!');
+      console.log('saved user!');
       return data;
     })
 }
 
-let fetchOrder = (pair) => {
+let fetchUser = (email) => {
   console.log('fetching order');
-  return Order.find({"pair": pair}).sort({"_id":-1}).limit(1).exec();
+  return Order.find({"email": email}).exec();
 }
 
 
 module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
-module.exports.saveOrder = saveOrder;
-module.exports.fetchOrder = fetchOrder;
+module.exports.saveUser = saveUser;
+module.exports.fetchUser = fetchUser;
 

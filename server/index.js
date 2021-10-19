@@ -2,6 +2,14 @@ const express = require('express');
 let app = express();
 var bodyParser = require('body-parser');
 
+// auth
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const validateRegisterInput = require("../../validation/register");
+const validateLoginInput = require("../../validation/login");
+const passport = require("passport");
+require("./config/passport")(passport);
+
 // ftx requests
 const getAccountValue = require('../lib/ftx.js').getAccountValue;
 const postMarketSellOrder = require('../lib/ftx.js').postMarketSellOrder;
@@ -15,13 +23,16 @@ const getOpenTriggerOrders = require('../lib/ftx.js').getOpenTriggerOrders;
 // database calls
 const saveCandle = require('../database/index.js').saveCandle;
 const fetchCandle = require('../database/index.js').fetchCandle;
-const saveOrder = require('../database/index.js').saveOrder;
-const fetchOrder = require('../database/index.js').fetchOrder;
+const saveUser = require('../database/index.js').saveUser;
+const fetchUser = require('../database/index.js').fetchUser;
 
+// middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use('/', express.static(__dirname + '/../client/dist'));
+app.use('/login', express.static(__dirname + '/../client/dist'));
+app.use(passport.initialize());
 
+// get requests
 app.get('/accountValue', function (req, res) {
   console.log('----------------get request-----------------');
   getAccountValue()
@@ -42,6 +53,7 @@ app.get('/accountValue', function (req, res) {
   })
 });
 
+// post requests
 app.post('/tradingview', function (req, res) {
   console.log(req.body);
   var high = req.body.high;
@@ -58,7 +70,6 @@ app.post('/tradingview', function (req, res) {
     if (freeCoins > 0) {
       if (event === 'bullish reversal') {
         console.log('fetching orderID');
-        // fetchOrder(req.body.pair)
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
           console.log('order: ', order);
@@ -78,11 +89,8 @@ app.post('/tradingview', function (req, res) {
           var currentPrice = marketData.result.price;
           console.log('test: posting stop market buy order')
           postStopMarketBuyOrder(high, freeCoins, currentPrice, pair)
-          .then(orderRes => {
+          .then(() => {
             console.log('successfully posted stop market buy order');
-            console.log(orderRes);
-            var orderID = orderRes.result.id;
-            return saveOrder(pair, orderID);
           })
         })
         .catch(err => {
@@ -92,7 +100,6 @@ app.post('/tradingview', function (req, res) {
       if (event === 'bearish reversal') {
         console.log('test: canceling order');
         console.log('fetching orderID');
-        // fetchOrder(req.body.pair)
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
           console.log('order: ', order);
@@ -106,11 +113,8 @@ app.post('/tradingview', function (req, res) {
         })
         .then(() => {
           postStopMarketSellOrder(low, freeCoins, pair)
-          .then(orderRes => {
+          .then(() => {
             console.log('successfully posted stop market sell order');
-            console.log(orderRes);
-            var orderID = orderRes.result.id;
-            return saveOrder(pair, orderID);
           })
         })
         .catch(err => {
@@ -120,7 +124,6 @@ app.post('/tradingview', function (req, res) {
       if (event === 'local top') {
         console.log('test: canceling order');
         console.log('fetching orderID');
-        // fetchOrder(req.body.pair)
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(order => {
           console.log('order: ', order);
@@ -134,11 +137,8 @@ app.post('/tradingview', function (req, res) {
         })
         .then(() => {
           postMarketSellOrder(freeCoins, pair)
-          .then(orderRes => {
+          .then(() => {
             console.log('successfully posted market sell order');
-            console.log(orderRes);
-            var orderID = orderRes.result.id;
-            return saveOrder(pair, orderID);
           })
         })
         .catch(err => {
@@ -160,6 +160,75 @@ app.post('/tradingview', function (req, res) {
   })
 });
 
+app.post("/register", (req, res) => {
+  // Form validation
+  const { errors, isValid } = validateRegisterInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const email = req.body.email;
+  const password = req.body.password;
+  fetchUser(email)
+  .then(user => {
+    if (user) {
+      return res.status(400).json({ email: "Email already exists" });
+    } else {
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hashedPassword) => {
+          saveUser(email, hashedPassword)
+        });
+      });
+    }
+  });
+});
+
+app.post("/login", (req, res) => {
+  // Form validation
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const email = req.body.email;
+  const password = req.body.password;
+  // Find user by email
+  fetchUser(email)
+  .then(user => {
+    // Check if user exists
+    if (!user) {
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    }
+    // Check password
+    bcrypt.compare(password, user.password).then(isMatch => {
+      if (isMatch) {
+        // User matched
+        // Create JWT Payload
+        const payload = {
+          id: user.id,
+        };
+        // Sign token
+        jwt.sign(
+          payload,
+          keys.secretOrKey,
+          {
+            expiresIn: 2419200 // 4 weeks in seconds
+          },
+          (err, token) => {
+            res.json({
+              success: true,
+              token: "Bearer " + token
+            });
+          }
+        );
+      } else {
+        return res
+          .status(400)
+          .json({ passwordincorrect: "Password incorrect" });
+      }
+    });
+  });
+});
 
 
 let port = process.env.PORT || 1128;

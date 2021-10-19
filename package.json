@@ -23,20 +23,27 @@
   },
   "dependencies": {
     "axios": "^0.21.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^5.1.1",
+    "concurrently": "^6.3.0",
     "express": "^4.15.0",
     "ftx-api": "^1.0.14",
     "hmac": "^1.0.1",
+    "isempty": "0.0.1",
     "jquery": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.15",
     "node-forge": "^0.10.0",
+    "passport": "^0.5.0",
+    "passport-jwt": "^4.0.0",
     "react": "^16.4",
     "react-bootstrap": "^2.0.0-rc.0",
     "react-dom": "^16.4",
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "validator": "^13.6.0"
   }
 }

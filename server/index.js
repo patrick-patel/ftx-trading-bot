@@ -29,7 +29,7 @@ const fetchUser = require('../database/index.js').fetchUser;
 // middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use('/login', express.static(__dirname + '/../client/dist'));
+app.use('/', express.static(__dirname + '/../client/dist'));
 app.use(passport.initialize());
 
 // get requests

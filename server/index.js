@@ -54,7 +54,7 @@ app.get('/accountValue', function (req, res) {
 });
 
 app.get('*', (req,res) =>{
-  res.sendFile(path.join(__dirname + '/../client/dist'));
+  express.static(__dirname + '/../client/dist');
 });
 
 // post requests

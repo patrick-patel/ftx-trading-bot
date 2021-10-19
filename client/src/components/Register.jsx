@@ -40,10 +40,10 @@ class Register extends React.Component {
           <input type="text" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange.bind(this)} required></input>
 
           <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" value={this.state.password} onChange={this.onChange.bind(this)} required></input>
+          <input type="password" placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required></input>
 
           <label for="psw2"><b>Password</b></label>
-          <input type="password" placeholder="Confirm Password" name="psw2" value={this.state.password2} onChange={this.onChange.bind(this)} required></input>
+          <input type="password" placeholder="Confirm Password" name="password2" value={this.state.password2} onChange={this.onChange.bind(this)} required></input>
 
           <button type="submit" onSubmit={this.login.bind(this)} >Register</button>
         </div>

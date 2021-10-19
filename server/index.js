@@ -8,7 +8,7 @@ const jwt = require("jsonwebtoken");
 const validateRegisterInput = require("./auth/register");
 const validateLoginInput = require("./auth/login");
 const passport = require("passport");
-require("./config/passport")(passport);
+require("./auth/passport")(passport);
 
 // ftx requests
 const getAccountValue = require('../lib/ftx.js').getAccountValue;

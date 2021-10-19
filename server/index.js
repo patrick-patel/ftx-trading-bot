@@ -53,6 +53,10 @@ app.get('/accountValue', function (req, res) {
   })
 });
 
+app.get('*', (req,res) =>{
+  res.sendFile(path.join(__dirname + '/../client/dist'));
+});
+
 // post requests
 app.post('/tradingview', function (req, res) {
   console.log(req.body);

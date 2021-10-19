@@ -176,6 +176,7 @@ app.post('/register', (req, res) => {
   const password = req.body.password;
   fetchUser(email)
   .then(user => {
+    console.log('user: ', user);
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {

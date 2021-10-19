@@ -166,6 +166,7 @@ app.post('/tradingview', function (req, res) {
 
 app.post('/register', (req, res) => {
   // Form validation
+  console.log(req.body);
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
   if (!isValid) {
@@ -178,8 +179,10 @@ app.post('/register', (req, res) => {
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
+      console.log('user not found, creating account')
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, (err, hashedPassword) => {
+          console.log('hashedPassword: ', hashedPassword);
           saveUser(email, hashedPassword)
         });
       });

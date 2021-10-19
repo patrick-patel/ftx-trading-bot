@@ -5,8 +5,8 @@ var bodyParser = require('body-parser');
 // auth
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const validateRegisterInput = require("../../validation/register");
-const validateLoginInput = require("../../validation/login");
+const validateRegisterInput = require("./auth/register");
+const validateLoginInput = require("./auth/login");
 const passport = require("passport");
 require("./config/passport")(passport);
 

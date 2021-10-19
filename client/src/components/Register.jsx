@@ -45,7 +45,7 @@ class Register extends React.Component {
           <label for="psw2"><b>Password</b></label>
           <input type="password" placeholder="Confirm Password" name="password2" value={this.state.password2} onChange={this.onChange.bind(this)} required></input>
 
-          <button type="submit" onSubmit={this.login.bind(this)} >Register</button>
+          <button type="submit" onClick={this.login.bind(this)}>Register</button>
         </div>
       </div>
     )

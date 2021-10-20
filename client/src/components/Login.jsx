@@ -40,7 +40,7 @@ class Login extends React.Component {
           <label for="password"><b>Password</b></label>
           <input type="password" placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required></input>
 
-          <button type="submit" onSubmit={this.login.bind(this)} >Login</button>
+          <button type="submit" onClick={this.login.bind(this)} >Login</button>
         </div>
       </div>
     )

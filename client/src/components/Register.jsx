@@ -37,7 +37,7 @@ class Register extends React.Component {
     })
   }
 
-  useEffect(() => {
+  useEffect() {
     $.ajax({
       // 'url': 'http://localhost:1128/login',
       'url': '/userData',
@@ -54,7 +54,7 @@ class Register extends React.Component {
         console.log(error);
       }
     })
-  }, [])
+  }
 
   render() {
     return (

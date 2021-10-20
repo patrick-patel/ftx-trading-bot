@@ -35,7 +35,7 @@ class Login extends React.Component {
     })
   }
 
-  useEffect(() => {
+  useEffect() {
     $.ajax({
       'url': '/userData',
       'type': 'GET',
@@ -51,7 +51,7 @@ class Login extends React.Component {
         console.log(error);
       }
     })
-  }, [])
+  }
 
   render() {
     return (

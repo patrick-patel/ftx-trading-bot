@@ -26,13 +26,13 @@ class Dashboard extends React.Component {
       'success': function(res) {
         this.setState({
           total: res.total,
-          btc: res['BTC'],
-          eth: res['ETH'],
-          link: res['LINK'],
-          matic: res['MATIC'],
-          sol: res['SOL'],
-          sushi: res['SUSHI'],
-          uni: res['UNI'],
+          btc: res['BTC'] || 0,
+          eth: res['ETH'] || 0,
+          link: res['LINK'] || 0,
+          matic: res['MATIC'] || 0,
+          sol: res['SOL'] || 0,
+          sushi: res['SUSHI'] || 0,
+          uni: res['UNI'] || 0,
         })
       }
     })

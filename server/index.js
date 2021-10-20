@@ -267,6 +267,7 @@ app.post('/login', (req, res) => {
   fetchUser(email)
   .then(user => {
     // Check if user exists
+    console.log('user: ', user);
     if (!user.email) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
@@ -298,6 +299,9 @@ app.post('/login', (req, res) => {
           .json({ passwordincorrect: "Password incorrect" });
       }
     });
+  })
+  .catch(err => {
+    console.log(err);
   })
   .then(() => {
     res.redirect('/');

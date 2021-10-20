@@ -1,5 +1,8 @@
 import React from 'react';
 import $ from 'jquery';
+import { useHistory } from 'react-router';
+import { useEffect } from 'react';
+
 
 class Register extends React.Component {
   constructor(props) {

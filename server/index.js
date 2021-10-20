@@ -1,6 +1,9 @@
 const express = require('express');
 let app = express();
 var bodyParser = require('body-parser');
+if (!process.env.API_KEY) {
+  const config = require('../config.js');
+}
 
 // auth
 const bcrypt = require("bcryptjs");
@@ -9,6 +12,7 @@ const validateRegisterInput = require("./auth/register");
 const validateLoginInput = require("./auth/login");
 const passport = require("passport");
 require("./auth/passport")(passport);
+const secretOrKey = process.env.secretOrKey || config.secretOrKeys;
 
 // ftx requests
 const getAccountValue = require('../lib/ftx.js').getAccountValue;
@@ -247,10 +251,9 @@ app.post('/login', (req, res) => {
         const payload = {
           id: user.id,
         };
-        // Sign token
         jwt.sign(
           payload,
-          keys.secretOrKey,
+          secretOrKey,
           {
             expiresIn: 2419200 // 4 weeks in seconds
           },

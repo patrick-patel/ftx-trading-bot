@@ -76,7 +76,7 @@ app.post('/tradingview', function (req, res) {
         console.log('fetching orderID');
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(orders => {
-          console.log('order: ', order);
+          console.log('order: ', orders);
           if (orders.result[0].id) {
             console.log('canceling order');
             var promises = [];
@@ -106,11 +106,9 @@ app.post('/tradingview', function (req, res) {
         })
       }
       if (event === 'bearish reversal') {
-        console.log('test: canceling order');
-        console.log('fetching orderID');
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
         .then(orders => {
-          console.log('order: ', order);
+          console.log('order: ', orders);
           if (orders.result[0].id) {
             console.log('canceling order');
             var promises = [];

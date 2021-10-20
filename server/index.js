@@ -267,11 +267,11 @@ app.post('/login', (req, res) => {
   fetchUser(email)
   .then(user => {
     // Check if user exists
-    console.log('user: ', user);
     if (!user.email) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
     // Check password
+    console.log('user: ', user);
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         // User matched

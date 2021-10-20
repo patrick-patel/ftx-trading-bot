@@ -61,7 +61,7 @@ let saveUser = (email, password) => {
 
 let fetchUser = (email) => {
   console.log('fetching user');
-  return User.find({"email": email}).exec();
+  return User.findOne({"email": email}).exec();
 }
 
 

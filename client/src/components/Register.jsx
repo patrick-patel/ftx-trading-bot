@@ -12,7 +12,6 @@ class Register extends React.Component {
   }
 
   onChange({ target }) {
-    console.log( target );
     this.setState({ [target.name]: target.value });
   }
 

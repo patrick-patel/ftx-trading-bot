@@ -21,7 +21,7 @@ class Dashboard extends React.Component {
     $.ajax({
       // 'url': 'http://localhost:1128/accountValue',
       'url': '/accountValue',
-      'type': 'GET',
+      'type': 'POST',
       'context': this,
       'success': function(res) {
         this.setState({

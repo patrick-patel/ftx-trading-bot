@@ -10,8 +10,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validateRegisterInput = require("./auth/register");
 const validateLoginInput = require("./auth/login");
-const passport = require("passport");
-require("./auth/passport")(passport);
+const verifyJWT = require("./auth/verifyJWT");
 const secretOrKey = process.env.secretOrKey || config.secretOrKeys;
 
 // ftx requests
@@ -34,7 +33,6 @@ const fetchUser = require('../database/index.js').fetchUser;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use('/', express.static(__dirname + '/../client/dist'));
-app.use(passport.initialize());
 
 // get requests
 app.get('/accountValue', function (req, res) {
@@ -57,7 +55,12 @@ app.get('/accountValue', function (req, res) {
   })
 });
 
-app.get('*', (req,res) =>{
+app.get('/userData', verifyJWT, function (req, res) {
+  console.log('inside userData route');
+  console.log('req.id', req.id);
+})
+
+app.get('*', (req, res) => {
   res.redirect('/');
 });
 

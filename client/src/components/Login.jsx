@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import $ from 'jquery';
 
 class Login extends React.Component {
@@ -16,19 +17,40 @@ class Login extends React.Component {
 
   login() {
     $.ajax({
-      // 'url': 'http://localhost:1128/login',
       'url': '/login',
       'type': 'POST',
+      'headers': {
+        'Content-type': 'application/json'
+      },
       'context': this,
       'data': this.state,
       'success': function(data) {
         console.log(data);
+        localStorage.setItem("token", data.token)
       },
       'error': function(error) {
         console.log(error);
       }
     })
   }
+
+  useEffect(() => {
+    $.ajax({
+      'url': '/userData',
+      'type': 'GET',
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
+      'success': function(data) {
+        console.log(data);
+        data.json();
+        data.isLoggedIn ? history.push('/dashboard') : null;
+      },
+      'error': function(error) {
+        console.log(error);
+      }
+    })
+  }, [])
 
   render() {
     return (

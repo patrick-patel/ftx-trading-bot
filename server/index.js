@@ -75,11 +75,15 @@ app.post('/tradingview', function (req, res) {
       if (event === 'bullish reversal') {
         console.log('fetching orderID');
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
-        .then(order => {
+        .then(orders => {
           console.log('order: ', order);
-          if (order.result[0].id) {
+          if (orders.result[0].id) {
             console.log('canceling order');
-            return cancelOrder(order.result[0].id);
+            var promises = [];
+            orders.result.forEach(order => {
+              promises.push(cancelOrder(order.id));
+            })
+            return Promise.all(promises);
           }
         })
         .catch(err => {
@@ -105,11 +109,15 @@ app.post('/tradingview', function (req, res) {
         console.log('test: canceling order');
         console.log('fetching orderID');
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
-        .then(order => {
+        .then(orders => {
           console.log('order: ', order);
-          if (order.result[0].id) {
+          if (orders.result[0].id) {
             console.log('canceling order');
-            return cancelOrder(order.result[0].id);
+            var promises = [];
+            orders.result.forEach(order => {
+              promises.push(cancelOrder(order.id));
+            })
+            return Promise.all(promises);
           }
         })
         .catch(err => {
@@ -125,30 +133,34 @@ app.post('/tradingview', function (req, res) {
           console.log(err);
         })
       }
-      if (event === 'local top') {
-        console.log('test: canceling order');
-        console.log('fetching orderID');
-        getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
-        .then(order => {
-          console.log('order: ', order);
-          if (order.result[0].id) {
-            console.log('canceling order');
-            return cancelOrder(order.result[0].id);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-        })
-        .then(() => {
-          postMarketSellOrder(freeCoins, pair)
-          .then(() => {
-            console.log('successfully posted market sell order');
-          })
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      }
+      // if (event === 'local top') {
+      //   console.log('test: canceling order');
+      //   console.log('fetching orderID');
+      //   getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
+      //   .then(orders => {
+      //     console.log('order: ', order);
+      //     if (orders.result[0].id) {
+      //       console.log('canceling order');
+      //       var promises = [];
+      //       orders.result.forEach(order => {
+      //         promises.push(cancelOrder(order.id));
+      //       })
+      //       return Promise.all(promises);
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   })
+      //   .then(() => {
+      //     postMarketSellOrder(freeCoins, pair)
+      //     .then(() => {
+      //       console.log('successfully posted market sell order');
+      //     })
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   })
+      // }
     }
   })
   .then(() => {

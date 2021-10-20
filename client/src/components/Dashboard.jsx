@@ -44,13 +44,13 @@ class Dashboard extends React.Component {
         <div style={{color: 'white', backgroundColor: 'black', padding: '20px'}}>
           <h1>FTX Trading Bot</h1>
           <p>Account Value USD:  {this.state.total}</p>
-          <p>BTC:  {this.state.btc}</p>
-          <p>ETH:  {this.state.eth}</p>
-          <p>LINK:  {this.state.link}</p>
-          <p>MATIC:  {this.state.matic}</p>
-          <p>SOL:  {this.state.sol}</p>
-          <p>SUSHI:  {this.state.sushi}</p>
-          <p>UNI:  {this.state.uni}</p>
+          <p>BTC: {this.state.btc}</p>
+          <p>ETH: {this.state.eth}</p>
+          <p>LINK: {this.state.link}</p>
+          <p>MATIC: {this.state.matic}</p>
+          <p>SOL: {this.state.sol}</p>
+          <p>SUSHI: {this.state.sushi}</p>
+          <p>UNI: {this.state.uni}</p>
         </div>
       </div>
     )

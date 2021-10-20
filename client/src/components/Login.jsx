@@ -21,8 +21,8 @@ class Login extends React.Component {
       'type': 'POST',
       'context': this,
       'data': this.state,
-      'success': function() {
-        console.log('success');
+      'success': function(data) {
+        console.log(data);
       },
       'error': function(error) {
         console.log(error);

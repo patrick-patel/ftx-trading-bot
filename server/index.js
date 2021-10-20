@@ -258,6 +258,7 @@ app.post('/login', (req, res) => {
             expiresIn: 2419200 // 4 weeks in seconds
           },
           (err, token) => {
+            console.log('token: ', token);
             res.json({
               success: true,
               token: "Bearer " + token
@@ -266,18 +267,17 @@ app.post('/login', (req, res) => {
         );
       } else {
         console.log('isNotMatch');
-        return res
-          .status(400)
-          .json({ passwordincorrect: "Password incorrect" });
+        res.status(400).json({ passwordincorrect: "Password incorrect" });
+        res.redirect('/');
       }
     });
   })
   .catch(err => {
     console.log(err);
   })
-  .then(() => {
-    res.redirect('/');
-  })
+  // .then(() => {
+  //   res.redirect('/');
+  // })
 });
 
 

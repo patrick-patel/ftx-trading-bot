@@ -234,7 +234,7 @@ app.post('/register', (req, res) => {
   fetchUser(email)
   .then(user => {
     console.log('user: ', user);
-    if (user) {
+    if (user.email) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
       console.log('user not found, creating account')

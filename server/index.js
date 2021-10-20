@@ -69,9 +69,20 @@ app.post('/tradingview', function (req, res) {
   .then(wallet => {
     console.log('wallet: ', wallet);
     var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === coin);
-    var freeCoins = walletEntity.free;
-    console.log('walletEntity: ', walletEntity)
-    if (freeCoins > 0) {
+    var btcWalletEntity = wallet.result.find(btcWalletEntity => btcWalletEntity.coin === "BTC");
+    if (walletEntity) {
+      var freeCoins = walletEntity.free;
+      console.log('walletEntity: ', walletEntity)
+    } else {
+      var freeCoins = 0;
+    }
+    if (btcWalletEntity) {
+      var freeBTC = btcWalletEntity.free;
+      console.log('btcWalletEntity: ', btcWalletEntity)
+    } else {
+      var freeBTC = 0;
+    }
+    if (freeBTC > 0) {
       if (event === 'bullish reversal') {
         console.log('fetching orderID');
         getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
@@ -96,7 +107,7 @@ app.post('/tradingview', function (req, res) {
           console.log('marketData: ', marketData)
           var currentPrice = marketData.result.price;
           console.log('test: posting stop market buy order')
-          postStopMarketBuyOrder(high, freeCoins, currentPrice, pair)
+          postStopMarketBuyOrder(high, freeBTC, currentPrice, pair)
           .then(() => {
             console.log('successfully posted stop market buy order');
           })
@@ -159,6 +170,42 @@ app.post('/tradingview', function (req, res) {
       //     console.log(err);
       //   })
       // }
+    } else {
+      if (freeBTC > 0) {
+        if (event === 'bearish reversal') {
+          console.log('fetching orderID');
+          getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
+          .then(orders => {
+            console.log('order: ', orders);
+            if (orders.result[0].id) {
+              console.log('canceling order');
+              var promises = [];
+              orders.result.forEach(order => {
+                promises.push(cancelOrder(order.id));
+              })
+              return Promise.all(promises);
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          })
+          .then(() => {
+            return getMarket(pair);
+          })
+          .then(marketData => {
+            console.log('marketData: ', marketData)
+            var currentPrice = marketData.result.price;
+            console.log('test: posting stop market buy order')
+            postStopMarketBuyOrder(high, freeBTC, currentPrice, pair)
+            .then(() => {
+              console.log('successfully posted stop market buy order');
+            })
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }
+      }
     }
   })
   .then(() => {

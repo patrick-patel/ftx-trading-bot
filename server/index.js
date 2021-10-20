@@ -232,6 +232,7 @@ app.post('/login', (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
   // Check validation
+  console.log('req.body: ', req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }

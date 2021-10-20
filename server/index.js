@@ -54,7 +54,7 @@ app.get('/accountValue', function (req, res) {
 });
 
 app.get('*', (req,res) =>{
-  express.static(__dirname + '/../client/dist');
+  res.redirect('/');
 });
 
 // post requests
@@ -249,6 +249,9 @@ app.post('/register', (req, res) => {
   .catch(err => {
     console.log(err);
   })
+  .then(() => {
+    res.redirect('/');
+  })
 });
 
 app.post('/login', (req, res) => {
@@ -264,7 +267,7 @@ app.post('/login', (req, res) => {
   fetchUser(email)
   .then(user => {
     // Check if user exists
-    if (!user) {
+    if (!user.email) {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
     // Check password
@@ -295,7 +298,10 @@ app.post('/login', (req, res) => {
           .json({ passwordincorrect: "Password incorrect" });
       }
     });
-  });
+  })
+  .then(() => {
+    res.redirect('/');
+  })
 });
 
 

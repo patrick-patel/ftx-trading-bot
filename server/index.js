@@ -274,6 +274,7 @@ app.post('/login', (req, res) => {
     console.log('user: ', user);
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
+        console.log('isMatch');
         // User matched
         // Create JWT Payload
         const payload = {
@@ -294,6 +295,7 @@ app.post('/login', (req, res) => {
           }
         );
       } else {
+        console.log('isNotMatch');
         return res
           .status(400)
           .json({ passwordincorrect: "Password incorrect" });

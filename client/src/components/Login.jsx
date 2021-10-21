@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { Redirect } from 'react-router';
 import { useEffect } from 'react';
 import $ from 'jquery';
 const history = useHistory();
@@ -9,9 +9,9 @@ class Login extends React.Component {
     super(props);
     this.state = {
       "email": "",
-      "password": ""
+      "password": "",
+      redirect: false
     };
-    // const history = useHistory();
   }
 
   onChange({ target }) {
@@ -19,6 +19,7 @@ class Login extends React.Component {
   }
 
   login() {
+    var json = {"email": this.state.email, "password": this.state.password};
     $.ajax({
       'url': '/login',
       'type': 'POST',
@@ -26,7 +27,7 @@ class Login extends React.Component {
       //   'Content-type': 'application/json'
       // },
       'context': this,
-      'data': this.state,
+      'data': json,
       'success': function(data) {
         console.log(data);
         localStorage.setItem("token", data.token);
@@ -39,6 +40,7 @@ class Login extends React.Component {
           },
           'success': function(data) {
             console.log(data);
+            this.setState({ redirect: true })
             let history = useHistory();
             data.isLoggedIn ? history.push('/') : null;
           },
@@ -72,18 +74,23 @@ class Login extends React.Component {
   // }
 
   render() {
-    return (
-      <div>
+    const { redirect } = this.state.redirect;
+    if (redirect) {
+      return <Redirect to='/' />
+    } else {
+      return (
         <div>
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange.bind(this)} required></input>
+          <div>
+            <label for="email"><b>Email</b></label>
+            <input type="text" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange.bind(this)} required></input>
 
-          <label for="password"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required></input>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required></input>
 
-          <button type="submit" onClick={this.login.bind(this)} >Login</button>
+            <button type="submit" onClick={this.login.bind(this)} >Login</button>
+          </div>
         </div>
-      </div>
+      }
     )
   }
 }

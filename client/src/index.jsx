@@ -30,7 +30,7 @@ class App extends React.Component {
           <li><Link to="/">Dashboard</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/register">Register</Link></li>
-          <li><a onClick={this.logout.bind(this)}>Logout</a></li>
+          <li><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></li>
         </ul>
 
         <Switch>

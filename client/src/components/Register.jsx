@@ -1,16 +1,15 @@
 import React from 'react';
 import $ from 'jquery';
-import { useHistory } from 'react-router';
-import { useEffect } from 'react';
-
+import { Redirect } from 'react-router';
 
 class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      password2: '',
+      "email": "",
+      "password": "",
+      "password2": "",
+      redirect: false
     }
   }
 
@@ -18,18 +17,21 @@ class Register extends React.Component {
     this.setState({ [target.name]: target.value });
   }
 
-  login() {
+  register() {
+    var json = {
+      "email": this.state.email,
+      "password": this.password.email,
+      "password2": this.state.password2
+    };
     $.ajax({
       // 'url': 'http://localhost:1128/login',
       'url': '/register',
       'type': 'POST',
-      // 'headers': {
-      //   'Content-type': 'application/json'
-      // },
       'context': this,
-      'data': this.state,
+      'data': json,
       'success': function() {
         console.log('success');
+        this.setState({ redirect: true });
       },
       'error': function(error) {
         console.log(error);
@@ -37,26 +39,11 @@ class Register extends React.Component {
     })
   }
 
-  // useEffect() {
-  //   $.ajax({
-  //     // 'url': 'http://localhost:1128/login',
-  //     'url': '/userData',
-  //     'type': 'GET',
-  //     'headers': {
-  //       'x-access-token': localStorage.getItem('token')
-  //     },
-  //     'success': function(data) {
-  //       console.log(data);
-  //       data.json();
-  //       data.isLoggedIn ? history.push('/dashboard') : null;
-  //     },
-  //     'error': function(error) {
-  //       console.log(error);
-  //     }
-  //   })
-  // }
-
   render() {
+    const redirect = this.state.redirect;
+    if (redirect) {
+      return <Redirect to='/login' />
+    }
     return (
       <div>
         <div>
@@ -69,7 +56,7 @@ class Register extends React.Component {
           <label for="psw2"><b>Password</b></label>
           <input type="password" placeholder="Confirm Password" name="password2" value={this.state.password2} onChange={this.onChange.bind(this)} required></input>
 
-          <button type="submit" onClick={this.login.bind(this)}>Register</button>
+          <button type="submit" onClick={this.register.bind(this)}>Register</button>
         </div>
       </div>
     )

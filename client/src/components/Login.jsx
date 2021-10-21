@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect } from 'react-router';
-import { useEffect } from 'react';
 import $ from 'jquery';
 
 class Login extends React.Component {
@@ -22,9 +21,6 @@ class Login extends React.Component {
     $.ajax({
       'url': '/login',
       'type': 'POST',
-      // 'headers': {
-      //   'Content-type': 'application/json'
-      // },
       'context': this,
       'data': json,
       'success': function(data) {
@@ -39,9 +35,7 @@ class Login extends React.Component {
           },
           'success': function(data) {
             console.log(data);
-            this.setState({ redirect: true })
-            // let history = useHistory();
-            // data.isLoggedIn ? history.push('/') : null;
+            this.setState({ redirect: true });
           },
           'error': function(error) {
             console.log(error);
@@ -53,24 +47,6 @@ class Login extends React.Component {
       }
     })
   }
-
-  // getUserData() {
-  //   $.ajax({
-  //     'url': '/userData',
-  //     'type': 'GET',
-  //     'context': this,
-  //     'headers': {
-  //       'x-access-token': localStorage.getItem('token')
-  //     },
-  //     'success': function(data) {
-  //       console.log(data);
-  //       data.isLoggedIn ? history.push('/') : null;
-  //     },
-  //     'error': function(error) {
-  //       console.log(error);
-  //     }
-  //   })
-  // }
 
   render() {
     const redirect = this.state.redirect;

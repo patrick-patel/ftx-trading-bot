@@ -90,8 +90,8 @@ class Login extends React.Component {
             <button type="submit" onClick={this.login.bind(this)} >Login</button>
           </div>
         </div>
-      }
-    )
+      )
+    }
   }
 }
 

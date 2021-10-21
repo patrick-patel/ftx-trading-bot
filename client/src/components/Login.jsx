@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { useEffect } from 'react';
 import $ from 'jquery';
+const history = useHistory();
 
 class Login extends React.Component {
   constructor(props) {

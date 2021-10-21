@@ -18,20 +18,19 @@ class App extends React.Component {
     }
   }
 
+  logout() {
+    localStorage.removeItem("token");
+  }
+
   render () {
     return (
     <Router>
       <div>
         <ul>
-          <li>
-            <Link to="/">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
+          <li><Link to="/">Dashboard</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/register">Register</Link></li>
+          <li><a onClick={this.logout.bind(this)}>Logout</a></Link>/li>
         </ul>
 
         <Switch>

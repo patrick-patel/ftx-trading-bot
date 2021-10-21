@@ -29,7 +29,21 @@ class Login extends React.Component {
       'success': function(data) {
         console.log(data);
         localStorage.setItem("token", data.token);
-        this.getUserData();
+        $.ajax({
+          'url': '/userData',
+          'type': 'GET',
+          'context': this,
+          'headers': {
+            'x-access-token': localStorage.getItem('token')
+          },
+          'success': function(data) {
+            console.log(data);
+            data.isLoggedIn ? history.push('/') : null;
+          },
+          'error': function(error) {
+            console.log(error);
+          }
+        })
       },
       'error': function(error) {
         console.log(error);

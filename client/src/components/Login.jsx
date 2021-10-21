@@ -51,23 +51,23 @@ class Login extends React.Component {
     })
   }
 
-  getUserData() {
-    $.ajax({
-      'url': '/userData',
-      'type': 'GET',
-      'context': this,
-      'headers': {
-        'x-access-token': localStorage.getItem('token')
-      },
-      'success': function(data) {
-        console.log(data);
-        data.isLoggedIn ? history.push('/') : null;
-      },
-      'error': function(error) {
-        console.log(error);
-      }
-    })
-  }
+  // getUserData() {
+  //   $.ajax({
+  //     'url': '/userData',
+  //     'type': 'GET',
+  //     'context': this,
+  //     'headers': {
+  //       'x-access-token': localStorage.getItem('token')
+  //     },
+  //     'success': function(data) {
+  //       console.log(data);
+  //       data.isLoggedIn ? history.push('/') : null;
+  //     },
+  //     'error': function(error) {
+  //       console.log(error);
+  //     }
+  //   })
+  // }
 
   render() {
     return (

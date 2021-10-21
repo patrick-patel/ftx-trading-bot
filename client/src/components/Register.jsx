@@ -6,9 +6,9 @@ class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      "email": "",
-      "password": "",
-      "password2": "",
+      email: "",
+      password: "",
+      password2: "",
       redirect: false
     }
   }
@@ -18,17 +18,17 @@ class Register extends React.Component {
   }
 
   register() {
-    var json = {
-      "email": this.state.email,
-      "password": this.password.email,
-      "password2": this.state.password2
+    var params = {
+      email: this.state.email,
+      password: this.state.password,
+      password2: this.state.password2
     };
     $.ajax({
       // 'url': 'http://localhost:1128/login',
       'url': '/register',
       'type': 'POST',
       'context': this,
-      'data': json,
+      'data': params,
       'success': function() {
         console.log('success');
         this.setState({ redirect: true });

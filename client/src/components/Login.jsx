@@ -9,7 +9,8 @@ class Login extends React.Component {
     this.state = {
       "email": "",
       "password": ""
-    }
+    };
+    const history = useHistory();
   }
 
   onChange({ target }) {
@@ -27,7 +28,8 @@ class Login extends React.Component {
       'data': this.state,
       'success': function(data) {
         console.log(data);
-        localStorage.setItem("token", data.token)
+        localStorage.setItem("token", data.token);
+        this.getUserData();
       },
       'error': function(error) {
         console.log(error);
@@ -35,10 +37,11 @@ class Login extends React.Component {
     })
   }
 
-  useEffect() {
+  getUserData() {
     $.ajax({
       'url': '/userData',
       'type': 'GET',
+      'context': this,
       'headers': {
         'x-access-token': localStorage.getItem('token')
       },

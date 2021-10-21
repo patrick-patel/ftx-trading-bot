@@ -8,7 +8,8 @@ if (!process.env.API_KEY) {
 }
 
 const secretOrKey = process.env.secretOrKey || config.secretOrKey;
-function verifyJWT(req, res, next) {
+
+module.exports = verifyJWT = (req, res, next) => {
   const token = req.headers["x-access-token"]?.split(' ')[1];
 
   if (token) {
@@ -30,5 +31,3 @@ function verifyJWT(req, res, next) {
     })
   }
 };
-
-module.exports.verifyJWT = verifyJWT;

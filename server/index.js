@@ -55,11 +55,11 @@ app.get('/accountValue', function (req, res) {
   })
 });
 
-app.get('/userData', verifyJWT, (req, res) => {
-  console.log('inside userData route');
-  console.log('req.user.id', req.user.id);
-  res.redirect('/');
-})
+// app.get('/userData', verifyJWT, (req, res) => {
+//   console.log('inside userData route');
+//   console.log('req.user.id', req.user.id);
+//   res.redirect('/');
+// })
 
 app.get('*', (req, res) => {
   res.redirect('/');

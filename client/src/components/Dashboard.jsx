@@ -23,6 +23,9 @@ class Dashboard extends React.Component {
       'url': '/userData',
       'type': 'GET',
       'context': this,
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
       'success': function(res) {
         this.setState({
           total: res.total,

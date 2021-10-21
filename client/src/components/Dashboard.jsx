@@ -20,7 +20,7 @@ class Dashboard extends React.Component {
     console.log('comp did mount')
     $.ajax({
       // 'url': 'http://localhost:1128/accountValue',
-      'url': '/accountValue',
+      'url': '/getUserData',
       'type': 'GET',
       'context': this,
       'success': function(res) {

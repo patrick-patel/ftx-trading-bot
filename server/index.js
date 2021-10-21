@@ -57,8 +57,26 @@ app.get('/accountValue', function (req, res) {
 
 app.get('/userData', verifyJWT, (req, res) => {
   console.log('inside userData route');
-  console.log('req.user.id', req.user.id);
-  res.send({ isLoggedIn: true }).redirect('/');
+  console.log('req.user.id: ', req.user.id);
+  if (req.user.id) {
+    getAccountValue()
+    .then(data => {
+      console.log(data)
+      responseObj = {total: 0};
+      data.result.forEach(walletEntity => {
+        responseObj.total += walletEntity.usdValue;
+        responseObj[walletEntity.coin] = walletEntity.total;
+      })
+      return responseObj;
+    })
+    .then(responseObj => {
+      res.send(responseObj);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    // res.send({ isLoggedIn: true});
+  }
 })
 
 app.get('*', (req, res) => {

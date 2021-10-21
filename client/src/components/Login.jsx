@@ -38,7 +38,8 @@ class Login extends React.Component {
           },
           'success': function(data) {
             console.log(data);
-            // data.isLoggedIn ? history.push('/') : null;
+            let history = useHistory();
+            data.isLoggedIn ? history.push('/') : null;
           },
           'error': function(error) {
             console.log(error);

@@ -23,9 +23,9 @@ class Register extends React.Component {
       // 'url': 'http://localhost:1128/login',
       'url': '/register',
       'type': 'POST',
-      'headers': {
-        'Content-type': 'application/json'
-      },
+      // 'headers': {
+      //   'Content-type': 'application/json'
+      // },
       'context': this,
       'data': this.state,
       'success': function() {

@@ -7,8 +7,8 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: ''
+      "email": "",
+      "password": ""
     }
   }
 
@@ -20,9 +20,9 @@ class Login extends React.Component {
     $.ajax({
       'url': '/login',
       'type': 'POST',
-      'headers': {
-        'Content-type': 'application/json'
-      },
+      // 'headers': {
+      //   'Content-type': 'application/json'
+      // },
       'context': this,
       'data': this.state,
       'success': function(data) {

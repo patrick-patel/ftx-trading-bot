@@ -55,10 +55,10 @@ app.get('/accountValue', function (req, res) {
   })
 });
 
-// app.get('/userData', verifyJWT, (req, res) => {
-//   console.log('inside userData route');
-//   console.log('req.id', req.id);
-// })
+app.get('/userData', verifyJWT, (req, res) => {
+  console.log('inside userData route');
+  console.log('req.user.id', req.user.id);
+})
 
 app.get('*', (req, res) => {
   res.redirect('/');
@@ -263,10 +263,7 @@ app.post('/login', (req, res) => {
           },
           (err, token) => {
             console.log('token: ', token);
-            res.json({
-              success: true,
-              token: "Bearer " + token
-            });
+            res.json({ success: true, token: "Bearer " + token}).redirect('/');
           }
         );
       } else {

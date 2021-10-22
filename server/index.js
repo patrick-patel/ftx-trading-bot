@@ -262,9 +262,9 @@ app.post('/tradingview', function (req, res) {
       }
       saveCandle(candle);
   })
-  .then(() => {
-    res.redirect('/');
-  })
+  // .then(() => {
+  //   res.redirect('/');
+  // })
 });
 
 app.post('/register', (req, res) => {
@@ -391,12 +391,12 @@ app.post('/setPairs', verifyJWT, (req, res) => {
   // if (!isValid) {
   //   return res.status(400).json(errors);
   // }
-  const ethbtc = req.body["ETH/BTC"];
-  const linkbtc = req.body["LINK/BTC"];
-  const maticbtc = req.body["MATIC/BTC"];
-  const solbtc = req.body["SOL/BTC"];
-  const sushibtc = req.body["SUSHI/BTC"];
-  const unibtc = req.body["UNI/BTC"];
+  const ethbtc = (req.body["ETH/BTC"] === 'true');
+  const linkbtc = (req.body["LINK/BTC"] === 'true');
+  const maticbtc = (req.body["MATIC/BTC"] === 'true');
+  const solbtc = (req.body["SOL/BTC"] === 'true');
+  const sushibtc = (req.body["SUSHI/BTC"] === 'true');
+  const unibtc = (req.body["UNI/BTC"] === 'true');
 
   fetchUserByID(req.user.id)
   .then(user => {
@@ -419,7 +419,7 @@ app.post('/setPairs', verifyJWT, (req, res) => {
       "UNI/BTC": unibtc
       }
     }
-    console.log('is subscribed to: ', credential.isSubribedTo);
+    console.log('type of: ', typeof credential.isSubribedTo["ETH/BTC"]);
     user.credentials.shift();
     user.credentials.push(credential);
     updateUserByID(user)

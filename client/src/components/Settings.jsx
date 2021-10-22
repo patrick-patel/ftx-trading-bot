@@ -19,11 +19,10 @@ class Settings extends React.Component {
 
   submitAPI() {
     var params = {
-      api_key: this.state.email,
-      secret: this.state.password
+      api_key: this.state.api_key,
+      secret: this.state.secret
     };
     $.ajax({
-      // 'url': 'http://localhost:1128/login',
       'url': '/postAPI',
       'type': 'POST',
       'context': this,
@@ -59,16 +58,18 @@ class Settings extends React.Component {
     return (
       <div>
         <div>
-          <label for="api_key"><b>Email</b></label>
+          <label for="api_key"><b>API Key</b></label>
           <input type="text" placeholder="Enter API Key" name="api_key" value={this.state.api_key} onChange={this.onChange.bind(this)} required></input>
 
-          <label for="secret"><b>Password</b></label>
+          <label for="secret"><b>Secret</b></label>
           <input type="text" placeholder="Enter Secret" name="secret" value={this.state.secret} onChange={this.onChange.bind(this)} required></input>
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
         <div>
-          <p>API Key: {this.state.apiValue}</p>
+          {this.state.apiValue &&
+            <p>API Key: {this.state.apiValue}</p>
+          }
         </div>
       </div>
     )

@@ -8,7 +8,7 @@ class Settings extends React.Component {
     this.state = {
       "api_key": "",
       "secret": "",
-      apiValue: "",
+      "apiValue": "",
       redirect: false
     };
   }
@@ -59,7 +59,7 @@ class Settings extends React.Component {
           },
           'success': function(api_key) {
             console.log(api_key);
-            this.setState({ apiValue: api_key });
+            this.setState({ "apiValue": api_key });
           },
           'error': function(error) {
             console.log(error);

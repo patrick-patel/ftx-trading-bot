@@ -145,7 +145,7 @@ class Settings extends React.Component {
         </div>
         <div>
           <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
-          <br>
+          <br></br>
           <p>{this.state.apiValue ? <label for="ETH/BTC"><b>ETH/BTC Pair</b></label> : null}</p>
           <div>
             {this.state.apiValue ? <input type="radio" name="ETH/BTC" value={this.state.["ETH/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}

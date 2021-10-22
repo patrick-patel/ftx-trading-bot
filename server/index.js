@@ -89,8 +89,8 @@ app.get('/userAPI', verifyJWT, (req, res) => {
     fetchUserByID(req.user.id)
     .then(user => {
       console.log('user: ', user);
-      if (user.api_key) {
-        res.send(user.api_key);
+      if (user.credentials.api_key) {
+        res.send(user.credentials.api_key);
       } else {
         res.status(400);
       }
@@ -355,6 +355,43 @@ app.post('/postAPI', verifyJWT, (req, res) => {
   const secret = req.body.secret;
   const isFTXUS = req.body.isFTXUS;
   const subAccountName = req.body.subAccountName;
+
+  fetchUserByID(req.user.id)
+  .then(user => {
+    console.log('user: ', user);
+    var credential = {
+      api_key: api_key,
+      secret: secret,
+      isFTXUS: isFTXUS,
+      subAccountName: subAccountName
+    }
+    user.credentials.push(credential);
+    updateUserByID(user)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .then(() => {
+    console.log('successfully updated user!');
+    res.end();
+  })
+});
+
+app.post('/setPairs', verifyJWT, (req, res) => {
+  // Form validation
+  console.log(req.body);
+  const { errors, isValid } = validateAPIInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const ethbtc = req.body["ETH/BTC"];
+  const linkbtc = req.body["LINK/BTC"];
+  const maticbtc = req.body["MATIC/BTC"];
+  const solbtc = req.body["SOL/BTC"];
+  const sushibtc = req.body["SUSHI/BTC"];
+  const unibtc = req.body["UNI/BTC"];
+
 
   fetchUserByID(req.user.id)
   .then(user => {

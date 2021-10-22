@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
+import Settings from './components/Settings.jsx';
 import Dashboard from './components/Dashboard.jsx';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
@@ -30,6 +31,7 @@ class App extends React.Component {
           <li><Link to="/">Dashboard</Link></li>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/register">Register</Link></li>
+          <li><Link to="/settings">Settings</Link></li>
           <li><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></li>
         </ul>
 
@@ -37,6 +39,7 @@ class App extends React.Component {
           <Route path="/" exact={true} component={Dashboard}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
+          <Route path="/settings" component={Settings}/>
         </Switch>
       </div>
     </Router>

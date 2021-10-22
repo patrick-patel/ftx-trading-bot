@@ -103,10 +103,12 @@ class Settings extends React.Component {
 
   submitPairs() {
     var params = {
-      api_key: this.state.api_key,
-      secret: this.state.secret,
-      isFTXUS: this.state.isFTXUS,
-      subAccountName: this.state.subAccountName
+      "ETH/BTC": this.state["ETH/BTC"],
+      "LINK/BTC": this.state["LINK/BTC"],
+      "MATIC/BTC": this.state["MATIC/BTC"]
+      "SOL/BTC": this.state["SOL/BTC"],
+      "SUSHI/BTC": this.state["SUSHI/BTC"],
+      "UNI/BTC": this.state["UNI/BTC"]
     };
     $.ajax({
       'url': '/setPairs',

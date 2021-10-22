@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded());
 app.use('/', express.static(__dirname + '/../client/dist'));
 
 // get requests
-app.get('/accountValue', function (req, res) {
+app.get('/accountValue', verifyJWT, function (req, res) {
   console.log('----------------get request-----------------');
   getAccountValue()
   .then(data => {
@@ -64,21 +64,27 @@ app.get('/userData', verifyJWT, (req, res) => {
   console.log('inside userData route');
   console.log('req.user.id: ', req.user.id);
   if (req.user.id) {
-    getAccountValue()
-    .then(data => {
-      console.log(data)
-      responseObj = {total: 0};
-      data.result.forEach(walletEntity => {
-        responseObj.total += walletEntity.usdValue;
-        responseObj[walletEntity.coin] = walletEntity.total;
+    fetchUserByID(req.user.id)
+    .then(user => {
+      establishRESTConnection(user.credentials[0])
+      .then(connection => {
+        getAccountValue(connection)
+        .then(data => {
+          console.log(data)
+          responseObj = {total: 0};
+          data.result.forEach(walletEntity => {
+            responseObj.total += walletEntity.usdValue;
+            responseObj[walletEntity.coin] = walletEntity.total;
+          })
+          return responseObj;
+        })
+        .then(responseObj => {
+          res.send(responseObj);
+        })
+        .catch(err => {
+          console.log(err);
+        })
       })
-      return responseObj;
-    })
-    .then(responseObj => {
-      res.send(responseObj);
-    })
-    .catch(err => {
-      console.log(err);
     })
   }
 })

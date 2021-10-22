@@ -85,7 +85,8 @@ class Settings extends React.Component {
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
         <div>
-            <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
+          <p>{this.state.apiValue}</p>
+          <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
         </div>
       </div>
     )

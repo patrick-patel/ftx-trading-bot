@@ -13,6 +13,24 @@ class Settings extends React.Component {
     };
   }
 
+  componentDidMount() {
+    $.ajax({
+      'url': '/userAPI',
+      'type': 'GET',
+      'context': this,
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
+      'success': function(data) {
+        console.log(data);
+        this.setState({ apiValue: data.api_key });
+      },
+      'error': function(error) {
+        console.log(error);
+      }
+    })
+  }
+
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
   }
@@ -67,7 +85,7 @@ class Settings extends React.Component {
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
         <div>
-          {this.state.apiValue &&
+          { this.state.apiValue.length > 0 &&
             <p>API Key: {this.state.apiValue}</p>
           }
         </div>

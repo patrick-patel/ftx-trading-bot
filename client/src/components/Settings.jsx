@@ -33,7 +33,7 @@ class Settings extends React.Component {
       'success': function(data) {
         console.log('success');
         $.ajax({
-          'url': '/userData',
+          'url': '/userAPI',
           'type': 'GET',
           'context': this,
           'headers': {

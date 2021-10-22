@@ -82,6 +82,17 @@ app.get('/userData', verifyJWT, (req, res) => {
   }
 })
 
+app.get('/userAPI', verifyJWT, (req, res) => {
+  console.log('inside userAPI route');
+  if (req.user.id) {
+    fetchUserByID(req.user.id)
+    .then(user => {
+      console.log('user: ', user);
+      res.send(user.api_key)
+    })
+  }
+})
+
 app.get('*', (req, res) => {
   res.redirect('/');
 });

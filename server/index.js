@@ -420,6 +420,8 @@ app.post('/setPairs', verifyJWT, (req, res) => {
       }
     }
     console.log('type of: ', typeof credential.isSubribedTo["ETH/BTC"]);
+    console.log('is subscribed to ', credential.isSubribedTo);
+
     user.credentials.shift();
     user.credentials.push(credential);
     updateUserByID(user)

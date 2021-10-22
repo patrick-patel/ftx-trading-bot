@@ -419,6 +419,7 @@ app.post('/setPairs', verifyJWT, (req, res) => {
       "UNI/BTC": unibtc
       }
     }
+    console.log('is subscribed to: ', credential.isSubribedTo);
     user.credentials.shift();
     user.credentials.push(credential);
     updateUserByID(user)

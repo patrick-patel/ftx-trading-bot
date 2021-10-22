@@ -386,11 +386,11 @@ app.post('/postAPI', verifyJWT, (req, res) => {
 app.post('/setPairs', verifyJWT, (req, res) => {
   // Form validation
   console.log(req.body);
-  const { errors, isValid } = validateAPIInput(req.body);
-  // Check validation
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
+  // const { errors, isValid } = validateAPIInput(req.body);
+  // // Check validation
+  // if (!isValid) {
+  //   return res.status(400).json(errors);
+  // }
   const ethbtc = req.body["ETH/BTC"];
   const linkbtc = req.body["LINK/BTC"];
   const maticbtc = req.body["MATIC/BTC"];

@@ -12,6 +12,12 @@ class Settings extends React.Component {
       "secret": "",
       "subAccountName": "",
       "isFTXUS": false,
+      "ETH/BTC": false,
+      "LINK/BTC": false,
+      "MATIC/BTC": false,
+      "SOL/BTC": false,
+      "SUSHI/BTC": false,
+      "UNI/BTC": false,
       "apiValue": "",
       redirect: false
     };
@@ -40,10 +46,14 @@ class Settings extends React.Component {
   onChangeRadio({ target }) {
     console.log(target.value);
     if (!this.state.isFTXUS) {
-      this.setState({ "isFTXUS": true })
+      this.setState({ [target.name]: true })
     } else {
-      this.setState({ "isFTXUS": false })
+      this.setState({ [target.name]: false })
     }
+  }
+
+  onChangePair({ target }) {
+    this.setState({ [target.name]: target.value });
   }
 
   onChange({ target }) {
@@ -91,6 +101,30 @@ class Settings extends React.Component {
     })
   }
 
+  submitAPI() {
+    var params = {
+      api_key: this.state.api_key,
+      secret: this.state.secret,
+      isFTXUS: this.state.isFTXUS,
+      subAccountName: this.state.subAccountName
+    };
+    $.ajax({
+      'url': '/setPairs',
+      'type': 'POST',
+      'context': this,
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
+      'data': params,
+      'success': function(data) {
+        console.log('success');
+      },
+      'error': function(error) {
+        console.log(error);
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -112,16 +146,48 @@ class Settings extends React.Component {
         <div>
           <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
           <div>
-            { this.state.apiValue ? <p>ETH/BTC Pair:</p> : null }
             {this.state.apiValue ?
-                <ButtonGroup aria-label="Basic example">
-                  <Button variant="secondary">Left</Button>
-                  <Button variant="secondary">Middle</Button>
-                  <Button variant="secondary">Right</Button>
-                </ButtonGroup>
+                <label for="ETH/BTC"><b>ETH/BTC Pair</b></label>
+                <input type="radio" name="ETH/BTC" value={this.state.["ETH/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input>
                 : null
             }
           </div>
+          <div>
+            {this.state.apiValue ?
+                <label for="LINK/BTC"><b>LINK/BTC Pair</b></label>
+                <input type="radio" name="LINK/BTC" value={this.state.["LINK/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input>
+                : null
+            }
+          </div>
+          <div>
+            {this.state.apiValue ?
+                <label for="MATIC/BTC"><b>MATIC/BTC Pair</b></label>
+                <input type="radio" name="MATIC/BTC" value={this.state.["MATIC/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input>
+                : null
+            }
+          </div>
+          <div>
+            {this.state.apiValue ?
+                <label for="SOL/BTC"><b>SOL/BTC Pair</b></label>
+                <input type="radio" name="SOL/BTC" value={this.state.["SOL/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input>
+                : null
+            }
+          </div>
+          <div>
+            {this.state.apiValue ?
+                <label for="SUSHI/BTC"><b>SUSHI/BTC Pair</b></label>
+                <input type="radio" name="SUSHI/BTC" value={this.state.["SUSHI/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input>
+                : null
+            }
+          </div>
+          <div>
+            {this.state.apiValue ?
+                <label for="UNI/BTC"><b>UNI/BTC Pair</b></label>
+                <input type="radio" name="UNI/BTC" value={this.state.["UNI/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input>
+                : null
+            }
+          </div>
+          <button type="submit" onClick={this.submitPairs.bind(this)}>Submit</button>
         </div>
       </div>
     )

@@ -392,16 +392,28 @@ app.post('/setPairs', verifyJWT, (req, res) => {
   const sushibtc = req.body["SUSHI/BTC"];
   const unibtc = req.body["UNI/BTC"];
 
-
   fetchUserByID(req.user.id)
   .then(user => {
     console.log('user: ', user);
+    const api_key = user.credentials[0].api_key;
+    const secret = user.credentials[0].secret;
+    const isFTXUS = user.credentials[0].isFTXUS;
+    const subAccountName = user.credentials[0].subAccountName;
     var credential = {
       api_key: api_key,
       secret: secret,
       isFTXUS: isFTXUS,
-      subAccountName: subAccountName
+      subAccountName: subAccountName,
+      isSubribedTo: {
+      "ETH/BTC": ethbtc,
+      "LINK/BTC": linkbtc,
+      "MATIC/BTC": maticbtc,
+      "SOL/BTC": solbtc,
+      "SUSHI/BTC": sushibtc,
+      "UNI/BTC": unibtc
+      }
     }
+    user.credentials.shift();
     user.credentials.push(credential);
     updateUserByID(user)
   })

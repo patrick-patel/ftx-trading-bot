@@ -42,7 +42,7 @@ class Settings extends React.Component {
           },
           'success': function(data) {
             console.log(data);
-            this.setState(apiValue: data.api_key);
+            this.setState({ apiValue: data.api_key });
           },
           'error': function(error) {
             console.log(error);

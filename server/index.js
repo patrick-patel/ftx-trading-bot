@@ -359,10 +359,13 @@ app.post('/postAPI', verifyJWT, (req, res) => {
   fetchUserByID(req.user.id)
   .then(user => {
     console.log('user: ', user);
-    user.api_key = api_key;
-    user.secret = secret;
-    user.isFTXUS = isFTXUS;
-    user.subAccountName = subAccountName;
+    var credential = {
+      api_key: api_key,
+      secret: secret,
+      isFTXUS: isFTXUS,
+      subAccountName: subAccountName
+    }
+    user.credentials.push(credential);
     updateUserByID(user)
   })
   .catch(err => {

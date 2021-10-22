@@ -57,9 +57,9 @@ class Settings extends React.Component {
           'headers': {
             'x-access-token': localStorage.getItem('token')
           },
-          'success': function(data) {
-            console.log(data);
-            this.setState({ apiValue: data.api_key });
+          'success': function(api_key) {
+            console.log(api_key);
+            this.setState({ apiValue: api_key });
           },
           'error': function(error) {
             console.log(error);

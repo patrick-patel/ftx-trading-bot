@@ -89,8 +89,8 @@ app.get('/userAPI', verifyJWT, (req, res) => {
     fetchUserByID(req.user.id)
     .then(user => {
       console.log('user: ', user);
-      if (user.credentials.api_key) {
-        res.send(user.credentials.api_key);
+      if (user.credentials[0].api_key) {
+        res.send(user.credentials[0].api_key);
       } else {
         res.status(400);
       }

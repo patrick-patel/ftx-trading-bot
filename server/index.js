@@ -121,6 +121,7 @@ app.post('/tradingview', function (req, res) {
   .then(users => {
     var promises = [];
     users.forEach(user => {
+      console.log(users);
       user.credentials.forEach(credential => {
         if (credential.isSubsribedTo[pair]) {
           promises.push(establishRESTConnection(credential))

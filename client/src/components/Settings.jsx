@@ -2,12 +2,16 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import $ from 'jquery';
 
+import { ButtonGroup, Button } from 'react-bootstrap';
+
 class Settings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       "api_key": "",
       "secret": "",
+      "subAccountName": "",
+      "isFTXUS": false,
       "apiValue": "",
       redirect: false
     };
@@ -33,6 +37,15 @@ class Settings extends React.Component {
     })
   }
 
+  onChangeRadio({ target }) {
+    console.log(target.value);
+    if (!this.state.isFTXUS) {
+      this.setState({ "isFTXUS": true })
+    } else {
+      this.setState({ "isFTXUS": false })
+    }
+  }
+
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
   }
@@ -40,7 +53,9 @@ class Settings extends React.Component {
   submitAPI() {
     var params = {
       api_key: this.state.api_key,
-      secret: this.state.secret
+      secret: this.state.secret,
+      isFTXUS: this.state.isFTXUS,
+      subAccountName: this.state.subAccountName
     };
     $.ajax({
       'url': '/postAPI',
@@ -86,11 +101,27 @@ class Settings extends React.Component {
           <label for="secret"><b>Secret</b></label>
           <input type="text" placeholder="Enter Secret" name="secret" value={this.state.secret} onChange={this.onChange.bind(this)} required></input>
 
+          <label for="subAccountName"><b>Secret</b></label>
+          <input type="text" placeholder="Enter Sub Account Name" name="subAccountName" value={this.state.subAccountName} onChange={this.onChange.bind(this)} required></input>
+
+          <label for="isFTXUS"><b>FTX.US?</b></label>
+          <input type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} required></input>
+
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
         <div>
-          <p>{this.state.apiValue}</p>
           <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
+          <div>
+            { this.state.apiValue ?
+                <p>ETH/BTC Pair:</p>
+                <ButtonGroup aria-label="Basic example">
+                  <Button variant="secondary">Left</Button>
+                  <Button variant="secondary">Middle</Button>
+                  <Button variant="secondary">Right</Button>
+                </ButtonGroup>
+                : null
+            }
+          </div>
         </div>
       </div>
     )

@@ -15,6 +15,7 @@ const verifyJWT = require("./auth/verifyJWT");
 const secretOrKey = process.env.secretOrKey || config.secretOrKeys;
 
 // ftx requests
+const establishRESTConnection = require('../lib/ftx.js').establishRESTConnection;
 const getAccountValue = require('../lib/ftx.js').getAccountValue;
 const postMarketSellOrder = require('../lib/ftx.js').postMarketSellOrder;
 const postStopMarketBuyOrder = require('../lib/ftx.js').postStopMarketBuyOrder;
@@ -28,6 +29,7 @@ const getOpenTriggerOrders = require('../lib/ftx.js').getOpenTriggerOrders;
 const saveCandle = require('../database/index.js').saveCandle;
 const fetchCandle = require('../database/index.js').fetchCandle;
 const saveUser = require('../database/index.js').saveUser;
+const fetchAllUsers = require('../database/index.js').fetchAllUsers;
 const fetchUser = require('../database/index.js').fetchUser;
 const fetchUserByID = require('../database/index.js').fetchUserByID;
 const updateUserByID = require('../database/index.js').updateUserByID;
@@ -78,7 +80,6 @@ app.get('/userData', verifyJWT, (req, res) => {
     .catch(err => {
       console.log(err);
     })
-    // res.send({ isLoggedIn: true});
   }
 })
 
@@ -109,115 +110,143 @@ app.post('/tradingview', function (req, res) {
   var event = req.body.event;
   var coin = req.body.coin;
   var pair = req.body.pair;
-  getAccountValue()
-  .then(wallet => {
-    console.log('wallet: ', wallet);
-    var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === coin);
-    var btcWalletEntity = wallet.result.find(btcWalletEntity => btcWalletEntity.coin === "BTC");
-    if (walletEntity) {
-      var freeCoins = walletEntity.free;
-      console.log('walletEntity: ', walletEntity)
-    } else {
-      var freeCoins = 0;
-    }
-    if (btcWalletEntity) {
-      var freeBTC = btcWalletEntity.free;
-      console.log('btcWalletEntity: ', btcWalletEntity)
-    } else {
-      var freeBTC = 0;
-    }
-    if (event === 'bullish reversal' && freeBTC > 0) {
-      console.log('fetching orderID');
-      getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
-      .then(orders => {
-        console.log('order: ', orders);
-        if (orders.result[0].id) {
-          console.log('canceling order');
-          var promises = [];
-          orders.result.forEach(order => {
-            promises.push(cancelOrder(order.id));
+
+  fetchAllUsers()
+  .then(users => {
+    var promises = [];
+    users.forEach(user => {
+      user.credentials.forEach(credential => {
+        if (credential.isSubsribedTo[pair]) {
+          promises.push(establishRESTConnection(credential))
+          .then(connection => {
+            getAccountValue(connection)
+            .then(wallet => {
+              console.log('wallet: ', wallet);
+              var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === coin);
+              var btcWalletEntity = wallet.result.find(btcWalletEntity => btcWalletEntity.coin === "BTC");
+              if (walletEntity) {
+                var freeCoins = walletEntity.free;
+                console.log('walletEntity: ', walletEntity)
+              } else {
+                var freeCoins = 0;
+              }
+              if (btcWalletEntity) {
+                var freeBTC = btcWalletEntity.free;
+                console.log('btcWalletEntity: ', btcWalletEntity)
+              } else {
+                var freeBTC = 0;
+              }
+              if (event === 'bullish reversal' && freeBTC > 0) {
+                console.log('fetching orderID');
+                var getOpenTriggerOrdersParams = {
+                  market: req.body.pair,
+                  type: 'stop'
+                };
+                getOpenTriggerOrders(connection.client, getOpenTriggerOrdersParams)
+                .then(orders => {
+                  console.log('order: ', orders);
+                  if (orders.result[0].id) {
+                    console.log('canceling order');
+                    var openTriggerOrderPromises = [];
+                    orders.result.forEach(order => {
+                      openTriggerOrderPromises.push(cancelOrder(connection.client, order.id));
+                    })
+                    return Promise.all(openTriggerOrderPromises);
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                })
+                .then(() => {
+                  return getMarket(connection.client, pair);
+                })
+                .then(marketData => {
+                  console.log('marketData: ', marketData)
+                  var currentPrice = marketData.result.price;
+                  console.log('test: posting stop market buy order')
+                  postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair)
+                  .then(() => {
+                    console.log('successfully posted stop market buy order');
+                  })
+                })
+                .catch(err => {
+                  console.log(err);
+                })
+              }
+              if (event === 'bearish reversal' && freeCoins > 0) {
+                console.log('fetching orderID');
+                var getOpenTriggerOrdersParams = {
+                  market: req.body.pair,
+                  type: 'stop'
+                };
+                getOpenTriggerOrders(connection.client, getOpenTriggerOrdersParams)
+                .then(orders => {
+                  console.log('order: ', orders);
+                  if (orders.result[0].id) {
+                    console.log('canceling order');
+                    var openTriggerOrderPromises = [];
+                    orders.result.forEach(order => {
+                      openTriggerOrderPromises.push(cancelOrder(connection.client, order.id));
+                    })
+                    return Promise.all(openTriggerOrderPromises);
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                })
+                .then(() => {
+                  postStopMarketSellOrder(connection.client, low, freeCoins, pair)
+                  .then(() => {
+                    console.log('successfully posted stop market sell order');
+                  })
+                })
+                .catch(err => {
+                  console.log(err);
+                })
+              }
+              if (event === 'bearish reversal' && freeBTC > 0) {
+                console.log('fetching orderID');
+                var getOpenTriggerOrdersParams = {
+                  market: req.body.pair,
+                  type: 'stop'
+                };
+                getOpenTriggerOrders(connection.client, getOpenTriggerOrdersParams)
+                .then(orders => {
+                  console.log('order: ', orders);
+                  if (orders.result[0].id) {
+                    console.log('canceling order');
+                    var openTriggerOrderPromises = [];
+                    orders.result.forEach(order => {
+                      openTriggerOrderPromises.push(cancelOrder(connection.client, order.id));
+                    })
+                    return Promise.all(openTriggerOrderPromises);
+                  }
+                })
+                .catch(err => {
+                  console.log(err);
+                })
+                .then(() => {
+                  return getMarket(connection.client, pair);
+                })
+                .then(marketData => {
+                  console.log('marketData: ', marketData)
+                  var currentPrice = marketData.result.price;
+                  console.log('test: posting stop market buy order')
+                  postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair)
+                  .then(() => {
+                    console.log('successfully posted stop market buy order');
+                  })
+                })
+                .catch(err => {
+                  console.log(err);
+                })
+              }
+            })
           })
-          return Promise.all(promises);
         }
       })
-      .catch(err => {
-        console.log(err);
-      })
-      .then(() => {
-        return getMarket(pair);
-      })
-      .then(marketData => {
-        console.log('marketData: ', marketData)
-        var currentPrice = marketData.result.price;
-        console.log('test: posting stop market buy order')
-        postStopMarketBuyOrder(high, freeBTC, currentPrice, pair)
-        .then(() => {
-          console.log('successfully posted stop market buy order');
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-    if (event === 'bearish reversal' && freeCoins > 0) {
-      getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
-      .then(orders => {
-        console.log('order: ', orders);
-        if (orders.result[0].id) {
-          console.log('canceling order');
-          var promises = [];
-          orders.result.forEach(order => {
-            promises.push(cancelOrder(order.id));
-          })
-          return Promise.all(promises);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .then(() => {
-        postStopMarketSellOrder(low, freeCoins, pair)
-        .then(() => {
-          console.log('successfully posted stop market sell order');
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
-    if (event === 'bearish reversal' && freeBTC > 0) {
-      console.log('fetching orderID');
-      getOpenTriggerOrders({market: req.body.pair, type: 'stop'})
-      .then(orders => {
-        console.log('order: ', orders);
-        if (orders.result[0].id) {
-          console.log('canceling order');
-          var promises = [];
-          orders.result.forEach(order => {
-            promises.push(cancelOrder(order.id));
-          })
-          return Promise.all(promises);
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      })
-      .then(() => {
-        return getMarket(pair);
-      })
-      .then(marketData => {
-        console.log('marketData: ', marketData)
-        var currentPrice = marketData.result.price;
-        console.log('test: posting stop market buy order')
-        postStopMarketBuyOrder(high, freeBTC, currentPrice, pair)
-        .then(() => {
-          console.log('successfully posted stop market buy order');
-        })
-      })
-      .catch(err => {
-        console.log(err);
-      })
-    }
+    })
+    return Promise.all(promises);
   })
   .then(() => {
       var candle = {
@@ -324,11 +353,16 @@ app.post('/postAPI', verifyJWT, (req, res) => {
   }
   const api_key = req.body.api_key;
   const secret = req.body.secret;
+  const isFTXUS = req.body.isFTXUS;
+  const subAccountName = req.body.subAccountName;
+
   fetchUserByID(req.user.id)
   .then(user => {
     console.log('user: ', user);
     user.api_key = api_key;
     user.secret = secret;
+    user.isFTXUS = isFTXUS;
+    user.subAccountName = subAccountName;
     updateUserByID(user)
   })
   .catch(err => {

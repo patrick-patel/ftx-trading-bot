@@ -42,8 +42,20 @@ let userSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  api_key: String,
-  secret: String
+  credentials: [{
+    api_key: String,
+    secret: String,
+    isFTXUS: Boolean,
+    subAccountName: String,
+    isSubscribedTo: {
+      "ETH/BTC": { type: Boolean, default: false },
+      "LINK/BTC": { type: Boolean, default: false },
+      'MATIC/BTC': { type: Boolean, default: false },
+      "SOL/BTC": { type: Boolean, default: false },
+      "SUSHI/BTC": { type: Boolean, default: false },
+      "UNI/BTC": { type: Boolean, default: false },
+    }
+  }]
 });
 
 let User = mongoose.model('User', userSchema);
@@ -59,6 +71,11 @@ let saveUser = (email, password) => {
       console.log('saved user!');
       return data;
     })
+}
+
+let fetchAllUsers = () => {
+  console.log('fetchin all users');
+  return User.find().exec();
 }
 
 let fetchUser = (email) => {
@@ -79,6 +96,7 @@ let updateUserByID = (user) => {
 module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
 module.exports.saveUser = saveUser;
+module.exports.fetchAllUsers = fetchAllUsers;
 module.exports.fetchUser = fetchUser;
 module.exports.fetchUserByID = fetchUserByID;
 module.exports.updateUserByID = updateUserByID;

@@ -101,7 +101,7 @@ class Settings extends React.Component {
     })
   }
 
-  submitAPI() {
+  submitPairs() {
     var params = {
       api_key: this.state.api_key,
       secret: this.state.secret,

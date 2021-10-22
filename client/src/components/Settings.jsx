@@ -145,13 +145,17 @@ class Settings extends React.Component {
         </div>
         <div>
           <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
+          <br>
+          <p>{this.state.apiValue ? <label for="ETH/BTC"><b>ETH/BTC Pair</b></label> : null}</p>
           <div>
             {this.state.apiValue ?
-                <label for="ETH/BTC"><b>ETH/BTC Pair</b></label>
+
                 <input type="radio" name="ETH/BTC" value={this.state.["ETH/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input>
                 : null
             }
           </div>
+
+          <p>{this.state.apiValue ? <label for="LINK/BTC"><b>LINK/BTC Pair</b></label> : null}</p>
           <div>
             {this.state.apiValue ?
                 <label for="LINK/BTC"><b>LINK/BTC Pair</b></label>
@@ -159,6 +163,8 @@ class Settings extends React.Component {
                 : null
             }
           </div>
+
+          <p>{this.state.apiValue ? <label for="MATIC/BTC"><b>MATIC/BTC Pair</b></label> : null}</p>
           <div>
             {this.state.apiValue ?
                 <label for="MATIC/BTC"><b>MATIC/BTC Pair</b></label>
@@ -166,6 +172,8 @@ class Settings extends React.Component {
                 : null
             }
           </div>
+
+          <p>{this.state.apiValue ? <label for="SOL/BTC"><b>SOL/BTC Pair</b></label> : null}</p>
           <div>
             {this.state.apiValue ?
                 <label for="SOL/BTC"><b>SOL/BTC Pair</b></label>
@@ -173,6 +181,8 @@ class Settings extends React.Component {
                 : null
             }
           </div>
+
+          <p>{this.state.apiValue ? <label for="SUSHI/BTC"><b>SUSHI/BTC Pair</b></label> : null}</p>
           <div>
             {this.state.apiValue ?
                 <label for="SUSHI/BTC"><b>SUSHI/BTC Pair</b></label>
@@ -180,6 +190,8 @@ class Settings extends React.Component {
                 : null
             }
           </div>
+
+          <p>{this.state.apiValue ? <label for="UNI/BTC"><b>UNI/BTC Pair</b></label> : null}</p>
           <div>
             {this.state.apiValue ?
                 <label for="UNI/BTC"><b>UNI/BTC Pair</b></label>

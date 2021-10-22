@@ -112,15 +112,13 @@ class Settings extends React.Component {
         <div>
           <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
           <div>
-            { this.state.apiValue ?
-                <p>ETH/BTC Pair:</p>
-                <>
+            { this.state.apiValue ? <p>ETH/BTC Pair:</p> : null }
+            {this.state.apiValue ?
                 <ButtonGroup aria-label="Basic example">
                   <Button variant="secondary">Left</Button>
                   <Button variant="secondary">Middle</Button>
                   <Button variant="secondary">Right</Button>
                 </ButtonGroup>
-                </>
                 : null
             }
           </div>

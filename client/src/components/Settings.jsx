@@ -21,9 +21,11 @@ class Settings extends React.Component {
       'headers': {
         'x-access-token': localStorage.getItem('token')
       },
-      'success': function(data) {
-        console.log(data);
-        this.setState({ apiValue: data.api_key });
+      'success': function(api_key) {
+        console.log('api_key: ', api_key);
+        console.log('type: ', typeof api_key);
+
+        this.setState({ "apiValue": api_key });
       },
       'error': function(error) {
         console.log(error);
@@ -58,7 +60,9 @@ class Settings extends React.Component {
             'x-access-token': localStorage.getItem('token')
           },
           'success': function(api_key) {
-            console.log('api_key: ', api_key, 'type: ', typeof api_key);
+            console.log('api_key: ', api_key);
+            console.log('type: ', typeof api_key);
+
             this.setState({ "apiValue": api_key });
           },
           'error': function(error) {

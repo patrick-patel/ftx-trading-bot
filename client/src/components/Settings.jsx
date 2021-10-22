@@ -105,7 +105,7 @@ class Settings extends React.Component {
     var params = {
       "ETH/BTC": this.state["ETH/BTC"],
       "LINK/BTC": this.state["LINK/BTC"],
-      "MATIC/BTC": this.state["MATIC/BTC"]
+      "MATIC/BTC": this.state["MATIC/BTC"],
       "SOL/BTC": this.state["SOL/BTC"],
       "SUSHI/BTC": this.state["SUSHI/BTC"],
       "UNI/BTC": this.state["UNI/BTC"]

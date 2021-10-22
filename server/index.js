@@ -119,11 +119,11 @@ app.post('/tradingview', function (req, res) {
 
   fetchAllUsers()
   .then(users => {
+    console.log(users);
     var promises = [];
     users.forEach(user => {
-      console.log(users);
       user.credentials.forEach(credential => {
-        if (credential.isSubsribedTo[pair]) {
+        if (credential.isSubscribedTo[pair]) {
           promises.push(establishRESTConnection(credential))
           .then(connection => {
             getAccountValue(connection)

@@ -10,6 +10,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const validateRegisterInput = require("./auth/register");
 const validateLoginInput = require("./auth/login");
+const validateAPIInput = require("./auth/api");
 const verifyJWT = require("./auth/verifyJWT");
 const secretOrKey = process.env.secretOrKey || config.secretOrKeys;
 
@@ -28,6 +29,8 @@ const saveCandle = require('../database/index.js').saveCandle;
 const fetchCandle = require('../database/index.js').fetchCandle;
 const saveUser = require('../database/index.js').saveUser;
 const fetchUser = require('../database/index.js').fetchUser;
+const fetchUserByID = require('../database/index.js').fetchUserByID;
+const updateUserByID = require('../database/index.js').updateUserByID;
 
 // middleware
 app.use(bodyParser.json());
@@ -234,7 +237,7 @@ app.post('/register', (req, res) => {
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(password, salt, (err, hashedPassword) => {
           console.log('hashedPassword: ', hashedPassword);
-          saveUser(email, hashedPassword)
+          saveUser(email, hashedPassword);
         });
       });
     }
@@ -293,6 +296,32 @@ app.post('/login', (req, res) => {
   })
   .catch(err => {
     console.log(err);
+  })
+});
+
+app.post('/postAPI', verifyJWT, (req, res) => {
+  // Form validation
+  console.log(req.body);
+  const { errors, isValid } = validateAPIInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const api_key = req.body.api_key;
+  const secret = req.body.secret;
+  fetchUserByID(req.user.id)
+  .then(user => {
+    console.log('user: ', user);
+    user.api_key = api_key;
+    user.secret = secret;
+    updateUserByID(user)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .then(() => {
+    console.log('successfully updated user!');
+    res.end();
   })
 });
 

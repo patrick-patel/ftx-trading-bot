@@ -41,7 +41,9 @@ let userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  api_key: String,
+  secret: String
 });
 
 let User = mongoose.model('User', userSchema);
@@ -64,10 +66,21 @@ let fetchUser = (email) => {
   return User.findOne({"email": email}).exec();
 }
 
+let fetchUserByID = (id) => {
+  console.log('fetching user');
+  return User.findOne({"_id": id}).exec();
+}
+
+let updateUserByID = (user) => {
+  console.log('updating user');
+  return User.findOneAndUpdate({"_id": user.id}, user).exec();
+}
 
 module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
 module.exports.saveUser = saveUser;
 module.exports.fetchUser = fetchUser;
+module.exports.fetchUserByID = fetchUserByID;
+module.exports.updateUserByID = updateUserByID;
 module.exports.User = User;
 

@@ -420,8 +420,8 @@ app.post('/setPairs', verifyJWT, (req, res) => {
         "UNI/BTC": unibtc
       }
     }
-    console.log('type of: ', typeof credential.isSubribedTo["ETH/BTC"]);
-    console.log('is subscribed to ', credential.isSubribedTo);
+    console.log('type of: ', typeof credential.isSubscribedTo["ETH/BTC"]);
+    console.log('is subscribed to ', credential.isSubscribedTo);
 
     user.credentials.shift();
     user.credentials.push(credential);

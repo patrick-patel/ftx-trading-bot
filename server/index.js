@@ -411,13 +411,13 @@ app.post('/setPairs', verifyJWT, (req, res) => {
       secret: secret,
       isFTXUS: isFTXUS,
       subAccountName: subAccountName,
-      isSubribedTo: {
-      "ETH/BTC": ethbtc,
-      "LINK/BTC": linkbtc,
-      "MATIC/BTC": maticbtc,
-      "SOL/BTC": solbtc,
-      "SUSHI/BTC": sushibtc,
-      "UNI/BTC": unibtc
+      isSubscribedTo: {
+        "ETH/BTC": ethbtc,
+        "LINK/BTC": linkbtc,
+        "MATIC/BTC": maticbtc,
+        "SOL/BTC": solbtc,
+        "SUSHI/BTC": sushibtc,
+        "UNI/BTC": unibtc
       }
     }
     console.log('type of: ', typeof credential.isSubribedTo["ETH/BTC"]);

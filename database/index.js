@@ -90,7 +90,7 @@ let fetchUserByID = (id) => {
 
 let updateUserByID = (user) => {
   console.log('updating user');
-  return User.findOneAndUpdate({"_id": user.id}, user).exec();
+  return User.findOneAndUpdate({"_id": user.id}, user, {setDefaultOnInsert: false}).exec();
 }
 
 module.exports.saveCandle = saveCandle;

@@ -124,7 +124,7 @@ app.post('/tradingview', function (req, res) {
     users.forEach(user => {
       user.credentials.forEach(credential => {
         if (credential.isSubscribedTo[pair]) {
-          promises.push(establishRESTConnection(credential))
+          promises.push(establishRESTConnection(credential)
           .then(connection => {
             getAccountValue(connection)
             .then(wallet => {
@@ -252,7 +252,7 @@ app.post('/tradingview', function (req, res) {
           })
         }
       })
-    })
+    }))
     return Promise.all(promises);
   })
   .then(() => {

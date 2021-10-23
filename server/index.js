@@ -250,9 +250,9 @@ app.post('/tradingview', function (req, res) {
               }
             })
           })
-        }
+        )}
       })
-    }))
+    })
     return Promise.all(promises);
   })
   .then(() => {

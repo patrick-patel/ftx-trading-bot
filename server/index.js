@@ -170,7 +170,7 @@ app.post('/tradingview', function (req, res) {
                 console.log('marketData: ', marketData)
                 var currentPrice = marketData.result.price;
                 console.log('test: posting stop market buy order')
-                postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair)
+                postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair, connection.orderAdj)
                 .then(() => {
                   console.log('successfully posted stop market buy order');
                 })
@@ -201,7 +201,7 @@ app.post('/tradingview', function (req, res) {
                 console.log(err);
               })
               .then(() => {
-                postStopMarketSellOrder(connection.client, low, freeCoins, pair)
+                postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
                 .then(() => {
                   console.log('successfully posted stop market sell order');
                 })
@@ -238,7 +238,7 @@ app.post('/tradingview', function (req, res) {
                 console.log('marketData: ', marketData)
                 var currentPrice = marketData.result.price;
                 console.log('test: posting stop market buy order')
-                postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair)
+                postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair, connection.orderAdj)
                 .then(() => {
                   console.log('successfully posted stop market buy order');
                 })
@@ -378,6 +378,12 @@ app.post('/postAPI', verifyJWT, (req, res) => {
   })
   .then(() => {
     console.log('successfully updated user!');
+    return fetchUserByID(req.user.id);
+  })
+  .then(user => {
+    user.credentials.forEach(credential => {
+      establishWSConnection(credential);
+    })
     res.end();
   })
 });

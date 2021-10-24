@@ -261,9 +261,9 @@ app.post('/tradingview', function (req, res) {
       }
       saveCandle(candle);
   })
-  // .then(() => {
-  //   res.redirect('/');
-  // })
+  .then(() => {
+    res.end();
+  })
 });
 
 app.post('/register', (req, res) => {

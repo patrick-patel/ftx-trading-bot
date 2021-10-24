@@ -247,7 +247,7 @@ app.post('/tradingview', function (req, res) {
                 console.log(err);
               })
             }
-          })
+          }))
         })
       )}
     })

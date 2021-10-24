@@ -16,6 +16,7 @@ const secretOrKey = process.env.secretOrKey || config.secretOrKeys;
 
 // ftx requests
 const establishRESTConnection = require('../lib/ftx.js').establishRESTConnection;
+const establishWSConnection = require('../lib/ftx.js').establishWSConnection;
 const getAccountValue = require('../lib/ftx.js').getAccountValue;
 const postMarketSellOrder = require('../lib/ftx.js').postMarketSellOrder;
 const postStopMarketBuyOrder = require('../lib/ftx.js').postStopMarketBuyOrder;

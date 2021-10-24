@@ -67,24 +67,22 @@ app.get('/userData', verifyJWT, (req, res) => {
   if (req.user.id) {
     fetchUserByID(req.user.id)
     .then(user => {
-      establishRESTConnection(user.credentials[0])
-      .then(connection => {
-        getAccountValue(connection)
-        .then(data => {
-          console.log(data)
-          responseObj = {total: 0};
-          data.result.forEach(walletEntity => {
-            responseObj.total += walletEntity.usdValue;
-            responseObj[walletEntity.coin] = walletEntity.total;
-          })
-          return responseObj;
+      var connection = establishRESTConnection(user.credentials[0]);
+      getAccountValue(connection)
+      .then(data => {
+        console.log(data)
+        responseObj = {total: 0};
+        data.result.forEach(walletEntity => {
+          responseObj.total += walletEntity.usdValue;
+          responseObj[walletEntity.coin] = walletEntity.total;
         })
-        .then(responseObj => {
-          res.send(responseObj);
-        })
-        .catch(err => {
-          console.log(err);
-        })
+        return responseObj;
+      })
+      .then(responseObj => {
+        res.send(responseObj);
+      })
+      .catch(err => {
+        console.log(err);
       })
     })
   }

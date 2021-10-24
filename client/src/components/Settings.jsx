@@ -137,7 +137,7 @@ class Settings extends React.Component {
           <label for="secret"><b>Secret</b></label>
           <input type="text" placeholder="Enter Secret" name="secret" value={this.state.secret} onChange={this.onChange.bind(this)} required></input>
 
-          <label for="subAccountName"><b>Secret</b></label>
+          <label for="subAccountName"><b>Sub Account Name</b></label>
           <input type="text" placeholder="Enter Sub Account Name" name="subAccountName" value={this.state.subAccountName} onChange={this.onChange.bind(this)} required></input>
 
           <label for="isFTXUS"><b>FTX.US?</b></label>
@@ -177,7 +177,7 @@ class Settings extends React.Component {
           <div>
             {this.state.apiValue ? <input type="radio" name="UNI/BTC" value={this.state.["UNI/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}
           </div>
-          <button type="submit" onClick={this.submitPairs.bind(this)}>Submit</button>
+          {this.state.apiValue ? <button type="submit" onClick={this.submitPairs.bind(this)}>Submit</button> : null}
         </div>
       </div>
     )

@@ -246,6 +246,9 @@ app.post('/tradingview', function (req, res) {
                 console.log(err);
               })
             }
+          })
+          .catch(err => {
+            console.log(err);
           }))
         }
       })

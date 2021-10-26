@@ -5,7 +5,7 @@ const APIs = (props) => (
   <div>
     <h4>API Keys</h4>
     <ul>
-      {Object.keys(props.api_keys).length > 0 ? Object.keys(props.api_keys).map(key => {
+      {Object.keys(props.api_keys).map(key => {
         <API
           api_key={props.api_keys[key]}
           ethbtc={props["ETH/BTC"]}
@@ -15,8 +15,7 @@ const APIs = (props) => (
           sushibtc={props["SUSHI/BTC"]}
           unibtc={props["UNI/BTC"]}
         />
-      })
-      : null}
+      })}
     </ul>
   </div>
 

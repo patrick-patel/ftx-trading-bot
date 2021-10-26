@@ -153,7 +153,7 @@ class Settings extends React.Component {
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
-        <APIs api_keys={this.state.api_keys} />
+        <APIs props={this.state} />
       </div>
     )
   }

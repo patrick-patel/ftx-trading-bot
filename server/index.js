@@ -152,6 +152,12 @@ app.post('/tradingview', function (req, res) {
                 postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair, connection.orderAdj, connection.freeBTCScaler)
                 .then(() => {
                   console.log('successfully posted stop market buy order');
+                  if (freeCoins > 0) {
+                    postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj, connection.freeBTCScaler)
+                    .then(() => {
+                      console.log('successfully posted stop market sell order');
+                    })
+                  }
                 })
               })
               .catch(err => {

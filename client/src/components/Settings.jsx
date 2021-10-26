@@ -20,7 +20,7 @@ class Settings extends React.Component {
       "SOL/BTC": false,
       "SUSHI/BTC": false,
       "UNI/BTC": false,
-      "api_keys": [],
+      "api_keys": {},
       redirect: false
     };
   }
@@ -35,9 +35,9 @@ class Settings extends React.Component {
       },
       'success': function(credentials) {
         console.log('credentials: ', credentials);
-        var api_keys = [];
+        var api_keys = {};
         credentials.forEach(credential => {
-          api_keys.push(credential.api_key);
+          api_keys[credential.subAccountName] = credential.api_key;
         })
 
         this.setState({ "api_keys": api_keys });

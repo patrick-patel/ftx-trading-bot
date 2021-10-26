@@ -36,4 +36,4 @@ const PairsForm = (props) => (
 
 )
 
-export default APIs;
+export default PairsForm;

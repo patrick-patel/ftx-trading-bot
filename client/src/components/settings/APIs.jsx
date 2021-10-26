@@ -5,9 +5,9 @@ const APIs = (props) => (
   <div>
     <h4>API Keys</h4>
     <ul>
-      {Object.keys(props["api_keys"]).map(key => {
+      {props["api_keys"].map(api_key => {
         <API
-          api_key={props["api_keys"][key]}
+          api_key={api_key}
           ethbtc={props["ETH/BTC"]}
           linkbtc={props["LINK/BTC"]}
           maticbtc={props["MATIC/BTC"]}

@@ -56,10 +56,6 @@ class Settings extends React.Component {
     }
   }
 
-  onChangePair({ target }) {
-    this.setState({ [target.name]: target.value });
-  }
-
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
   }
@@ -152,7 +148,7 @@ class Settings extends React.Component {
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
-        {this.state.api_keys.length > 0 ? <APIs api_keys={this.state["api_keys"]} /> : null}
+        {this.state.api_keys.length > 0 ? <APIs api_keys={this.state["api_keys"]} onChangeRadio={this.onChangeRadio.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
       </div>
     )
   }

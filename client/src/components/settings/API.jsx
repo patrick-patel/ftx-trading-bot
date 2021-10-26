@@ -4,7 +4,7 @@ import PairsForm from './PairsForm.jsx';
 import { ButtonGroup, Button } from 'react-bootstrap';
 
 
-class API extends React.component {
+class API extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

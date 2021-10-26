@@ -49,8 +49,7 @@ class Settings extends React.Component {
   }
 
   onChangeRadio({ target }) {
-    console.log(target.value);
-    if (!this.state.isFTXUS) {
+    if (!this.state[target.name]) {
       this.setState({ [target.name]: true })
     } else {
       this.setState({ [target.name]: false })
@@ -153,7 +152,7 @@ class Settings extends React.Component {
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
-        {this.state.api_keys.length > 0 ? <APIs state={this.state} /> : null}
+        {this.state.api_keys.length > 0 ? <APIs api_keys={this.state["api_keys"]} /> : null}
       </div>
     )
   }

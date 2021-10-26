@@ -1,6 +1,6 @@
 import React from 'react';
+import $ from 'jquery';
 import PairsForm from './PairsForm.jsx';
-
 import { ButtonGroup, Button } from 'react-bootstrap';
 
 

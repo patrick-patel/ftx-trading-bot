@@ -14,12 +14,6 @@ class Settings extends React.Component {
       "secret": "",
       "subAccountName": "",
       "isFTXUS": false,
-      "ETH/BTC": false,
-      "LINK/BTC": false,
-      "MATIC/BTC": false,
-      "SOL/BTC": false,
-      "SUSHI/BTC": false,
-      "UNI/BTC": false,
       "api_keys": [],
       redirect: false
     };
@@ -104,32 +98,6 @@ class Settings extends React.Component {
     })
   }
 
-  submitPairs() {
-    var params = {
-      "ETH/BTC": this.state["ETH/BTC"],
-      "LINK/BTC": this.state["LINK/BTC"],
-      "MATIC/BTC": this.state["MATIC/BTC"],
-      "SOL/BTC": this.state["SOL/BTC"],
-      "SUSHI/BTC": this.state["SUSHI/BTC"],
-      "UNI/BTC": this.state["UNI/BTC"]
-    };
-    $.ajax({
-      'url': '/setPairs',
-      'type': 'POST',
-      'context': this,
-      'headers': {
-        'x-access-token': localStorage.getItem('token')
-      },
-      'data': params,
-      'success': function(data) {
-        console.log('success');
-      },
-      'error': function(error) {
-        console.log(error);
-      }
-    })
-  }
-
   render() {
     return (
       <div>
@@ -148,7 +116,7 @@ class Settings extends React.Component {
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
-        {this.state.api_keys.length > 0 ? <APIs api_keys={this.state["api_keys"]} onChangeRadio={this.onChangeRadio.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
+        {this.state.api_keys.length > 0 ? <APIs api_keys={this.state["api_keys"]} /> : null}
       </div>
     )
   }

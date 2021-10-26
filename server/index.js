@@ -378,7 +378,7 @@ app.post('/postAPI', verifyJWT, (req, res) => {
 
 app.post('/setPairs', verifyJWT, (req, res) => {
   console.log(req.body);
-
+  const api_key = req.body["api_key"];
   const ethbtc = (req.body["ETH/BTC"] === 'true');
   const linkbtc = (req.body["LINK/BTC"] === 'true');
   const maticbtc = (req.body["MATIC/BTC"] === 'true');
@@ -389,16 +389,8 @@ app.post('/setPairs', verifyJWT, (req, res) => {
   fetchUserByID(req.user.id)
   .then(user => {
     console.log('user: ', user);
-    const api_key = user.credentials[0].api_key;
-    const secret = user.credentials[0].secret;
-    const isFTXUS = user.credentials[0].isFTXUS;
-    const subAccountName = user.credentials[0].subAccountName;
-    var credential = {
-      api_key: api_key,
-      secret: secret,
-      isFTXUS: isFTXUS,
-      subAccountName: subAccountName,
-      isSubscribedTo: {
+    let credentialIndex = user.credentials.findIndex(credential => credential.api_key === api_key)
+    user.credentials[credentialIndex].isSubscribedTo = {
         "ETH/BTC": ethbtc,
         "LINK/BTC": linkbtc,
         "MATIC/BTC": maticbtc,
@@ -406,12 +398,7 @@ app.post('/setPairs', verifyJWT, (req, res) => {
         "SUSHI/BTC": sushibtc,
         "UNI/BTC": unibtc
       }
-    }
-    console.log('type of: ', typeof credential.isSubscribedTo["ETH/BTC"]);
-    console.log('is subscribed to ', credential.isSubscribedTo);
 
-    user.credentials.shift();
-    user.credentials.push(credential);
     updateUserByID(user)
   })
   .catch(err => {

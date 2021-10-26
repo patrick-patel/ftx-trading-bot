@@ -19,7 +19,6 @@ class Dashboard extends React.Component {
   componentDidMount() {
     console.log('comp did mount')
     $.ajax({
-      // 'url': 'http://localhost:1128/accountValue',
       'url': '/userData',
       'type': 'GET',
       'context': this,

@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import $ from 'jquery';
 
+import APIs from './settings/APIs.jsx';
+
 import { ButtonGroup, Button } from 'react-bootstrap';
 
 class Settings extends React.Component {
@@ -18,7 +20,7 @@ class Settings extends React.Component {
       "SOL/BTC": false,
       "SUSHI/BTC": false,
       "UNI/BTC": false,
-      "apiValue": "",
+      "api_keys": [],
       redirect: false
     };
   }
@@ -31,11 +33,14 @@ class Settings extends React.Component {
       'headers': {
         'x-access-token': localStorage.getItem('token')
       },
-      'success': function(api_key) {
-        console.log('api_key: ', api_key);
-        console.log('type: ', typeof api_key);
+      'success': function(credentials) {
+        console.log('credentials: ', credentials);
+        var api_keys = [];
+        credentials.forEach(credential => {
+          api_keys.push(credential.api_key);
+        })
 
-        this.setState({ "apiValue": api_key });
+        this.setState({ "api_keys": api_keys });
       },
       'error': function(error) {
         console.log(error);
@@ -84,11 +89,14 @@ class Settings extends React.Component {
           'headers': {
             'x-access-token': localStorage.getItem('token')
           },
-          'success': function(api_key) {
-            console.log('api_key: ', api_key);
-            console.log('type: ', typeof api_key);
+          'success': function(credentials) {
+            console.log('credentials: ', credentials);
+            var api_keys = [];
+            credentials.forEach(credential => {
+              api_keys.push(credential.api_key);
+            })
 
-            this.setState({ "apiValue": api_key });
+            this.setState({ "api_keys": api_keys });
           },
           'error': function(error) {
             console.log(error);
@@ -145,40 +153,7 @@ class Settings extends React.Component {
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
-        <div>
-          <p>{this.state.apiValue ? 'API Key: ' + this.state.apiValue : ''}</p>
-          <br></br>
-          <p>{this.state.apiValue ? <label for="ETH/BTC"><b>ETH/BTC Pair</b></label> : null}</p>
-          <div>
-            {this.state.apiValue ? <input type="radio" name="ETH/BTC" value={this.state.["ETH/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}
-          </div>
-
-          <p>{this.state.apiValue ? <label for="LINK/BTC"><b>LINK/BTC Pair</b></label> : null}</p>
-          <div>
-            {this.state.apiValue ? <input type="radio" name="LINK/BTC" value={this.state.["LINK/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}
-          </div>
-
-          <p>{this.state.apiValue ? <label for="MATIC/BTC"><b>MATIC/BTC Pair</b></label> : null}</p>
-          <div>
-            {this.state.apiValue ? <input type="radio" name="MATIC/BTC" value={this.state.["MATIC/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}
-          </div>
-
-          <p>{this.state.apiValue ? <label for="SOL/BTC"><b>SOL/BTC Pair</b></label> : null}</p>
-          <div>
-            {this.state.apiValue ? <input type="radio" name="SOL/BTC" value={this.state.["SOL/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}
-          </div>
-
-          <p>{this.state.apiValue ? <label for="SUSHI/BTC"><b>SUSHI/BTC Pair</b></label> : null}</p>
-          <div>
-            {this.state.apiValue ? <input type="radio" name="SUSHI/BTC" value={this.state.["SUSHI/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}
-          </div>
-
-          <p>{this.state.apiValue ? <label for="UNI/BTC"><b>UNI/BTC Pair</b></label> : null}</p>
-          <div>
-            {this.state.apiValue ? <input type="radio" name="UNI/BTC" value={this.state.["UNI/BTC"]} onChange={this.onChangeRadio.bind(this)} required></input> : null}
-          </div>
-          {this.state.apiValue ? <button type="submit" onClick={this.submitPairs.bind(this)}>Submit</button> : null}
-        </div>
+        <APIs api_keys={this.state.api_keys}/>
       </div>
     )
   }

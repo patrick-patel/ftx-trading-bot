@@ -41,26 +41,6 @@ app.use(bodyParser.urlencoded());
 app.use('/', express.static(__dirname + '/../client/dist'));
 
 // get requests
-app.get('/accountValue', verifyJWT, function (req, res) {
-  console.log('----------------get request-----------------');
-  getAccountValue()
-  .then(data => {
-    console.log(data)
-    responseObj = {total: 0};
-    data.result.forEach(walletEntity => {
-      responseObj.total += walletEntity.usdValue;
-      responseObj[walletEntity.coin] = walletEntity.total;
-    })
-    return responseObj;
-  })
-  .then(responseObj => {
-    res.send(responseObj);
-  })
-  .catch(err => {
-    console.log(err);
-  })
-});
-
 app.get('/userData', verifyJWT, (req, res) => {
   console.log('inside userData route');
   console.log('req.user.id: ', req.user.id);
@@ -95,7 +75,7 @@ app.get('/userAPI', verifyJWT, (req, res) => {
     .then(user => {
       console.log('user: ', user);
       if (user.credentials[0].api_key) {
-        res.send(user.credentials[0].api_key);
+        res.send(user.credentials);
       } else {
         res.status(400);
       }
@@ -391,13 +371,8 @@ app.post('/postAPI', verifyJWT, (req, res) => {
 });
 
 app.post('/setPairs', verifyJWT, (req, res) => {
-  // Form validation
   console.log(req.body);
-  // const { errors, isValid } = validateAPIInput(req.body);
-  // // Check validation
-  // if (!isValid) {
-  //   return res.status(400).json(errors);
-  // }
+
   const ethbtc = (req.body["ETH/BTC"] === 'true');
   const linkbtc = (req.body["LINK/BTC"] === 'true');
   const maticbtc = (req.body["MATIC/BTC"] === 'true');

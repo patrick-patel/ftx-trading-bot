@@ -1,16 +1,16 @@
 import React from 'react';
 import PairsForm from './PairsForm.jsx';
 
-const API = ({api_key, ethbtc, linkbtc, maticbtc, solbtc, sushibtc, unibtc}) => (
+const API = (props) => (
   <div>
-    <h4>{api_key}</h4>
+    <h4>{props.api_key}</h4>
     <PairsForm
-      ethbtc={ethbtc}
-      linkbtc={linkbtc}
-      maticbtc={maticbtc}
-      solbtc={solbtc}
-      sushibtc={sushibtc}
-      unibtc={unibtc}
+      ethbtc={props.ethbtc}
+      linkbtc={props.linkbtc}
+      maticbtc={props.maticbtc}
+      solbtc={props.solbtc}
+      sushibtc={props.sushibtc}
+      unibtc={props.unibtc}
     />
     <p>--------------------------</p>
   </div>

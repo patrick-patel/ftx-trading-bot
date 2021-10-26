@@ -8,12 +8,12 @@ const APIs = (props) => (
       {props.state["api_keys"].map(api_key => {
         <API
           api_key={api_key}
-          ethbtc={props["ETH/BTC"]}
-          linkbtc={props["LINK/BTC"]}
-          maticbtc={props["MATIC/BTC"]}
-          solbtc={props["SOL/BTC"]}
-          sushibtc={props["SUSHI/BTC"]}
-          unibtc={props["UNI/BTC"]}
+          ethbtc={props.state["ETH/BTC"]}
+          linkbtc={props.state["LINK/BTC"]}
+          maticbtc={props.state["MATIC/BTC"]}
+          solbtc={props.state["SOL/BTC"]}
+          sushibtc={props.state["SUSHI/BTC"]}
+          unibtc={props.state["UNI/BTC"]}
         />
       })}
     </ul>

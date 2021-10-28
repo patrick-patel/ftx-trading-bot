@@ -60,6 +60,7 @@ app.get('/userData', verifyJWT, (req, res) => {
             responseObj[walletEntity.coin] = walletEntity.total;
           })
           responseObj.api_key = credential.api_key;
+          console.log('responseObj: ', responseObj)
           responseArray.push(responseObj);
         })
         .catch(err => {

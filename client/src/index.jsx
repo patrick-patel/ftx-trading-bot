@@ -51,7 +51,7 @@ class App extends React.Component {
         </ul>
 
         <Switch>
-          <Route path="/" exact={true} component={() => <Dashboards credentials={this.state.credentials}/>}/>
+          <Route path="/" exact={true} component={() => {this.state.credentials ? <Dashboards credentials={this.state.credentials}/> : null}}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/settings" component={Settings}/>

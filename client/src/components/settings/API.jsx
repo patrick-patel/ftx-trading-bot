@@ -52,6 +52,7 @@ class API extends React.Component {
     })
   }
 
+
   onPairChange(pair, hr) {
     this.setState({
       [pair]: hr

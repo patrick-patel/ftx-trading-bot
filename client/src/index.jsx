@@ -26,6 +26,7 @@ class App extends React.Component {
         'x-access-token': localStorage.getItem('token')
       },
       'success': function(credentials) {
+        console.log('server response: ', credentials);
         this.setState({
           credentials: credentials
         })

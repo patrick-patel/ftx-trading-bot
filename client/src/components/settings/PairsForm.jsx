@@ -3,7 +3,7 @@ import {ButtonGroup, Button} from 'react-bootstrap';
 
 const PairsForm = (props) => (
   <div>
-    <p><label for="ETH/BTC"><b>ETH/BTC Pair</b></label></p>
+    <p><label for="ETH/BTC"><b>ETH/BTC Pair - Set To: {props.state["ETH/BTC"]}</b></label></p>
     <div>
       <ButtonGroup>
         <Button onClick={() => props.onPairChange("ETH/BTC", "off")} active={props.state["ETH/BTC"] === "off"}>Off</Button>
@@ -15,7 +15,7 @@ const PairsForm = (props) => (
       </ButtonGroup>
     </div>
 
-    <p><label for="LINK/BTC"><b>LINK/BTC Pair</b></label></p>
+    <p><label for="LINK/BTC"><b>LINK/BTC Pair - Set To: {props.state["LINK/BTC"]}</b></label></p>
     <div>
       <ButtonGroup>
         <Button onClick={() => props.onPairChange("LINK/BTC", "off")} active={props.state["LINK/BTC"] === "off"}>Off</Button>
@@ -27,7 +27,7 @@ const PairsForm = (props) => (
       </ButtonGroup>
     </div>
 
-    <p><label for="MATIC/BTC"><b>MATIC/BTC Pair</b></label></p>
+    <p><label for="MATIC/BTC"><b>MATIC/BTC Pair - Set To: {props.state["MATIC/BTC"]}</b></label></p>
     <div>
       <ButtonGroup>
         <Button onClick={() => props.onPairChange("MATIC/BTC", "off")} active={props.state["MATIC/BTC"] === "off"}>Off</Button>
@@ -39,7 +39,7 @@ const PairsForm = (props) => (
       </ButtonGroup>
     </div>
 
-    <p><label for="SOL/BTC"><b>SOL/BTC Pair</b></label></p>
+    <p><label for="SOL/BTC"><b>SOL/BTC Pair - Set To: {props.state["SOL/BTC"]}</b></label></p>
     <div>
       <ButtonGroup>
         <Button onClick={() => props.onPairChange("SOL/BTC", "off")} active={props.state["SOL/BTC"] === "off"}>Off</Button>
@@ -51,7 +51,7 @@ const PairsForm = (props) => (
       </ButtonGroup>
     </div>
 
-    <p><label for="SUSHI/BTC"><b>SUSHI/BTC Pair</b></label></p>
+    <p><label for="SUSHI/BTC"><b>SUSHI/BTC Pair - Set To: {props.state["SUSHI/BTC"]}</b></label></p>
     <div>
       <ButtonGroup>
         <Button onClick={() => props.onPairChange("SUSHI/BTC", "off")} active={props.state["SUSHI/BTC"] === "off"}>Off</Button>
@@ -63,7 +63,7 @@ const PairsForm = (props) => (
       </ButtonGroup>
     </div>
 
-    <p><label for="UNI/BTC"><b>UNI/BTC Pair</b></label></p>
+    <p><label for="UNI/BTC"><b>UNI/BTC Pair - Set To: {props.state["UNI/BTC"]}</b></label></p>
     <div>
       <ButtonGroup>
         <Button onClick={() => props.onPairChange("UNI/BTC", "off")} active={props.state["UNI/BTC"] === "off"}>Off</Button>

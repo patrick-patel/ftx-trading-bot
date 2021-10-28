@@ -15,6 +15,7 @@ class API extends React.Component {
       "SOL/BTC": "off",
       "SUSHI/BTC": "off",
       "UNI/BTC": "off",
+      ethActiveButton: '',
       edit: false,
       redirect: false
     }

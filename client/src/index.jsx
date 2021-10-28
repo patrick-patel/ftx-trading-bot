@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Settings from './components/Settings.jsx';
-import Dashboards from './components/Dashboard.jsx';
+import Dashboards from './components/Dashboards.jsx';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 

@@ -53,10 +53,71 @@ let userSchema = mongoose.Schema({
       'MATIC/BTC': { type: Boolean, default: false },
       "SOL/BTC": { type: Boolean, default: false },
       "SUSHI/BTC": { type: Boolean, default: false },
-      "UNI/BTC": { type: Boolean, default: false },
+      "UNI/BTC": { type: Boolean, default: false }
     }
   }]
 });
+
+// let userSchema = mongoose.Schema({
+//   email: {
+//     type: String,
+//     required: true
+//   },
+//   password: {
+//     type: String,
+//     required: true
+//   },
+//   credentials: [{
+//     api_key: String,
+//     secret: String,
+//     isFTXUS: Boolean,
+//     subAccountName: String,
+//     isSubscribedTo: {
+//       "ETH/BTC": {
+//         "1hr": { type: Boolean, default: false },
+//         "2hr": { type: Boolean, default: false },
+//         "4hr": { type: Boolean, default: false },
+//         "6hr": { type: Boolean, default: false },
+//         "12hr": { type: Boolean, default: false },
+//       },
+//       "LINK/BTC": {
+//         "1hr": { type: Boolean, default: false },
+//         "2hr": { type: Boolean, default: false },
+//         "4hr": { type: Boolean, default: false },
+//         "6hr": { type: Boolean, default: false },
+//         "12hr": { type: Boolean, default: false },
+//       },
+//       'MATIC/BTC': {
+//         "1hr": { type: Boolean, default: false },
+//         "2hr": { type: Boolean, default: false },
+//         "4hr": { type: Boolean, default: false },
+//         "6hr": { type: Boolean, default: false },
+//         "12hr": { type: Boolean, default: false },
+//       },
+//       "SOL/BTC": {
+//         "1hr": { type: Boolean, default: false },
+//         "2hr": { type: Boolean, default: false },
+//         "4hr": { type: Boolean, default: false },
+//         "6hr": { type: Boolean, default: false },
+//         "12hr": { type: Boolean, default: false },
+//       },
+//       "SUSHI/BTC": {
+//         "1hr": { type: Boolean, default: false },
+//         "2hr": { type: Boolean, default: false },
+//         "4hr": { type: Boolean, default: false },
+//         "6hr": { type: Boolean, default: false },
+//         "12hr": { type: Boolean, default: false },
+//       },
+//       "UNI/BTC": {
+//         "1hr": { type: Boolean, default: false },
+//         "2hr": { type: Boolean, default: false },
+//         "4hr": { type: Boolean, default: false },
+//         "6hr": { type: Boolean, default: false },
+//         "12hr": { type: Boolean, default: false },
+//       }
+//     }
+//   }]
+// });
 
 let User = mongoose.model('User', userSchema);
 

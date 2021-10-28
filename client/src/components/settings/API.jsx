@@ -9,13 +9,14 @@ class API extends React.Component {
     super(props);
     this.state = {
       "api_key": this.props.api_key,
-      "ETH/BTC": false,
-      "LINK/BTC": false,
-      "MATIC/BTC": false,
-      "SOL/BTC": false,
-      "SUSHI/BTC": false,
-      "UNI/BTC": false,
-      edit: false
+      "ETH/BTC": "off",
+      "LINK/BTC": "off",
+      "MATIC/BTC": "off",
+      "SOL/BTC": "off",
+      "SUSHI/BTC": "off",
+      "UNI/BTC": "off",
+      edit: false,
+      redirect: false
     }
   }
 
@@ -29,28 +30,30 @@ class API extends React.Component {
       "SUSHI/BTC": this.state["SUSHI/BTC"],
       "UNI/BTC": this.state["UNI/BTC"]
     };
-    $.ajax({
-      'url': '/setPairs',
-      'type': 'POST',
-      'context': this,
-      'headers': {
-        'x-access-token': localStorage.getItem('token')
-      },
-      'data': params,
-      'success': function(data) {
-        this.setState({
-          "ETH/BTC": false,
-          "LINK/BTC": false,
-          "MATIC/BTC": false,
-          "SOL/BTC": false,
-          "SUSHI/BTC": false,
-          "UNI/BTC": false
-        })
-        console.log('success');
-      },
-      'error': function(error) {
-        console.log(error);
-      }
+    console.log(params);
+    // $.ajax({
+    //   'url': '/setPairs',
+    //   'type': 'POST',
+    //   'context': this,
+    //   'headers': {
+    //     'x-access-token': localStorage.getItem('token')
+    //   },
+    //   'data': params,
+    //   'success': function(data) {
+    //     this.setState({
+    //       redirect: true
+    //     })
+    //     console.log('success');
+    //   },
+    //   'error': function(error) {
+    //     console.log(error);
+    //   }
+    // })
+  }
+
+  onPairChange(pair, hr) {
+    this.setState({
+      [pair]: hr
     })
   }
 
@@ -71,10 +74,14 @@ class API extends React.Component {
   }
 
   render() {
+    const redirect = this.state.redirect;
+    if (redirect) {
+      return <Redirect to='/settings' />
+    }
     return (
       <div>
         <h4>{this.props.api_key}</h4>
-        {this.state.edit ? <PairsForm onChangeRadio={this.onChangeRadio.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
+        {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
         <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>
         <p>--------------------------</p>
       </div>

@@ -85,7 +85,7 @@ class Settings extends React.Component {
               api_keys.push(credential.api_key);
             })
 
-            this.setState({ "api_keys": api_keys });
+            this.setState({ "api_keys": api_keys, redirect: true });
           },
           'error': function(error) {
             console.log(error);
@@ -99,6 +99,10 @@ class Settings extends React.Component {
   }
 
   render() {
+    const redirect = this.state.redirect;
+    if (redirect) {
+      return <Redirect to='/settings' />
+    }
     return (
       <div>
         <div>

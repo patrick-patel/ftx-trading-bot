@@ -95,6 +95,7 @@ app.post('/tradingview', function (req, res) {
   var event = req.body.event;
   var coin = req.body.coin;
   var pair = req.body.pair;
+  var hr = req.body.hr;
 
   fetchAllUsers()
   .then(users => {
@@ -102,7 +103,7 @@ app.post('/tradingview', function (req, res) {
     var promises = [];
     users.forEach(user => {
       user.credentials.forEach(credential => {
-        if (credential.isSubscribedTo[pair]) {
+        if (credential.isSubscribedTo[pair][hr]) {
           const connection = establishRESTConnection(credential);
           promises.push(getAccountValue(connection)
           .then(wallet => {
@@ -244,6 +245,7 @@ app.post('/tradingview', function (req, res) {
   .then(() => {
       var candle = {
         pair: pair,
+        hr,
         high: high,
         low: low
       }
@@ -379,25 +381,34 @@ app.post('/postAPI', verifyJWT, (req, res) => {
 app.post('/setPairs', verifyJWT, (req, res) => {
   console.log(req.body);
   const api_key = req.body["api_key"];
-  const ethbtc = (req.body["ETH/BTC"] === 'true');
-  const linkbtc = (req.body["LINK/BTC"] === 'true');
-  const maticbtc = (req.body["MATIC/BTC"] === 'true');
-  const solbtc = (req.body["SOL/BTC"] === 'true');
-  const sushibtc = (req.body["SUSHI/BTC"] === 'true');
-  const unibtc = (req.body["UNI/BTC"] === 'true');
+  const ethbtc = req.body["ETH/BTC"];
+  const linkbtc = req.body["LINK/BTC"];
+  const maticbtc = req.body["MATIC/BTC"];
+  const solbtc = req.body["SOL/BTC"];
+  const sushibtc = req.body["SUSHI/BTC"];
+  const unibtc = req.body["UNI/BTC"];
 
   fetchUserByID(req.user.id)
   .then(user => {
     console.log('user: ', user);
     let credentialIndex = user.credentials.findIndex(credential => credential.api_key === api_key)
     user.credentials[credentialIndex].isSubscribedTo = {
-        "ETH/BTC": ethbtc,
-        "LINK/BTC": linkbtc,
-        "MATIC/BTC": maticbtc,
-        "SOL/BTC": solbtc,
-        "SUSHI/BTC": sushibtc,
-        "UNI/BTC": unibtc
-      }
+      "ETH/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "LINK/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "MATIC/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "SOL/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "SUSHI/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "UNI/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false }
+    }
+
+    user.credentials[credentialIndex].isSubscribedTo["ETH/BTC"][ethbtc] = true;
+    user.credentials[credentialIndex].isSubscribedTo["LINK/BTC"][linkbtc] = true;
+    user.credentials[credentialIndex].isSubscribedTo["MATIC/BTC"][maticbtc] = true;
+    user.credentials[credentialIndex].isSubscribedTo["SOL/BTC"][solbtc] = true;
+    user.credentials[credentialIndex].isSubscribedTo["SUSHI/BTC"][sushibtc] = true;
+    user.credentials[credentialIndex].isSubscribedTo["UNI/BTC"][unibtc] = true;
+
+    console.log(user.credentials[credentialIndex].isSubscribedTo);
 
     updateUserByID(user)
   })

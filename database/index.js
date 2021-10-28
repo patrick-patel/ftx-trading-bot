@@ -10,6 +10,7 @@ mongoose.connect(mongoURI, options);
 // Candle Store
 let candleSchema = mongoose.Schema({
   pair: String,
+  hr: String,
   high: Number,
   low: Number,
 });
@@ -26,9 +27,9 @@ let saveCandle = (candle) => {
     })
 }
 
-let fetchCandle = (pair) => {
+let fetchCandle = (pair, hr) => {
   console.log('fetching candle');
-  return Candle.find({"pair": pair}).sort({"_id":-1}).limit(1).exec();
+  return Candle.find({"pair": pair, "hr": hr}).sort({"_id":-1}).limit(1).exec();
 
 }
 
@@ -48,76 +49,57 @@ let userSchema = mongoose.Schema({
     isFTXUS: Boolean,
     subAccountName: String,
     isSubscribedTo: {
-      "ETH/BTC": { type: Boolean, default: false },
-      "LINK/BTC": { type: Boolean, default: false },
-      'MATIC/BTC': { type: Boolean, default: false },
-      "SOL/BTC": { type: Boolean, default: false },
-      "SUSHI/BTC": { type: Boolean, default: false },
-      "UNI/BTC": { type: Boolean, default: false }
+      "ETH/BTC": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      "LINK/BTC": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      'MATIC/BTC': {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      "SOL/BTC": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      "SUSHI/BTC": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      "UNI/BTC": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      }
     }
   }]
 });
-
-// let userSchema = mongoose.Schema({
-//   email: {
-//     type: String,
-//     required: true
-//   },
-//   password: {
-//     type: String,
-//     required: true
-//   },
-//   credentials: [{
-//     api_key: String,
-//     secret: String,
-//     isFTXUS: Boolean,
-//     subAccountName: String,
-//     isSubscribedTo: {
-//       "ETH/BTC": {
-//         "1hr": { type: Boolean, default: false },
-//         "2hr": { type: Boolean, default: false },
-//         "4hr": { type: Boolean, default: false },
-//         "6hr": { type: Boolean, default: false },
-//         "12hr": { type: Boolean, default: false },
-//       },
-//       "LINK/BTC": {
-//         "1hr": { type: Boolean, default: false },
-//         "2hr": { type: Boolean, default: false },
-//         "4hr": { type: Boolean, default: false },
-//         "6hr": { type: Boolean, default: false },
-//         "12hr": { type: Boolean, default: false },
-//       },
-//       'MATIC/BTC': {
-//         "1hr": { type: Boolean, default: false },
-//         "2hr": { type: Boolean, default: false },
-//         "4hr": { type: Boolean, default: false },
-//         "6hr": { type: Boolean, default: false },
-//         "12hr": { type: Boolean, default: false },
-//       },
-//       "SOL/BTC": {
-//         "1hr": { type: Boolean, default: false },
-//         "2hr": { type: Boolean, default: false },
-//         "4hr": { type: Boolean, default: false },
-//         "6hr": { type: Boolean, default: false },
-//         "12hr": { type: Boolean, default: false },
-//       },
-//       "SUSHI/BTC": {
-//         "1hr": { type: Boolean, default: false },
-//         "2hr": { type: Boolean, default: false },
-//         "4hr": { type: Boolean, default: false },
-//         "6hr": { type: Boolean, default: false },
-//         "12hr": { type: Boolean, default: false },
-//       },
-//       "UNI/BTC": {
-//         "1hr": { type: Boolean, default: false },
-//         "2hr": { type: Boolean, default: false },
-//         "4hr": { type: Boolean, default: false },
-//         "6hr": { type: Boolean, default: false },
-//         "12hr": { type: Boolean, default: false },
-//       }
-//     }
-//   }]
-// });
 
 let User = mongoose.model('User', userSchema);
 

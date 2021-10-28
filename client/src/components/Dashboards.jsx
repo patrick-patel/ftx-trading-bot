@@ -4,7 +4,7 @@ import Dashboard from './Dashboard.jsx'
 const Dashboards = (props) => (
   <div>
     <h1>FTX Trading Bot</h1>
-    <ul>{props.credentials.map(credential => <Dashboard credential={credential} />)}</ul>
+    {props.credentials[0].api_key ? <ul>{props.credentials.map(credential => <Dashboard credential={credential} />)}</ul> : null}
   </div>
 )
 

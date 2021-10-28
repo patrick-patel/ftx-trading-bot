@@ -4,7 +4,7 @@ import $ from 'jquery';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Settings from './components/Settings.jsx';
-import Dashboard from './components/Dashboard.jsx';
+import Dashboards from './components/Dashboard.jsx';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 
@@ -12,11 +12,25 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      total: 0,
-      matic: 0,
-      link: 0,
-      btc: 0
+      credentials: []
     }
+  }
+
+  componentDidMount() {
+    console.log('comp did mount')
+    $.ajax({
+      'url': '/userData',
+      'type': 'GET',
+      'context': this,
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
+      'success': function(credentials) {
+        this.setState({
+          credentials: credentials
+        })
+      }
+    })
   }
 
   logout() {
@@ -36,7 +50,7 @@ class App extends React.Component {
         </ul>
 
         <Switch>
-          <Route path="/" exact={true} component={Dashboard}/>
+          <Route path="/" exact={true} component={() => <Dashboards credentials={this.state.credentials}/>}/>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/settings" component={Settings}/>

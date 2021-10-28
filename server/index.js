@@ -45,25 +45,31 @@ app.get('/userData', verifyJWT, (req, res) => {
   console.log('inside userData route');
   console.log('req.user.id: ', req.user.id);
   if (req.user.id) {
-    fetchUserByID(req.user.id)
+    var responseArray = [];
+    var promises = [];
+    promises.push(fetchUserByID(req.user.id)
     .then(user => {
-      var connection = establishRESTConnection(user.credentials[0]);
-      getAccountValue(connection)
-      .then(data => {
-        console.log(data)
-        responseObj = {total: 0};
-        data.result.forEach(walletEntity => {
-          responseObj.total += walletEntity.usdValue;
-          responseObj[walletEntity.coin] = walletEntity.total;
+      user.credentials.forEach(credential => {
+        var connection = establishRESTConnection(credential);
+        getAccountValue(connection)
+        .then(data => {
+          console.log(data)
+          responseObj = {total: 0};
+          data.result.forEach(walletEntity => {
+            responseObj.total += walletEntity.usdValue;
+            responseObj[walletEntity.coin] = walletEntity.total;
+          })
+          responseObj.api_key = credential.api_key;
+          responseArray.push(responseObj);
         })
-        return responseObj;
+        .catch(err => {
+          console.log(err);
+        })
       })
-      .then(responseObj => {
-        res.send(responseObj);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    }))
+    Promise.all(promises)
+    .then(() => {
+      res.send(responseArray);
     })
   }
 })

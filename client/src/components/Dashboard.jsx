@@ -1,62 +1,19 @@
 import React from 'react';
-import $ from 'jquery';
 
-class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      total: 0,
-      btc: 0,
-      eth: 0,
-      link: 0,
-      matic: 0,
-      sol: 0,
-      sushi: 0,
-      uni: 0,
-    }
-  }
-
-  componentDidMount() {
-    console.log('comp did mount')
-    $.ajax({
-      'url': '/userData',
-      'type': 'GET',
-      'context': this,
-      'headers': {
-        'x-access-token': localStorage.getItem('token')
-      },
-      'success': function(res) {
-        this.setState({
-          total: res.total,
-          btc: res['BTC'] || 0,
-          eth: res['ETH'] || 0,
-          link: res['LINK'] || 0,
-          matic: res['MATIC'] || 0,
-          sol: res['SOL'] || 0,
-          sushi: res['SUSHI'] || 0,
-          uni: res['UNI'] || 0,
-        })
-      }
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        <div style={{color: 'white', backgroundColor: 'black', padding: '20px'}}>
-          <h1>FTX Trading Bot</h1>
-          <p>Account Value USD:  {this.state.total}</p>
-          <p>BTC: {this.state.btc}</p>
-          <p>ETH: {this.state.eth}</p>
-          <p>LINK: {this.state.link}</p>
-          <p>MATIC: {this.state.matic}</p>
-          <p>SOL: {this.state.sol}</p>
-          <p>SUSHI: {this.state.sushi}</p>
-          <p>UNI: {this.state.uni}</p>
-        </div>
-      </div>
-    )
-  }
-}
+const Dashboard = ({ credential }) => (
+  <div>
+    <div style={{color: 'white', backgroundColor: 'black', padding: '20px'}}>
+      <p>API Key: {credential.api_key}</p>
+      <p>Account Value USD:  {credential.total}</p>
+      <p>BTC: {credential.btc}</p>
+      <p>ETH: {credential.eth}</p>
+      <p>LINK: {credential.link}</p>
+      <p>MATIC: {credential.matic}</p>
+      <p>SOL: {credential.sol}</p>
+      <p>SUSHI: {credential.sushi}</p>
+      <p>UNI: {credential.uni}</p>
+    </div>
+  </div>
+)
 
 export default Dashboard;

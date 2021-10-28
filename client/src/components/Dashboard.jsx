@@ -2,7 +2,7 @@ import React from 'react';
 
 const Dashboard = ({ credential }) => (
   <div>
-    {credential.api_key &&
+    {credential.api_key ?
     <div style={{color: 'white', backgroundColor: 'black', padding: '20px'}}>
       <p>API Key: {credential.api_key}</p>
       <p>Account Value USD:  {credential.total}</p>
@@ -14,7 +14,7 @@ const Dashboard = ({ credential }) => (
       <p>SUSHI: {credential.sushi}</p>
       <p>UNI: {credential.uni}</p>
     </div>
-    }
+    : null}
   </div>
 )
 

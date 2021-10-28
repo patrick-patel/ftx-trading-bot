@@ -30,7 +30,6 @@ let saveCandle = (candle) => {
 let fetchCandle = (pair, hr) => {
   console.log('fetching candle');
   return Candle.find({"pair": pair, "hr": hr}).sort({"_id":-1}).limit(1).exec();
-
 }
 
 // Order store

@@ -1,6 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import PairsForm from './PairsForm.jsx';
+import { Redirect } from 'react-router';
 import { ButtonGroup, Button } from 'react-bootstrap';
 
 
@@ -51,7 +52,6 @@ class API extends React.Component {
       }
     })
   }
-
 
   onPairChange(pair, hr) {
     this.setState({

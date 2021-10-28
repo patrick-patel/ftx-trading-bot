@@ -67,11 +67,11 @@ app.get('/userData', verifyJWT, (req, res) => {
           console.log(err);
         }))
       })
-      Promise.all(promises);
-    })
-    .then(() => {
-      console.log('response array: ', responseArray);
-      res.send(responseArray);
+      Promise.all(promises)
+      .then(() => {
+        console.log('response array: ', responseArray);
+        res.send(responseArray);
+      })
     })
   }
 })

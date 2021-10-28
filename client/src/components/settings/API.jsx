@@ -32,24 +32,24 @@ class API extends React.Component {
       "UNI/BTC": this.state["UNI/BTC"]
     };
     console.log(params);
-    // $.ajax({
-    //   'url': '/setPairs',
-    //   'type': 'POST',
-    //   'context': this,
-    //   'headers': {
-    //     'x-access-token': localStorage.getItem('token')
-    //   },
-    //   'data': params,
-    //   'success': function(data) {
-    //     this.setState({
-    //       redirect: true
-    //     })
-    //     console.log('success');
-    //   },
-    //   'error': function(error) {
-    //     console.log(error);
-    //   }
-    // })
+    $.ajax({
+      'url': '/setPairs',
+      'type': 'POST',
+      'context': this,
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
+      'data': params,
+      'success': function(data) {
+        this.setState({
+          redirect: true
+        })
+        console.log('success');
+      },
+      'error': function(error) {
+        console.log(error);
+      }
+    })
   }
 
   onPairChange(pair, hr) {

@@ -51,7 +51,7 @@ app.get('/userData', verifyJWT, (req, res) => {
     .then(user => {
       user.credentials.forEach(credential => {
         var connection = establishRESTConnection(credential);
-        getAccountValue(connection)
+        promises.push(getAccountValue(connection)
         .then(data => {
           console.log(data)
           responseObj = {total: 0};
@@ -65,8 +65,9 @@ app.get('/userData', verifyJWT, (req, res) => {
         })
         .catch(err => {
           console.log(err);
-        })
+        }))
       })
+      Promise.all(promises);
     })
     .then(() => {
       console.log('response array: ', responseArray);

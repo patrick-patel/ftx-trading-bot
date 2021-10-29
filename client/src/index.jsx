@@ -54,7 +54,7 @@ class App extends React.Component {
     return (
     <Router>
       <div>
-        <Navbar isLoggedIn={this.state.isLoggedIn} logout={this.logout.bind(this)}/>
+        <NavbarComp isLoggedIn={this.state.isLoggedIn} logout={this.logout.bind(this)}/>
 
         <Switch>
           <Route path="/" exact={true} render={() => <Dashboards credentials={this.state.credentials} />}/>

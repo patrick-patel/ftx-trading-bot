@@ -118,6 +118,8 @@ app.post('/tradingview', function (req, res) {
             console.log('wallet: ', wallet);
             var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === coin);
             var btcWalletEntity = wallet.result.find(btcWalletEntity => btcWalletEntity.coin === "BTC");
+            var usdWalletEntity = wallet.result.find(usdWalletEntity => usdWalletEntity.coin === "USD");
+
             if (walletEntity) {
               var freeCoins = walletEntity.free;
               console.log('walletEntity: ', walletEntity)
@@ -130,7 +132,19 @@ app.post('/tradingview', function (req, res) {
             } else {
               var freeBTC = 0;
             }
-            if (event === 'bullish reversal' && freeBTC > 0) {
+            if (usdWalletEntity) {
+              var freeUSD = usdWalletEntity.free;
+              console.log('usdWalletEntity: ', usdWalletEntity)
+            } else {
+              var freeUSD = 0;
+            }
+            if (coin === "USD") {
+              var freeBase = freeUSD;
+            } else {
+              var freeBase = freeBTC;
+            }
+
+            if (event === 'bullish reversal' && freeBase > 0) {
               console.log('fetching orderID');
               var getOpenTriggerOrdersParams = {
                 market: req.body.pair,
@@ -158,11 +172,11 @@ app.post('/tradingview', function (req, res) {
                 console.log('marketData: ', marketData)
                 var currentPrice = marketData.result.price;
                 console.log('test: posting stop market buy order')
-                postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair, connection.orderAdj, connection.freeBTCScaler)
+                postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
                 .then(() => {
                   console.log('successfully posted stop market buy order');
                   if (freeCoins > 0) {
-                    postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj, connection.freeBTCScaler)
+                    postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
                     .then(() => {
                       console.log('successfully posted stop market sell order');
                     })
@@ -195,7 +209,7 @@ app.post('/tradingview', function (req, res) {
                 console.log(err);
               })
               .then(() => {
-                postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj, connection.freeBTCScaler)
+                postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
                 .then(() => {
                   console.log('successfully posted stop market sell order');
                 })
@@ -204,7 +218,7 @@ app.post('/tradingview', function (req, res) {
                 console.log(err);
               })
             }
-            if (event === 'bearish reversal' && freeBTC > 0) {
+            if (event === 'bearish reversal' && freeBase > 0) {
               console.log('fetching orderID');
               var getOpenTriggerOrdersParams = {
                 market: req.body.pair,
@@ -232,7 +246,7 @@ app.post('/tradingview', function (req, res) {
                 console.log('marketData: ', marketData)
                 var currentPrice = marketData.result.price;
                 console.log('test: posting stop market buy order')
-                postStopMarketBuyOrder(connection.client, high, freeBTC, currentPrice, pair, connection.orderAdj, connection.freeBTCScaler)
+                postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
                 .then(() => {
                   console.log('successfully posted stop market buy order');
                 })
@@ -253,7 +267,7 @@ app.post('/tradingview', function (req, res) {
   .then(() => {
       var candle = {
         pair: pair,
-        hr,
+        hr: hr,
         high: high,
         low: low
       }
@@ -393,13 +407,11 @@ app.post('/setPairs', verifyJWT, (req, res) => {
   const linkbtc = req.body["LINK/BTC"];
   const maticbtc = req.body["MATIC/BTC"];
   const solbtc = req.body["SOL/BTC"];
-  const sushibtc = req.body["SUSHI/BTC"];
   const unibtc = req.body["UNI/BTC"];
   const ethusd = req.body["ETH/USD"];
   const linkusd = req.body["LINK/USD"];
   const maticusd = req.body["MATIC/USD"];
   const solusd = req.body["SOL/USD"];
-  const sushiusd = req.body["SUSHI/USD"];
   const uniusd = req.body["UNI/USD"];
 
   fetchUserByID(req.user.id)
@@ -411,13 +423,11 @@ app.post('/setPairs', verifyJWT, (req, res) => {
       "LINK/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "MATIC/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "SOL/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
-      "SUSHI/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "UNI/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "ETH/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "LINK/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "MATIC/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "SOL/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
-      "SUSHI/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "UNI/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false }
     }
 
@@ -425,13 +435,11 @@ app.post('/setPairs', verifyJWT, (req, res) => {
     user.credentials[credentialIndex].isSubscribedTo["LINK/BTC"][linkbtc] = true;
     user.credentials[credentialIndex].isSubscribedTo["MATIC/BTC"][maticbtc] = true;
     user.credentials[credentialIndex].isSubscribedTo["SOL/BTC"][solbtc] = true;
-    user.credentials[credentialIndex].isSubscribedTo["SUSHI/BTC"][sushibtc] = true;
     user.credentials[credentialIndex].isSubscribedTo["UNI/BTC"][unibtc] = true;
     user.credentials[credentialIndex].isSubscribedTo["ETH/USD"][ethusd] = true;
     user.credentials[credentialIndex].isSubscribedTo["LINK/USD"][linkusd] = true;
     user.credentials[credentialIndex].isSubscribedTo["MATIC/USD"][maticusd] = true;
     user.credentials[credentialIndex].isSubscribedTo["SOL/USD"][solusd] = true;
-    user.credentials[credentialIndex].isSubscribedTo["SUSHI/USD"][sushiusd] = true;
     user.credentials[credentialIndex].isSubscribedTo["UNI/USD"][uniusd] = true;
 
     console.log(user.credentials[credentialIndex].isSubscribedTo);

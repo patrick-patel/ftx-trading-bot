@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Settings from './components/Settings.jsx';
@@ -39,6 +38,9 @@ class App extends React.Component {
 
   logout() {
     localStorage.removeItem("token");
+    this.setState({
+      isLoggedIn: false
+    })
   }
 
   render () {

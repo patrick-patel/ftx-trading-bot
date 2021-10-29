@@ -61,7 +61,16 @@ app.get('/userData', verifyJWT, (req, res) => {
           })
           responseObj.api_key = credential.api_key;
           responseObj.subAccountName = credential.subAccountName;
-          responseObj.isSubscribedTo = [credential.isSubscribedTo];
+          responseObj["ETH/BTC"] = credential.isSubscribedTo["ETH/BTC"];
+          responseObj["LINK/BTC"] = credential.isSubscribedTo["LINK/BTC"];
+          responseObj["MATIC/BTC"] = credential.isSubscribedTo["MATIC/BTC"];
+          responseObj["SOL/BTC"] = credential.isSubscribedTo["SOL/BTC"];
+          responseObj["UNI/BTC"] = credential.isSubscribedTo["UNI/BTC"];
+          responseObj["ETH/USD"] = credential.isSubscribedTo["ETH/USD"];
+          responseObj["LINK/USD"] = credential.isSubscribedTo["LINK/USD"];
+          responseObj["MATIC/USD"] = credential.isSubscribedTo["MATIC/USD"];
+          responseObj["SOL/USD"] = credential.isSubscribedTo["SOL/USD"];
+          responseObj["UNI/USD"] = credential.isSubscribedTo["UNI/USD"];
           console.log('responseObj: ', responseObj)
           responseArray.push(responseObj);
         })

@@ -47,10 +47,10 @@ class App extends React.Component {
   }
 
   render () {
-    const redirect = this.state.redirect;
-    if (redirect) {
-      return <Redirect to='/' />
-    }
+    // const redirect = this.state.redirect;
+    // if (redirect) {
+    //   return <Redirect to='/' />
+    // }
     return (
     <Router>
       <div>

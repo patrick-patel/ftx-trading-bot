@@ -31,15 +31,9 @@ class App extends React.Component {
         console.log('server response: ', credentials);
         this.setState({
           credentials: credentials,
-          // isLoggedIn: true,
+          isLoggedIn: localStorage.getItem('token'),
         })
       }
-    })
-  }
-
-  loginState(token) {
-    this.setState({
-      isLoggedIn: token
     })
   }
 
@@ -75,7 +69,7 @@ class App extends React.Component {
             {this.state.isLoggedIn ? <Dashboards credentials={this.state.credentials} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/login">
-            {this.state.isLoggedIn ? <Redirect to="/" /> : <Login loginState={this.loginState.bind(this)}/>}
+            {this.state.isLoggedIn ? <Redirect to="/" /> : <Login />}
           </Route>
           <Route path="/register">
             {this.state.isLoggedIn ? <Redirect to="/" /> : <Register />}

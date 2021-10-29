@@ -35,7 +35,6 @@ class Login extends React.Component {
           },
           'success': function(data) {
             console.log(data);
-            props.loginState(localStorage.getItem('token'));
             this.setState({ redirect: true });
           },
           'error': function(error) {

@@ -9,7 +9,6 @@ import Dashboards from './components/Dashboards.jsx';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);

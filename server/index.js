@@ -61,7 +61,7 @@ app.get('/userData', verifyJWT, (req, res) => {
           })
           responseObj.api_key = credential.api_key;
           responseObj.subAccountName = credential.subAccountName;
-          responseObj.isSubscribedTo = credential.isSubscribedTo;
+          responseObj.isSubscribedTo = [credential.isSubscribedTo];
           console.log('responseObj: ', responseObj)
           responseArray.push(responseObj);
         })

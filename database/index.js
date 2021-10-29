@@ -80,7 +80,7 @@ let userSchema = mongoose.Schema({
         "6hr": { type: Boolean, default: false },
         "12hr": { type: Boolean, default: false },
       },
-      "SUSHI/BTC": {
+      "UNI/BTC": {
         "off": { type: Boolean, default: true },
         "1hr": { type: Boolean, default: false },
         "2hr": { type: Boolean, default: false },
@@ -88,7 +88,39 @@ let userSchema = mongoose.Schema({
         "6hr": { type: Boolean, default: false },
         "12hr": { type: Boolean, default: false },
       },
-      "UNI/BTC": {
+      "ETH/USD": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      "LINK/USD": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      'MATIC/USD': {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      "SOL/USD": {
+        "off": { type: Boolean, default: true },
+        "1hr": { type: Boolean, default: false },
+        "2hr": { type: Boolean, default: false },
+        "4hr": { type: Boolean, default: false },
+        "6hr": { type: Boolean, default: false },
+        "12hr": { type: Boolean, default: false },
+      },
+      "UNI/USD": {
         "off": { type: Boolean, default: true },
         "1hr": { type: Boolean, default: false },
         "2hr": { type: Boolean, default: false },

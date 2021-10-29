@@ -395,6 +395,12 @@ app.post('/setPairs', verifyJWT, (req, res) => {
   const solbtc = req.body["SOL/BTC"];
   const sushibtc = req.body["SUSHI/BTC"];
   const unibtc = req.body["UNI/BTC"];
+  const ethusd = req.body["ETH/USD"];
+  const linkusd = req.body["LINK/USD"];
+  const maticusd = req.body["MATIC/USD"];
+  const solusd = req.body["SOL/USD"];
+  const sushiusd = req.body["SUSHI/USD"];
+  const uniusd = req.body["UNI/USD"];
 
   fetchUserByID(req.user.id)
   .then(user => {
@@ -406,7 +412,13 @@ app.post('/setPairs', verifyJWT, (req, res) => {
       "MATIC/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "SOL/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
       "SUSHI/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
-      "UNI/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false }
+      "UNI/BTC": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "ETH/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "LINK/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "MATIC/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "SOL/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "SUSHI/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false },
+      "UNI/USD": { "off": false, "1hr": false, "2hr": false, "4hr": false, "6hr": false, "12hr": false }
     }
 
     user.credentials[credentialIndex].isSubscribedTo["ETH/BTC"][ethbtc] = true;
@@ -415,6 +427,12 @@ app.post('/setPairs', verifyJWT, (req, res) => {
     user.credentials[credentialIndex].isSubscribedTo["SOL/BTC"][solbtc] = true;
     user.credentials[credentialIndex].isSubscribedTo["SUSHI/BTC"][sushibtc] = true;
     user.credentials[credentialIndex].isSubscribedTo["UNI/BTC"][unibtc] = true;
+    user.credentials[credentialIndex].isSubscribedTo["ETH/USD"][ethusd] = true;
+    user.credentials[credentialIndex].isSubscribedTo["LINK/USD"][linkusd] = true;
+    user.credentials[credentialIndex].isSubscribedTo["MATIC/USD"][maticusd] = true;
+    user.credentials[credentialIndex].isSubscribedTo["SOL/USD"][solusd] = true;
+    user.credentials[credentialIndex].isSubscribedTo["SUSHI/USD"][sushiusd] = true;
+    user.credentials[credentialIndex].isSubscribedTo["UNI/USD"][uniusd] = true;
 
     console.log(user.credentials[credentialIndex].isSubscribedTo);
 

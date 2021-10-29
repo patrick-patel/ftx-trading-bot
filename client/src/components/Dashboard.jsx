@@ -10,7 +10,6 @@ const Dashboard = ({ credential }) => (
       <p>LINK: {credential["LINK"]}</p>
       <p>MATIC: {credential["MATIC"]}</p>
       <p>SOL: {credential["SOL"]}</p>
-      <p>SUSHI: {credential["SUSHI"]}</p>
       <p>UNI: {credential["UNI"]}</p>
     </div>
   </div>

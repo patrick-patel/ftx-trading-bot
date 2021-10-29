@@ -14,8 +14,12 @@ class API extends React.Component {
       "LINK/BTC": "off",
       "MATIC/BTC": "off",
       "SOL/BTC": "off",
-      "SUSHI/BTC": "off",
       "UNI/BTC": "off",
+      "ETH/USD": "off",
+      "LINK/USD": "off",
+      "MATIC/USD": "off",
+      "SOL/USD": "off",
+      "UNI/USD": "off",
       ethActiveButton: '',
       edit: false,
       redirect: false
@@ -29,8 +33,12 @@ class API extends React.Component {
       "LINK/BTC": this.state["LINK/BTC"],
       "MATIC/BTC": this.state["MATIC/BTC"],
       "SOL/BTC": this.state["SOL/BTC"],
-      "SUSHI/BTC": this.state["SUSHI/BTC"],
-      "UNI/BTC": this.state["UNI/BTC"]
+      "UNI/BTC": this.state["UNI/BTC"],
+      "ETH/USD": this.state["ETH/USD"],
+      "LINK/USD": this.state["LINK/USD"],
+      "MATIC/USD": this.state["MATIC/USD"],
+      "SOL/USD": this.state["SOL/USD"],
+      "UNI/USD": this.state["UNI/USD"]
     };
     console.log(params);
     $.ajax({

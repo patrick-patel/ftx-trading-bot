@@ -37,6 +37,12 @@ class App extends React.Component {
     })
   }
 
+  loginState(token) {
+    this.setState({
+      isLoggedIn: token
+    })
+  }
+
   logout() {
     localStorage.removeItem("token");
     this.setState({
@@ -69,7 +75,7 @@ class App extends React.Component {
             {this.state.isLoggedIn ? <Dashboards credentials={this.state.credentials} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/login">
-            {this.state.isLoggedIn ? <Redirect to="/" /> : <Login />}
+            {this.state.isLoggedIn ? <Redirect to="/" /> : <Login loginState={this.loginState.bind(this)}/>}
           </Route>
           <Route path="/register">
             {this.state.isLoggedIn ? <Redirect to="/" /> : <Register />}

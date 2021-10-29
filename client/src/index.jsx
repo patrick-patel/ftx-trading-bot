@@ -47,7 +47,7 @@ class App extends React.Component {
     return (
     <Router>
       <div>
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" expand="lg">
           <Container>
             <Navbar.Brand>FTX Trading Bot</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

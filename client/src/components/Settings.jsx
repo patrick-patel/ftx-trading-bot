@@ -20,26 +20,22 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {
-    $.ajax({
-      'url': '/userAPI',
-      'type': 'GET',
-      'context': this,
-      'headers': {
-        'x-access-token': localStorage.getItem('token')
-      },
-      'success': function(credentials) {
-        console.log('credentials: ', credentials);
-        var api_keys = [];
-        credentials.forEach(credential => {
-          api_keys.push(credential.api_key);
-        })
-
-        this.setState({ "api_keys": api_keys });
-      },
-      'error': function(error) {
-        console.log(error);
-      }
-    })
+    if (this.state.api_keys < 1) {
+      $.ajax({
+        'url': '/userAPI',
+        'type': 'GET',
+        'context': this,
+        'headers': {
+          'x-access-token': localStorage.getItem('token')
+        },
+        'success': function(api_keys) {
+          this.setState({ "api_keys": api_keys });
+        },
+        'error': function(error) {
+          console.log(error);
+        }
+      })
+    }
   }
 
   onChangeRadio({ target }) {

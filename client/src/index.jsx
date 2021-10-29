@@ -31,7 +31,6 @@ class App extends React.Component {
         console.log('server response: ', credentials);
         this.setState({
           credentials: credentials,
-          isLoggedIn: localStorage.getItem('token'),
         })
       }
     })

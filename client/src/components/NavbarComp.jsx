@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
-const Navbar = ({ isLoggedIn, logout }) => (
+const NavbarComp = ({ isLoggedIn, logout }) => (
   <div>
     <Navbar bg="light" expand="lg">
       <Container>
@@ -22,4 +22,4 @@ const Navbar = ({ isLoggedIn, logout }) => (
   </div>
 )
 
-export default Navbar;
+export default NavbarComp;

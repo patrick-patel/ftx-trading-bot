@@ -14,8 +14,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       credentials: [],
-      isLoggedIn: false,
-      redirect: false
+      isLoggedIn: localStorage.getItem('token'),
     }
   }
 
@@ -32,8 +31,7 @@ class App extends React.Component {
         console.log('server response: ', credentials);
         this.setState({
           credentials: credentials,
-          isLoggedIn: true,
-          redirect: true
+          // isLoggedIn: true,
         })
       }
     })
@@ -41,9 +39,9 @@ class App extends React.Component {
 
   logout() {
     localStorage.removeItem("token");
-    this.setState({
-      isLoggedIn: false
-    })
+    // this.setState({
+    //   isLoggedIn: false
+    // })
   }
 
   render () {
@@ -70,9 +68,15 @@ class App extends React.Component {
           <Route path="/" exact={true}>
             {this.state.isLoggedIn ? <Dashboards credentials={this.state.credentials} /> : <Redirect to="/login" />}
           </Route>
-          <Route path="/login" component={Login}/>
-          <Route path="/register" component={Register}/>
-          <Route path="/settings" component={Settings}/>
+          <Route path="/login">
+            {this.state.isLoggedIn ? <Redirect to="/" /> : <Login />}
+          </Route>
+          <Route path="/register">
+            {this.state.isLoggedIn ? <Redirect to="/" /> : <Register />}
+          </Route>
+          <Route path="/settings">
+            {this.state.isLoggedIn ? <Settings /> : <Redirect to="/login" />}
+          </Route>
         </Switch>
       </div>
     </Router>

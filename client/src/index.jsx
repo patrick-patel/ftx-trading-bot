@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import NavbarComp from './components/NavbarComp.jsx';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Settings from './components/Settings.jsx';
 import Dashboards from './components/Dashboards.jsx';
 import { Redirect } from 'react-router';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor(props) {
@@ -47,17 +47,29 @@ class App extends React.Component {
   }
 
   render () {
-    // const redirect = this.state.redirect;
-    // if (redirect) {
-    //   return <Redirect to='/' />
-    // }
     return (
     <Router>
       <div>
-        <NavbarComp isLoggedIn={this.state.isLoggedIn} logout={this.logout.bind(this)}/>
+        <Navbar bg="light" expand="lg">
+          <Container>
+            <Navbar.Brand>FTX Trading Bot</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link><Link to="/">Dashboard</Link></Nav.Link>
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register">Register</Link></Nav.Link>}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/settings">Settings</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
 
         <Switch>
-          <Route path="/" exact={true} render={() => <Dashboards credentials={this.state.credentials} />}/>
+          <Route path="/" exact={true}>
+            {isLoggedIn ? <Dashboards credentials={this.state.credentials} /> : <Redirect to="/login" />}
+          </Route>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>
           <Route path="/settings" component={Settings}/>

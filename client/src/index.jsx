@@ -5,6 +5,7 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Settings from './components/Settings.jsx';
 import Dashboards from './components/Dashboards.jsx';
+import { Redirect } from 'react-router';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
@@ -13,7 +14,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       credentials: [],
-      isLoggedIn: false
+      isLoggedIn: false,
+      redirect: false
     }
   }
 
@@ -30,7 +32,8 @@ class App extends React.Component {
         console.log('server response: ', credentials);
         this.setState({
           credentials: credentials,
-          isLoggedIn: true
+          isLoggedIn: true,
+          redirect: true
         })
       }
     })
@@ -44,12 +47,16 @@ class App extends React.Component {
   }
 
   render () {
+    const redirect = this.state.redirect;
+    if (redirect) {
+      return <Redirect to='/' />
+    }
     return (
     <Router>
       <div>
         <Navbar bg="light" expand="lg">
           <Container>
-            <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+            <Navbar.Brand href="#home">FTX Trading Bot</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
@@ -62,13 +69,6 @@ class App extends React.Component {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <ul>
-          <li><Link to="/">Dashboard</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/register">Register</Link></li>
-          <li><Link to="/settings">Settings</Link></li>
-          <li><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></li>
-        </ul>
 
         <Switch>
           <Route path="/" exact={true} render={() => <Dashboards credentials={this.state.credentials} />}/>

@@ -68,7 +68,7 @@ class App extends React.Component {
 
         <Switch>
           <Route path="/" exact={true}>
-            {isLoggedIn ? <Dashboards credentials={this.state.credentials} /> : <Redirect to="/login" />}
+            {this.state.isLoggedIn ? <Dashboards credentials={this.state.credentials} /> : <Redirect to="/login" />}
           </Route>
           <Route path="/login" component={Login}/>
           <Route path="/register" component={Register}/>

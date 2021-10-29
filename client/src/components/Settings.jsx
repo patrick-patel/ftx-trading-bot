@@ -74,13 +74,7 @@ class Settings extends React.Component {
           'headers': {
             'x-access-token': localStorage.getItem('token')
           },
-          'success': function(credentials) {
-            console.log('credentials: ', credentials);
-            var api_keys = [];
-            credentials.forEach(credential => {
-              api_keys.push(credential.api_key);
-            })
-
+          'success': function(api_keys) {
             this.setState({ "api_keys": api_keys, redirect: true });
           },
           'error': function(error) {

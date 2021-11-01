@@ -168,9 +168,7 @@ app.post('/tradingview', function (req, res) {
                   return Promise.all(openTriggerOrderPromises);
                 }
               })
-              .catch(err => {
-                console.log(err);
-              })
+              .catch(err => console.log(err))
               .then(() => {
                 return getMarket(connection.client, pair);
               })
@@ -186,14 +184,14 @@ app.post('/tradingview', function (req, res) {
                     .then(() => {
                       console.log('successfully posted stop market sell order');
                     })
+                    .catch(err => console.log(err))
                   }
                 })
+                .catch(err => console.log(err))
               })
-              .catch(err => {
-                console.log(err);
-              })
+              .catch(err => console.log(err))
             }
-            if (event === 'bearish reversal' && freeCoins > 0) {
+            if (event === 'bearish reversal') {
               console.log('fetching orderID');
               var getOpenTriggerOrdersParams = {
                 market: req.body.pair,
@@ -211,60 +209,37 @@ app.post('/tradingview', function (req, res) {
                   return Promise.all(openTriggerOrderPromises);
                 }
               })
-              .catch(err => {
-                console.log(err);
-              })
+              .catch(err => console.log(err))
               .then(() => {
-                postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
-                .then(() => {
-                  console.log('successfully posted stop market sell order');
-                })
-              })
-              .catch(err => {
-                console.log(err);
-              })
-            }
-            if (event === 'bearish reversal' && freeBase > 0) {
-              console.log('fetching orderID');
-              var getOpenTriggerOrdersParams = {
-                market: req.body.pair,
-                type: 'stop'
-              };
-              getOpenTriggerOrders(connection.client, getOpenTriggerOrdersParams)
-              .then(orders => {
-                console.log('order: ', orders);
-                if (orders.result[0].id) {
-                  console.log('canceling order');
-                  var openTriggerOrderPromises = [];
-                  orders.result.forEach(order => {
-                    openTriggerOrderPromises.push(cancelOrder(connection.client, order.id));
+                if (freeCoins > 0) {
+                  postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
+                  .then(() => {
+                    console.log('successfully posted stop market sell order');
                   })
-                  return Promise.all(openTriggerOrderPromises);
+                  .catch(err => console.log(err))
+                } else { console.log('no free coins') }
+              })
+              .catch(err => console.log(err))
+              .then(() => {
+                if (freeBase > 0) {
+                  getMarket(connection.client, pair)
+                  .then(marketData => {
+                    console.log('marketData: ', marketData)
+                    var currentPrice = marketData.result.price;
+                    console.log('test: posting stop market buy order')
+                    postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
+                    .then(() => {
+                      console.log('successfully posted stop market buy order');
+                    })
+                    .catch(err => console.log(err))
+                  })
+                  .catch(err => console.log(err))
                 }
               })
-              .catch(err => {
-                console.log(err);
-              })
-              .then(() => {
-                return getMarket(connection.client, pair);
-              })
-              .then(marketData => {
-                console.log('marketData: ', marketData)
-                var currentPrice = marketData.result.price;
-                console.log('test: posting stop market buy order')
-                postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
-                .then(() => {
-                  console.log('successfully posted stop market buy order');
-                })
-              })
-              .catch(err => {
-                console.log(err);
-              })
+              .catch(err => console.log(err))
             }
           })
-          .catch(err => {
-            console.log(err);
-          }))
+          .catch(err => console.log(err)))
         }
       })
     })

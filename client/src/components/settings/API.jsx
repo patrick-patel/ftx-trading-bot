@@ -61,6 +61,31 @@ class API extends React.Component {
     })
   }
 
+  deleteAPI() {
+    var params = {
+      "api_key": this.state["api_key"],
+    };
+
+    $.ajax({
+      'url': '/deleteAPI',
+      'type': 'POST',
+      'context': this,
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
+      'data': params,
+      'success': function(data) {
+        this.setState({
+          redirect: true
+        })
+        console.log('success');
+      },
+      'error': function(error) {
+        console.log(error);
+      }
+    })
+  }
+
   onPairChange(pair, hr) {
     this.setState({
       [pair]: hr
@@ -93,6 +118,7 @@ class API extends React.Component {
         <h4>{this.props.api_key}</h4>
         {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
         <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>
+        <Button onClick={this.deleteAPI.bind(this)}>Remove API</Button>
         <p>--------------------------</p>
       </div>
     )

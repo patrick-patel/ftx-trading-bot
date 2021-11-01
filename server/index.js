@@ -436,6 +436,30 @@ app.post('/setPairs', verifyJWT, (req, res) => {
   })
 });
 
+app.post('/deleteAPI', verifyJWT, (req, res) => {
+  console.log(req.body);
+  const api_key = req.body["api_key"];
+
+  fetchUserByID(req.user.id)
+  .then(user => {
+    console.log('user: ', user);
+    let credentialIndex = user.credentials.findIndex(credential => credential.api_key === api_key)
+
+    console.log('all credentials: ', user.credentials);
+    user.credentials.splice(credentialIndex, 1);
+    console.log('all credentials after splice: ', user.credentials);
+
+    // updateUserByID(user)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+  .then(() => {
+    console.log('successfully updated user!');
+    res.end();
+  })
+});
+
 
 let port = process.env.PORT || 1128;
 

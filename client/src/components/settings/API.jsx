@@ -22,6 +22,7 @@ class API extends React.Component {
       "UNI/USD": "off",
       ethActiveButton: '',
       edit: false,
+      removeAPI: false,
       redirect: false
     }
   }
@@ -108,6 +109,14 @@ class API extends React.Component {
     }
   }
 
+  onRemove() {
+    if (!this.state.removeAPI) {
+      this.setState({ removeAPI: true })
+    } else {
+      this.setState({ removeAPI: false })
+    }
+  }
+
   render() {
     const redirect = this.state.redirect;
     if (redirect) {
@@ -118,7 +127,9 @@ class API extends React.Component {
         <h4>{this.props.api_key}</h4>
         {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
         <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>
-        <Button onClick={this.deleteAPI.bind(this)}>Remove API</Button>
+        {this.state.removeAPI ? <Button onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button onClick={this.onRemove.bind(this)}>Remove API</Button>}
+        {this.state.removeAPI ? <Button onClick={this.deleteAPI.bind(this)}>Confirm Removal of API</Button> : null}
+        {this.state.removeAPI ? <p>Remember to <a href="#">delete the API Key from your FTX Account</a></p> : null}
         <p>--------------------------</p>
       </div>
     )

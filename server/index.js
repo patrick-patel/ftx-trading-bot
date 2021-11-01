@@ -449,7 +449,7 @@ app.post('/deleteAPI', verifyJWT, (req, res) => {
     user.credentials.splice(credentialIndex, 1);
     console.log('all credentials after splice: ', user.credentials);
 
-    // updateUserByID(user)
+    updateUserByID(user)
   })
   .catch(err => {
     console.log(err);

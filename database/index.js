@@ -18,7 +18,7 @@ let candleSchema = mongoose.Schema({
 let Candle = mongoose.model('Candle', candleSchema);
 
 let saveCandle = (candle) => {
-  console.log('saving candle')
+  console.log('saving candle: ', candle);
   var candleInstance = new Candle(candle)
   candleInstance.save()
     .then(data => {
@@ -28,8 +28,15 @@ let saveCandle = (candle) => {
 }
 
 let fetchCandle = (pair, hr) => {
-  console.log('fetching candle');
+  console.log('fetching candle for pair: ', pair);
+  console.log('...and hr: ', hr);
   return Candle.find({"pair": pair, "hr": hr}).sort({"_id":-1}).limit(1).exec();
+}
+
+let deleteCandle = (pair, hr) => {
+  console.log('deleting candle(s) for pair: ', pair);
+  console.log('...and hr: ', hr);
+  return Candle.deleteMany({"pair": pair, "hr": hr}).exec();
 }
 
 // Order store
@@ -135,7 +142,7 @@ let userSchema = mongoose.Schema({
 let User = mongoose.model('User', userSchema);
 
 let saveUser = (email, password) => {
-  console.log('saving user')
+  console.log('saving user: ', email)
   var userInstance = new User({
     email: email,
     password: password
@@ -153,22 +160,23 @@ let fetchAllUsers = () => {
 }
 
 let fetchUser = (email) => {
-  console.log('fetching user');
+  console.log('fetching user: ', email);
   return User.findOne({"email": email}).exec();
 }
 
 let fetchUserByID = (id) => {
-  console.log('fetching user');
+  console.log('fetching user by id: ', id);
   return User.findOne({"_id": id}).exec();
 }
 
 let updateUserByID = (user) => {
-  console.log('updating user');
+  console.log('updating user by id: ', user.id);
   return User.findOneAndUpdate({"_id": user.id}, user, {setDefaultOnInsert: false}).exec();
 }
 
 module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
+module.exports.deleteCandle = deleteCandle;
 module.exports.saveUser = saveUser;
 module.exports.fetchAllUsers = fetchAllUsers;
 module.exports.fetchUser = fetchUser;

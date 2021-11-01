@@ -30,6 +30,7 @@ const getOpenTriggerOrders = require('../lib/ftx.js').getOpenTriggerOrders;
 // database calls
 const saveCandle = require('../database/index.js').saveCandle;
 const fetchCandle = require('../database/index.js').fetchCandle;
+const deleteCandle = require('../database/index.js').deleteCandle;
 const saveUser = require('../database/index.js').saveUser;
 const fetchAllUsers = require('../database/index.js').fetchAllUsers;
 const fetchUser = require('../database/index.js').fetchUser;
@@ -248,13 +249,16 @@ app.post('/tradingview', function (req, res) {
       return Promise.all(promises);
     })
     .then(() => {
-        var candle = {
-          pair: pair,
-          hr: hr,
-          high: high,
-          low: low
-        }
-        saveCandle(candle);
+      deleteCandle(pair, hr);
+    })
+    .then(() => {
+      var candle = {
+        pair: pair,
+        hr: hr,
+        high: high,
+        low: low
+      }
+      saveCandle(candle);
     })
     .then(() => {
       res.end();

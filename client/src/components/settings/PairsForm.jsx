@@ -6,7 +6,7 @@ const PairsForm = (props) => (
     <p><label for="ETH"><b>ETH - Set To: {props.state["ETH/BTC"] === "off" ? props.state["ETH/USD"] : props.state["ETH/BTC"]}</b></label></p>
     <div>
       <Row>
-        <ButtonGroup className="d-grid gap-2 col-6 mx-auto" size="sm">
+        <ButtonGroup className="d-grid gap-2 col-6 mx-auto mb-2" size="sm">
           <Button onClick={() => {
                                   props.onPairChange("ETH/BTC", "off");
                                   props.onPairChange("ETH/USD", "off");
@@ -14,12 +14,12 @@ const PairsForm = (props) => (
         </ButtonGroup>
       </Row>
       <Row>
-        <ButtonGroup size="sm">
-          <Col><Button onClick={() => props.onPairChange("ETH/BTC", "1hr")} active={props.state["ETH/BTC"] === "1hr"}>ETH/BTC 1hr</Button></Col>
-          <Col><Button onClick={() => props.onPairChange("ETH/BTC", "2hr")} active={props.state["ETH/BTC"] === "2hr"}>ETH/BTC 2hr</Button></Col>
-          <Col><Button onClick={() => props.onPairChange("ETH/BTC", "4hr")} active={props.state["ETH/BTC"] === "4hr"}>ETH/BTC 4hr</Button></Col>
-          <Col><Button onClick={() => props.onPairChange("ETH/BTC", "6hr")} active={props.state["ETH/BTC"] === "6hr"}>ETH/BTC 6hr</Button></Col>
-          <Col><Button onClick={() => props.onPairChange("ETH/BTC", "12hr")} active={props.state["ETH/BTC"] === "12hr"}>ETH/BTC 12hr</Button></Col>
+        <ButtonGroup className="mb-2" size="sm">
+          <Button onClick={() => props.onPairChange("ETH/BTC", "1hr")} active={props.state["ETH/BTC"] === "1hr"}>ETH/BTC 1hr</Button>
+          <Button onClick={() => props.onPairChange("ETH/BTC", "2hr")} active={props.state["ETH/BTC"] === "2hr"}>ETH/BTC 2hr</Button>
+          <Button onClick={() => props.onPairChange("ETH/BTC", "4hr")} active={props.state["ETH/BTC"] === "4hr"}>ETH/BTC 4hr</Button>
+          <Button onClick={() => props.onPairChange("ETH/BTC", "6hr")} active={props.state["ETH/BTC"] === "6hr"}>ETH/BTC 6hr</Button>
+          <Button onClick={() => props.onPairChange("ETH/BTC", "12hr")} active={props.state["ETH/BTC"] === "12hr"}>ETH/BTC 12hr</Button>
         </ButtonGroup>
       </Row>
       <Row>
@@ -112,7 +112,7 @@ const PairsForm = (props) => (
         <Button onClick={() => props.onPairChange("UNI/USD", "12hr")} active={props.state["UNI/USD"] === "12hr"}>UNI/USD 12hr</Button>
       </ButtonGroup>
     </div>
-    <Button className="mb-2" type="submit" onClick={props.submitPairs}>Submit</Button>
+    <Button className="mb-2 mt-2" type="submit" onClick={props.submitPairs}>Submit</Button>
   </div>
 
 )

@@ -28,6 +28,7 @@ const cancelOrder = require('../lib/ftx.js').cancelOrder;
 const getMarket = require('../lib/ftx.js').getMarket;
 const getOpenTriggerOrders = require('../lib/ftx.js').getOpenTriggerOrders;
 
+
 // database calls
 const saveCandle = require('../database/index.js').saveCandle;
 const fetchCandle = require('../database/index.js').fetchCandle;

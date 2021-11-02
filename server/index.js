@@ -12,6 +12,7 @@ const validateRegisterInput = require("./auth/register");
 const validateLoginInput = require("./auth/login");
 const validateAPIInput = require("./auth/api");
 const verifyJWT = require("./auth/verifyJWT");
+const encrypt = require("./auth/dataEncryption").encrypt;
 const secretOrKey = process.env.secretOrKey || config.secretOrKeys;
 const WebHookPasskey = process.env.WebHookPasskey;
 
@@ -357,7 +358,7 @@ app.post('/postAPI', verifyJWT, (req, res) => {
     return res.status(400).json(errors);
   }
   const api_key = req.body.api_key;
-  const secret = req.body.secret;
+  const secret = encrypt(req.body.secret);
   const isFTXUS = req.body.isFTXUS;
   const subAccountName = req.body.subAccountName;
 

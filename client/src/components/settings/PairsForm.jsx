@@ -9,7 +9,7 @@ const PairsForm = (props) => (
         <Button onClick={() => {
                                  props.onPairChange("ETH/BTC", "off");
                                  props.onPairChange("ETH/USD", "off");
-                               }} active={props.state["ETH/BTC"] === "off"}>Off</Button>
+                               }} active={props.state["ETH/BTC"] === "off" && props.state["ETH/USD"] === "off"}>Off</Button>
         <Button onClick={() => props.onPairChange("ETH/BTC", "1hr")} active={props.state["ETH/BTC"] === "1hr"}>ETH/BTC 1hr</Button>
         <Button onClick={() => props.onPairChange("ETH/BTC", "2hr")} active={props.state["ETH/BTC"] === "2hr"}>ETH/BTC 2hr</Button>
         <Button onClick={() => props.onPairChange("ETH/BTC", "4hr")} active={props.state["ETH/BTC"] === "4hr"}>ETH/BTC 4hr</Button>
@@ -29,7 +29,7 @@ const PairsForm = (props) => (
         <Button onClick={() => {
                                  props.onPairChange("LINK/BTC", "off");
                                  props.onPairChange("LINK/USD", "off");
-                               }} active={props.state["LINK/BTC"] === "off"}>Off</Button>
+                               }} active={props.state["LINK/BTC"] === "off" && props.state["LINK/USD"] === "off"}>Off</Button>
         <Button onClick={() => props.onPairChange("LINK/BTC", "1hr")} active={props.state["LINK/BTC"] === "1hr"}>LINK/BTC 1hr</Button>
         <Button onClick={() => props.onPairChange("LINK/BTC", "2hr")} active={props.state["LINK/BTC"] === "2hr"}>LINK/BTC 2hr</Button>
         <Button onClick={() => props.onPairChange("LINK/BTC", "4hr")} active={props.state["LINK/BTC"] === "4hr"}>LINK/BTC 4hr</Button>
@@ -49,7 +49,7 @@ const PairsForm = (props) => (
         <Button onClick={() => {
                                  props.onPairChange("MATIC/BTC", "off");
                                  props.onPairChange("MATIC/USD", "off");
-                               }} active={props.state["MATIC/BTC"] === "off"}>Off</Button>
+                               }} active={props.state["MATIC/BTC"] === "off" && props.state["MATIC/USD"] === "off"}>Off</Button>
         <Button onClick={() => props.onPairChange("MATIC/BTC", "1hr")} active={props.state["MATIC/BTC"] === "1hr"}>MATIC/BTC 1hr</Button>
         <Button onClick={() => props.onPairChange("MATIC/BTC", "2hr")} active={props.state["MATIC/BTC"] === "2hr"}>MATIC/BTC 2hr</Button>
         <Button onClick={() => props.onPairChange("MATIC/BTC", "4hr")} active={props.state["MATIC/BTC"] === "4hr"}>MATIC/BTC 4hr</Button>
@@ -69,7 +69,7 @@ const PairsForm = (props) => (
         <Button onClick={() => {
                                  props.onPairChange("SOL/BTC", "off");
                                  props.onPairChange("SOL/USD", "off");
-                               }} active={props.state["SOL/BTC"] === "off"}>Off</Button>
+                               }} active={props.state["SOL/BTC"] === "off" && props.state["SOL/USD"] === "off"}>Off</Button>
         <Button onClick={() => props.onPairChange("SOL/BTC", "1hr")} active={props.state["SOL/BTC"] === "1hr"}>SOL/BTC 1hr</Button>
         <Button onClick={() => props.onPairChange("SOL/BTC", "2hr")} active={props.state["SOL/BTC"] === "2hr"}>SOL/BTC 2hr</Button>
         <Button onClick={() => props.onPairChange("SOL/BTC", "4hr")} active={props.state["SOL/BTC"] === "4hr"}>SOL/BTC 4hr</Button>
@@ -89,7 +89,7 @@ const PairsForm = (props) => (
         <Button onClick={() => {
                                  props.onPairChange("UNI/BTC", "off");
                                  props.onPairChange("UNI/USD", "off");
-                               }} active={props.state["UNI/BTC"] === "off"}>Off</Button>
+                               }} active={props.state["UNI/BTC"] === "off" && props.state["UNI/USD"] === "off"}>Off</Button>
         <Button onClick={() => props.onPairChange("UNI/BTC", "1hr")} active={props.state["UNI/BTC"] === "1hr"}>UNI/BTC 1hr</Button>
         <Button onClick={() => props.onPairChange("UNI/BTC", "2hr")} active={props.state["UNI/BTC"] === "2hr"}>UNI/BTC 2hr</Button>
         <Button onClick={() => props.onPairChange("UNI/BTC", "4hr")} active={props.state["UNI/BTC"] === "4hr"}>UNI/BTC 4hr</Button>

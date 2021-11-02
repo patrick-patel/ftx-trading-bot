@@ -57,7 +57,7 @@ app.get('/userData', verifyJWT, (req, res) => {
         var connection = establishRESTConnection(credential);
         promises.push(getAccountValue(connection)
         .then(data => {
-          console.log(data)
+          // console.log(data)
           responseObj = {total: 0};
           data.result.forEach(walletEntity => {
             responseObj.total += walletEntity.usdValue;

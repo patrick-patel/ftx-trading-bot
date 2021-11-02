@@ -131,7 +131,7 @@ class API extends React.Component {
         <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>
         {this.state.removeAPI ? <Button onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button onClick={this.onRemove.bind(this)}>Remove API</Button>}
         {this.state.removeAPI ? <Button onClick={this.deleteAPI.bind(this)}>Confirm Removal of API</Button> : null}
-        {this.state.removeAPI ? <p>Remember to <a href="#">delete the API Key from your FTX Account</a></p> : null}
+        {this.state.removeAPI ? <p>You must <a href="#">delete the API Key from your FTX Account</a> to fully disable the bot</p> : null}
         <p>--------------------------</p>
       </div>
     )

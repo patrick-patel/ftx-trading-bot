@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 import APIs from './settings/APIs.jsx';
 
-import { ButtonGroup, Button } from 'react-bootstrap';
+import { Container, ButtonGroup, Button } from 'react-bootstrap';
 
 class Settings extends React.Component {
   constructor(props) {
@@ -20,22 +20,20 @@ class Settings extends React.Component {
   }
 
   componentDidMount() {
-    if (this.state.api_keys < 1) {
-      $.ajax({
-        'url': '/userAPI',
-        'type': 'GET',
-        'context': this,
-        'headers': {
-          'x-access-token': localStorage.getItem('token')
-        },
-        'success': function(subAccounts) {
-          this.setState({ "subAccounts": subAccounts });
-        },
-        'error': function(error) {
-          console.log(error);
-        }
-      })
-    }
+    $.ajax({
+      'url': '/userAPI',
+      'type': 'GET',
+      'context': this,
+      'headers': {
+        'x-access-token': localStorage.getItem('token')
+      },
+      'success': function(subAccounts) {
+        this.setState({ "subAccounts": subAccounts });
+      },
+      'error': function(error) {
+        console.log(error);
+      }
+    })
   }
 
   onChangeRadio({ target }) {
@@ -95,7 +93,7 @@ class Settings extends React.Component {
     }
     return (
       <div>
-        <div>
+        <Container>
           <label for="api_key"><b>API Key</b></label>
           <input type="text" placeholder="Enter API Key" name="api_key" value={this.state.api_key} onChange={this.onChange.bind(this)} required></input>
 
@@ -109,7 +107,7 @@ class Settings extends React.Component {
           <input type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} required></input>
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
-        </div>
+        </Container>
         {this.state.subAccounts.length > 0 ? <APIs subAccounts={this.state["subAccounts"]} /> : null}
       </div>
     )

@@ -125,8 +125,8 @@ class API extends React.Component {
     }
     return (
       <div>
-        <h3>{this.state["subAccountName"]}</h3>
-        <h4>{this.state["api_key"]}</h4>
+        <h6 className="display-6">{this.state["subAccountName"]}</h6>
+        <p className="lead">{this.state["api_key"]}</p>
         {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
         <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>
         {this.state.removeAPI ? <Button onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button onClick={this.onRemove.bind(this)}>Remove API</Button>}

@@ -47,7 +47,7 @@ app.use('/', express.static(__dirname + '/../client/dist'));
 // get requests
 app.get('/userData', verifyJWT, (req, res) => {
   console.log('inside userData route');
-  console.log('req.user.id: ', req.user.id);
+  // console.log('req.user.id: ', req.user.id);
   if (req.user.id) {
     var responseArray = [];
     var promises = [];
@@ -66,7 +66,7 @@ app.get('/userData', verifyJWT, (req, res) => {
           responseObj.api_key = credential.api_key;
           responseObj.subAccountName = credential.subAccountName;
           responseObj.isSubscribedTo = credential.isSubscribedTo;
-          console.log('responseObj: ', responseObj)
+          // console.log('responseObj: ', responseObj)
           responseArray.push(responseObj);
         })
         .catch(err => {
@@ -75,7 +75,7 @@ app.get('/userData', verifyJWT, (req, res) => {
       })
       Promise.all(promises)
       .then(() => {
-        console.log('response array: ', responseArray);
+        // console.log('response array: ', responseArray);
         res.send(responseArray);
       })
     })
@@ -87,7 +87,7 @@ app.get('/userAPI', verifyJWT, (req, res) => {
   if (req.user.id) {
     fetchUserByID(req.user.id)
     .then(user => {
-      console.log('user: ', user);
+      // console.log('user: ', user);
       if (user.credentials[0].api_key) {
         var subAccounts = [];
         user.credentials.forEach(credential => {

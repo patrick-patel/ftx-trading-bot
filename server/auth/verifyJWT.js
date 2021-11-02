@@ -12,7 +12,7 @@ const secretOrKey = process.env.secretOrKey || config.secretOrKey;
 module.exports = verifyJWT = (req, res, next) => {
   console.log('inside verifyJWT');
   const token = req.headers["x-access-token"]?.split(' ')[1];
-  console.log('token inside verifyJWT: ', token);
+  // console.log('token inside verifyJWT: ', token);
 
   if (token) {
     jwt.verify(token, secretOrKey, (err, decoded) => {

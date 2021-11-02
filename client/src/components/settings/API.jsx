@@ -89,8 +89,19 @@ class API extends React.Component {
   }
 
   onPairChange(pair, hr) {
+    pairSplit = pair.split('/');
+    var coin = pairSplit[0];
+    console.log('coin: ', coin);
+    var base = pairSplit[1];
+    if (base === "USD") {
+      var otherPair = coin + "/BTC";
+    } else {
+      var otherPair = coin + "/USD";
+    }
+    console.log('otherPair: ', otherPair);
     this.setState({
-      [pair]: hr
+      [pair]: hr,
+      [otherPair]: "off"
     })
   }
 
@@ -128,8 +139,8 @@ class API extends React.Component {
         <h6 className="display-6">{this.state["subAccountName"]}</h6>
         <p className="lead">{this.state["api_key"]}</p>
         {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
-        <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>
-        {this.state.removeAPI ? <Button onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button onClick={this.onRemove.bind(this)}>Remove API</Button>}
+        <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>{' '}
+        {this.state.removeAPI ? <Button onClick={this.onRemove.bind(this)}>Cancel</Button>{' '} : <Button onClick={this.onRemove.bind(this)}>Remove API</Button>{' '}}
         {this.state.removeAPI ? <Button onClick={this.deleteAPI.bind(this)}>Confirm Removal of API</Button> : null}
         {this.state.removeAPI ? <p>You must <a href="#">delete the API Key from your FTX Account</a> to fully disable the bot</p> : null}
         <hr></hr>

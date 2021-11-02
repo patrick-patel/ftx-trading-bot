@@ -94,6 +94,7 @@ class Settings extends React.Component {
     return (
       <div>
         <Container>
+          <br></br>
           <Form>
             <Form.Group className="mb-3">
               <Form.Label>API Key</Form.Label>

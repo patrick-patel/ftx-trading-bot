@@ -53,6 +53,7 @@ class App extends React.Component {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
+                <br></br>
                 {this.state.isLoggedIn ? <Nav.Link><Link to="/">Dashboard</Link></Nav.Link> : null}
                 {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
                 {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register">Register</Link></Nav.Link>}

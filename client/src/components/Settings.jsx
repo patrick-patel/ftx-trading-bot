@@ -118,19 +118,7 @@ class Settings extends React.Component {
               Submit
             </Button>
           </Form>
-          {/* <label for="api_key"><b>API Key</b></label>
-          <input type="text" placeholder="Enter API Key" name="api_key" value={this.state.api_key} onChange={this.onChange.bind(this)} required></input>
-
-          <label for="secret"><b>Secret</b></label>
-          <input type="text" placeholder="Enter Secret" name="secret" value={this.state.secret} onChange={this.onChange.bind(this)} required></input>
-
-          <label for="subAccountName"><b>Sub Account Name</b></label>
-          <input type="text" placeholder="Enter Sub Account Name" name="subAccountName" value={this.state.subAccountName} onChange={this.onChange.bind(this)} required></input>
-
-          <label for="isFTXUS"><b>FTX.US?</b></label>
-          <input type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} required></input>
-
-          <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button> */}
+          <hr></hr>
           <div>
             {this.state.subAccounts.length > 0 ? <APIs subAccounts={this.state["subAccounts"]} /> : null}
           </div>

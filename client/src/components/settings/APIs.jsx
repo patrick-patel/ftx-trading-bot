@@ -5,7 +5,7 @@ const APIs = (props) => (
   <div>
     <h4>API Keys</h4>
     <ul>
-      {props.api_keys.map(api_key => <API api_key={api_key} />)}
+      {props.subAccounts.map(subAccount => <API subAccount={subAccount} />)}
     </ul>
   </div>
 

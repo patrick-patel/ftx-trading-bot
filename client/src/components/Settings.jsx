@@ -14,7 +14,7 @@ class Settings extends React.Component {
       "secret": "",
       "subAccountName": "",
       "isFTXUS": false,
-      "api_keys": [],
+      "subAccounts": [],
       redirect: false
     };
   }
@@ -28,8 +28,8 @@ class Settings extends React.Component {
         'headers': {
           'x-access-token': localStorage.getItem('token')
         },
-        'success': function(api_keys) {
-          this.setState({ "api_keys": api_keys });
+        'success': function(subAccounts) {
+          this.setState({ "subAccounts": subAccounts });
         },
         'error': function(error) {
           console.log(error);
@@ -74,8 +74,8 @@ class Settings extends React.Component {
           'headers': {
             'x-access-token': localStorage.getItem('token')
           },
-          'success': function(api_keys) {
-            this.setState({ "api_keys": api_keys, redirect: true });
+          'success': function(subAccounts) {
+            this.setState({ "subAccounts": subAccounts, redirect: true });
           },
           'error': function(error) {
             console.log(error);
@@ -110,7 +110,7 @@ class Settings extends React.Component {
 
           <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
         </div>
-        {this.state.api_keys.length > 0 ? <APIs api_keys={this.state["api_keys"]} /> : null}
+        {this.state.subAccounts.length > 0 ? <APIs subAccounts={this.state["subAccounts"]} /> : null}
       </div>
     )
   }

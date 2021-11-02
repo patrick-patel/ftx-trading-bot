@@ -33,6 +33,12 @@ let fetchCandle = (pair, hr) => {
   return Candle.find({"pair": pair, "hr": hr}).sort({"_id":-1}).limit(1).exec();
 }
 
+// let updateCandle = (pair, hr, candle) => {
+//   console.log('updating candle for pair: ', pair);
+//   console.log('...and hr: ', hr);
+//   return Candle.findOneAndUpdate({"pair": pair, "hr": }, candle).exec();
+// }
+
 let deleteCandle = (pair, hr) => {
   console.log('deleting candle(s) for pair: ', pair);
   console.log('...and hr: ', hr);

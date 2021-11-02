@@ -9,7 +9,8 @@ class API extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      "api_key": this.props.api_key,
+      "api_key": this.props.subAccount[0],
+      "subAccountName": this.props.subAccount[1],
       "ETH/BTC": "off",
       "LINK/BTC": "off",
       "MATIC/BTC": "off",
@@ -124,7 +125,8 @@ class API extends React.Component {
     }
     return (
       <div>
-        <h4>{this.props.api_key}</h4>
+        <h3>{this.state["subAccountName"]}</h3>
+        <h4>{this.state["api_key"]}</h4>
         {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
         <Button onClick={this.onEdit.bind(this)}>Edit Pairs</Button>
         {this.state.removeAPI ? <Button onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button onClick={this.onRemove.bind(this)}>Remove API</Button>}

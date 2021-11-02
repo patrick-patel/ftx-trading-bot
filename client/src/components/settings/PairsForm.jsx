@@ -102,7 +102,7 @@ const PairsForm = (props) => (
         <Button onClick={() => props.onPairChange("UNI/USD", "12hr")} active={props.state["UNI/USD"] === "12hr"}>UNI/USD 12hr</Button>
       </ButtonGroup>
     </div>
-    <button type="submit" onClick={props.submitPairs}>Submit</button>
+    <Button type="submit" onClick={props.submitPairs}>Submit</Button>
   </div>
 
 )

@@ -251,16 +251,17 @@ app.post('/tradingview', function (req, res) {
       return Promise.all(promises);
     })
     .then(() => {
-      deleteCandle(pair, hr);
-    })
-    .then(() => {
-      var candle = {
-        pair: pair,
-        hr: hr,
-        high: high,
-        low: low
-      }
-      saveCandle(candle);
+      deleteCandle(pair, hr)
+      .then(() => {
+        console.log('candle deleted');
+        var candle = {
+          pair: pair,
+          hr: hr,
+          high: high,
+          low: low
+        }
+        saveCandle(candle);
+      })
     })
     .then(() => {
       res.end();

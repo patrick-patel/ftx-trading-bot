@@ -181,7 +181,7 @@ app.post('/tradingview', function (req, res) {
                 .then(marketData => {
                   console.log('marketData: ', marketData)
                   var currentPrice = marketData.result.price;
-                  console.log('test: posting stop market buy order')
+                  console.log('posting stop market buy order')
                   postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
                   .then(() => {
                     console.log('successfully posted stop market buy order');

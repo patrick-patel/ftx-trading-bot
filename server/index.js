@@ -367,15 +367,25 @@ app.post('/postAPI', verifyJWT, (req, res) => {
 
   fetchUserByID(req.user.id)
   .then(user => {
-    console.log('user: ', user);
-    var credential = {
-      api_key: api_key,
-      secret: secret,
-      isFTXUS: isFTXUS,
-      subAccountName: subAccountName
+    var duplicateFlag = false;
+    user.credentials.forEach(credential => {
+      if (credential.subAccountName === subAccountName) {
+        duplicateFlag = true;
+      }
+    })
+    if (!duplicateFlag) {
+      console.log('user: ', user);
+      var credential = {
+        api_key: api_key,
+        secret: secret,
+        isFTXUS: isFTXUS,
+        subAccountName: subAccountName
+      }
+      user.credentials.push(credential);
+      updateUserByID(user)
+    } else {
+      console.log('duplicate subAccountName: ', subAccountName);
     }
-    user.credentials.push(credential);
-    updateUserByID(user)
   })
   .catch(err => {
     console.log(err);

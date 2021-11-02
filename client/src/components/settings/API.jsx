@@ -89,7 +89,7 @@ class API extends React.Component {
   }
 
   onPairChange(pair, hr) {
-    pairSplit = pair.split('/');
+    var pairSplit = pair.split('/');
     var coin = pairSplit[0];
     console.log('coin: ', coin);
     var base = pairSplit[1];

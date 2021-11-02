@@ -452,7 +452,13 @@ app.post('/setPairs', verifyJWT, (req, res) => {
     console.log(err);
   })
   .then(() => {
-    console.log('successfully updated user!');
+    console.log('successfully updated pairs!');
+    return fetchUserByID(req.user.id);
+  })
+  .then(user => {
+    user.credentials.forEach(credential => {
+      establishWSConnection(credential);
+    })
     res.end();
   })
 });
@@ -473,6 +479,12 @@ app.post('/deleteAPI', verifyJWT, (req, res) => {
   })
   .then(() => {
     console.log('successfully updated user!');
+    return fetchUserByID(req.user.id);
+  })
+  .then(user => {
+    user.credentials.forEach(credential => {
+      establishWSConnection(credential);
+    })
     res.end();
   })
 });

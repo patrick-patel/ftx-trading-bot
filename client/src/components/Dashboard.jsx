@@ -4,9 +4,12 @@ const Dashboard = ({ credential }) => (
   <>
     <p>Sub Account Name: {credential.subAccountName}</p>
     <p>API Key: {credential.api_key}</p>
-    <p>Account Value USD:  {credential.total}</p>
+    <p>Account Value in USD:  {credential.total}</p>
     <div>
       <p>BTC: {credential["BTC"]}</p>
+    </div>
+    <div>
+      <p>USD: {credential["USD"]}</p>
     </div>
     <div>
       <p>ETH: {credential["ETH"]}</p>

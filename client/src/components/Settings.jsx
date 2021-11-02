@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 import APIs from './settings/APIs.jsx';
 
-import { Container, ButtonGroup, Button } from 'react-bootstrap';
+import { Container, ButtonGroup, Button, Form } from 'react-bootstrap';
 
 class Settings extends React.Component {
   constructor(props) {
@@ -94,7 +94,31 @@ class Settings extends React.Component {
     return (
       <div>
         <Container>
-          <label for="api_key"><b>API Key</b></label>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>API Key</Form.Label>
+              <Form.Control type="text" placeholder="Enter API Key" name="api_key" value={this.state.api_key} onChange={this.onChange.bind(this)} required />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="text" placeholder="Enter Secret" name="secret" value={this.state.secret} onChange={this.onChange.bind(this)} required />
+              <Form.Text className="text-muted">
+                API Secrets are encrypted before storage
+              </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>Sub Account Name</Form.Label>
+              <Form.Control type="text" placeholder="Enter Sub Account Name" name="subAccountName" value={this.state.subAccountName} onChange={this.onChange.bind(this)} required />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Check type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} label="FTX US" />
+            </Form.Group>
+            <Button type="submit" onClick={this.submitAPI.bind(this)}>
+              Submit
+            </Button>
+          </Form>
+          {/* <label for="api_key"><b>API Key</b></label>
           <input type="text" placeholder="Enter API Key" name="api_key" value={this.state.api_key} onChange={this.onChange.bind(this)} required></input>
 
           <label for="secret"><b>Secret</b></label>
@@ -106,9 +130,11 @@ class Settings extends React.Component {
           <label for="isFTXUS"><b>FTX.US?</b></label>
           <input type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} required></input>
 
-          <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button>
+          <button type="submit" onClick={this.submitAPI.bind(this)}>Submit</button> */}
+          <div>
+            {this.state.subAccounts.length > 0 ? <APIs subAccounts={this.state["subAccounts"]} /> : null}
+          </div>
         </Container>
-        {this.state.subAccounts.length > 0 ? <APIs subAccounts={this.state["subAccounts"]} /> : null}
       </div>
     )
   }

@@ -12,7 +12,7 @@ const validateRegisterInput = require("./auth/register");
 const validateLoginInput = require("./auth/login");
 const validateAPIInput = require("./auth/api");
 const verifyJWT = require("./auth/verifyJWT");
-const encrypt = require("./auth/dataEncryption").encrypt;
+const encrypt = require("./auth/dataEncryption.js").encrypt;
 const secretOrKey = process.env.secretOrKey || config.secretOrKeys;
 const WebHookPasskey = process.env.WebHookPasskey;
 

@@ -55,11 +55,11 @@ class App extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <br></br>
-                {this.state.isLoggedIn ? <Nav.Link style={color: "white"}><Link to="/">Dashboard</Link></Nav.Link> : null}
-                {this.state.isLoggedIn ? null : <Nav.Link style={color: "white"}><Link to="/login">Login</Link></Nav.Link>}
-                {this.state.isLoggedIn ? null : <Nav.Link style={color: "white"}><Link to="/register">Register</Link></Nav.Link>}
-                {this.state.isLoggedIn ? <Nav.Link style={color: "white"}><Link to="/settings">Settings</Link></Nav.Link> : null}
-                {this.state.isLoggedIn ? <Nav.Link style={color: "white"}><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/">Dashboard</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register">Register</Link></Nav.Link>}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/settings">Settings</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
               </Nav>
             </Navbar.Collapse>
           </Container>

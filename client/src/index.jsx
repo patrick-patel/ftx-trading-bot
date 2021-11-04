@@ -49,17 +49,17 @@ class App extends React.Component {
     <Router>
       <div>
         <Navbar className="navbar navbar-dark bg-dark" expand="lg">
-          <Container>
-            <Navbar.Brand>FTX Trading Bot</Navbar.Brand>
+          <Container fluid>
+            <Navbar.Brand href="/">FTX Trading Bot</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <br></br>
-                {this.state.isLoggedIn ? <Nav.Link><Link to="/">Dashboard</Link></Nav.Link> : null}
-                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
-                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register">Register</Link></Nav.Link>}
-                {this.state.isLoggedIn ? <Nav.Link><Link to="/settings">Settings</Link></Nav.Link> : null}
-                {this.state.isLoggedIn ? <Nav.Link><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link style={color: "white"}><Link to="/">Dashboard</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? null : <Nav.Link style={color: "white"}><Link to="/login">Login</Link></Nav.Link>}
+                {this.state.isLoggedIn ? null : <Nav.Link style={color: "white"}><Link to="/register">Register</Link></Nav.Link>}
+                {this.state.isLoggedIn ? <Nav.Link style={color: "white"}><Link to="/settings">Settings</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link style={color: "white"}><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
               </Nav>
             </Navbar.Collapse>
           </Container>

@@ -3,7 +3,7 @@ import { Chart } from "react-google-charts";
 import { Col, Row } from 'react-bootstrap';
 
 
-const Dashboard = ({ credential}) => (
+const Dashboard = ({ credential }) => (
   <>
     <Row>
       <Col className="border">
@@ -129,7 +129,21 @@ const Dashboard = ({ credential}) => (
           height={'400px'}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
-          data={data}
+          data={[
+            ['x', credential.subAccountName],
+            [1, credential.chartData[0]],
+            [2, credential.chartData[1]],
+            [3, credential.chartData[2]],
+            [4, credential.chartData[3]],
+            [5, credential.chartData[4]],
+            [6, credential.chartData[5]],
+            [7, credential.chartData[6]],
+            [8, credential.chartData[7]],
+            [9, credential.chartData[8]],
+            [10, credential.chartData[9]],
+            [11, credential.chartData[10]],
+            [12, credential.chartData[11]],
+          ]}
           options={{
             hAxis: {
               title: 'Week',

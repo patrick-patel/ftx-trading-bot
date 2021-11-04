@@ -125,7 +125,7 @@ const Dashboard = ({ credential }) => (
       </Col>
       <Col className="border">
         <Chart
-          height={'400px'}
+          height={'600px'}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
           data={[

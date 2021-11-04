@@ -106,12 +106,12 @@ const Dashboard = ({ credential }) => (
           </Col>
         </Row>
         <Row>
-          <Col className="border-end">
+          <Col className="border-end border-top">
             <div>
               <p className="lead">BTC: {credential["BTC"]}</p>
             </div>
           </Col>
-          <Col>
+          <Col className="border-top">
             <div>
               <p className="lead">USD: {credential["USD"]}</p>
             </div>

@@ -5,8 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 
 
 const Dashboard = ({ credential, data }) => (
-
-  return (
+  <>
     <Row>
       <Col className="border">
         <Row>
@@ -132,7 +131,7 @@ const Dashboard = ({ credential, data }) => (
       </Col>
     </Row>
     <hr></hr>
-  )
+  </>
 )
 
 export default Dashboard;

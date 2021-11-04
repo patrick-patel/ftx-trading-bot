@@ -123,6 +123,8 @@ const Dashboard = ({ credential }) => (
           </Col>
         </Row>
       </Col>
+    </Row>
+    <Row>
       <Col className="border">
         <Chart
           height={'300px'}

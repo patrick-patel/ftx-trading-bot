@@ -6,7 +6,7 @@ import { Col, Row } from 'react-bootstrap';
 
 const Dashboard = ({ credential }) => (
 
-  const data = {
+  var data = {
     labels: ["Sunday", "Monday", "Tuesday",
       "Wednesday", "Thursday", "Friday", "Saturday"],
     datasets: [

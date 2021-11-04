@@ -12,24 +12,24 @@ const Dashboard = ({ credential, data }) => (
           <p className="lead">{credential.api_key}</p>
         </Row>
         <Row>
-          <Col className="border">
+          <Col className="border-end border-top">
             <p className="lead">ETH: {credential["ETH"]}</p>
           </Col>
-          <Col className="border">
+          <Col className="border-end border-top">
             <p className="lead">LINK: {credential["LINK"]}</p>
           </Col>
-          <Col className="border">
+          <Col className="border-end border-top">
             <p className="lead">MATIC: {credential["MATIC"]}</p>
           </Col>
-          <Col className="border">
+          <Col className="border-end border-top">
             <p className="lead">SOL: {credential["SOL"]}</p>
           </Col>
-          <Col className="border">
+          <Col className="border-top">
             <p className="lead">UNI: {credential["UNI"]}</p>
           </Col>
         </Row>
         <Row>
-          <Col className="border">
+          <Col className="border-end border-top">
             <div>
               {credential.isSubscribedTo["ETH/BTC"]["1hr"] ? <p className="lead">ETH/BTC 1hr</p> : null}
               {credential.isSubscribedTo["ETH/BTC"]["2hr"] ? <p className="lead">ETH/BTC 2hr</p> : null}
@@ -44,7 +44,7 @@ const Dashboard = ({ credential, data }) => (
               {credential.isSubscribedTo["ETH/USD"]["12hr"] ? <p className="lead">ETH/USD 12hr</p> : null}
             </div>
           </Col>
-          <Col className="border">
+          <Col className="border-end border-top">
             <div>
               {credential.isSubscribedTo["LINK/BTC"]["1hr"] ? <p className="lead">LINK/BTC 1hr</p> : null}
               {credential.isSubscribedTo["LINK/BTC"]["2hr"] ? <p className="lead">LINK/BTC 2hr</p> : null}
@@ -59,7 +59,7 @@ const Dashboard = ({ credential, data }) => (
               {credential.isSubscribedTo["LINK/USD"]["12hr"] ? <p className="lead">LINK/USD 12hr</p> : null}
             </div>
           </Col>
-          <Col className="border">
+          <Col className="border-end border-top">
             <div>
               {credential.isSubscribedTo["MATIC/BTC"]["1hr"] ? <p className="lead">MATIC/BTC 1hr</p> : null}
               {credential.isSubscribedTo["MATIC/BTC"]["2hr"] ? <p className="lead">MATIC/BTC 2hr</p> : null}
@@ -74,7 +74,7 @@ const Dashboard = ({ credential, data }) => (
               {credential.isSubscribedTo["MATIC/USD"]["12hr"] ? <p className="lead">MATIC/USD 12hr</p> : null}
             </div>
           </Col>
-          <Col className="border">
+          <Col className="border-end border-top">
             <div>
               {credential.isSubscribedTo["SOL/BTC"]["1hr"] ? <p className="lead">SOL/BTC 1hr</p> : null}
               {credential.isSubscribedTo["SOL/BTC"]["2hr"] ? <p className="lead">SOL/BTC 2hr</p> : null}
@@ -89,7 +89,7 @@ const Dashboard = ({ credential, data }) => (
               {credential.isSubscribedTo["SOL/USD"]["12hr"] ? <p className="lead">SOL/USD 12hr</p> : null}
             </div>
           </Col>
-          <Col className="border">
+          <Col className="border-top">
             <div>
               {credential.isSubscribedTo["UNI/BTC"]["1hr"] ? <p className="lead">UNI/BTC 1hr</p> : null}
               {credential.isSubscribedTo["UNI/BTC"]["2hr"] ? <p className="lead">UNI/BTC 2hr</p> : null}
@@ -106,19 +106,19 @@ const Dashboard = ({ credential, data }) => (
           </Col>
         </Row>
         <Row>
-          <Col className="border">
+          <Col className="border-end border-top">
             <div>
               <p className="lead">BTC: {credential["BTC"]}</p>
             </div>
           </Col>
-          <Col className="border">
+          <Col className="border-top">
             <div>
               <p className="lead">USD: {credential["USD"]}</p>
             </div>
           </Col>
         </Row>
         <Row>
-          <Col className="border">
+          <Col className="border-top">
             <p className="lead">Account Value in USD: {credential.total}</p>
           </Col>
         </Row>

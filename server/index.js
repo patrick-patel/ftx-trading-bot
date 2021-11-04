@@ -1,6 +1,7 @@
 const express = require('express');
 let app = express();
 var bodyParser = require('body-parser');
+const chartSnap = require('../lib/chartSnap.js')
 if (!process.env.API_KEY) {
   const config = require('../config.js');
 }
@@ -66,7 +67,7 @@ app.get('/userData', verifyJWT, (req, res) => {
           responseObj.api_key = credential.api_key;
           responseObj.subAccountName = credential.subAccountName;
           responseObj.isSubscribedTo = credential.isSubscribedTo;
-          // console.log('responseObj: ', responseObj)
+          responseObj.chartData = credential.chartData;
           responseArray.push(responseObj);
         })
         .catch(err => {

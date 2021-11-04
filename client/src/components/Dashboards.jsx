@@ -3,10 +3,10 @@ import Dashboard from './Dashboard.jsx'
 import { Container } from 'react-bootstrap';
 
 
-const Dashboards = ({ credentials, data }) => (
+const Dashboards = ({ credentials }) => (
   <Container style={{padding: '20px'}}>
     <h5 className="display-5">Dashboard</h5>
-    {credentials.length > 0 ? credentials.map(credential => <Dashboard credential={credential} data={data}/>) : null}
+    {credentials.length > 0 ? credentials.map(credential => <Dashboard credential={credential}/>) : null}
   </Container>
 )
 

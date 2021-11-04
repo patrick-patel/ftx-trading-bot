@@ -2,6 +2,8 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import $ from 'jquery';
 
+import { Container, ButtonGroup, Button, Form } from 'react-bootstrap';
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +57,29 @@ class Login extends React.Component {
     }
     return (
       <div>
-        <div>
+        <Container>
+          <Form>
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" name="email" value={this.state.email} onChange={this.onChange.bind(this)} required />
+              <Form.Text className="text-muted">
+                We'll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password"  placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicCheckbox">
+              <Form.Check type="checkbox" label="Check me out" />
+            </Form.Group>
+            <Button variant="primary" type="submit" onClick={this.login.bind(this)}>
+              Login
+            </Button>
+          </Form>
+        </Container>
+        {/* <div>
           <label for="email"><b>Email</b></label>
           <input type="text" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange.bind(this)} required></input>
 
@@ -63,7 +87,7 @@ class Login extends React.Component {
           <input type="password" placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required></input>
 
           <button type="submit" onClick={this.login.bind(this)}>Login</button>
-        </div>
+        </div> */}
       </div>
     )
   }

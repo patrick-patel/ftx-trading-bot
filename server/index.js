@@ -172,29 +172,30 @@ app.post('/tradingview', function (req, res) {
                     orders.result.forEach(order => {
                       openTriggerOrderPromises.push(cancelOrder(connection.client, order.id));
                     })
-                    return Promise.all(openTriggerOrderPromises);
-                  }
-                })
-                .catch(err => console.log(err))
-                .then(() => {
-                  return getMarket(connection.client, pair);
-                })
-                .then(marketData => {
-                  console.log('marketData: ', marketData)
-                  var currentPrice = marketData.result.price;
-                  console.log('posting stop market buy order')
-                  postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
-                  .then(() => {
-                    console.log('successfully posted stop market buy order');
-                    if (freeCoins > 0) {
-                      postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
-                      .then(() => {
-                        console.log('successfully posted stop market sell order');
+                    Promise.all(openTriggerOrderPromises)
+                    .then(() => {
+                      getMarket(connection.client, pair)
+                      .then(marketData => {
+                        console.log('marketData: ', marketData)
+                        var currentPrice = marketData.result.price;
+                        console.log('posting stop market buy order')
+                        postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
+                        .then(() => {
+                          console.log('successfully posted stop market buy order');
+                          if (freeCoins > 0) {
+                            postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
+                            .then(() => {
+                              console.log('successfully posted stop market sell order');
+                            })
+                            .catch(err => console.log(err))
+                          }
+                        })
+                        .catch(err => console.log(err))
                       })
                       .catch(err => console.log(err))
-                    }
-                  })
-                  .catch(err => console.log(err))
+                    })
+                    .catch(err => console.log(err))
+                  }
                 })
                 .catch(err => console.log(err))
               }
@@ -213,18 +214,18 @@ app.post('/tradingview', function (req, res) {
                     orders.result.forEach(order => {
                       openTriggerOrderPromises.push(cancelOrder(connection.client, order.id));
                     })
-                    return Promise.all(openTriggerOrderPromises);
-                  }
-                })
-                .catch(err => console.log(err))
-                .then(() => {
-                  if (freeCoins > 0) {
-                    postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
+                    Promise.all(openTriggerOrderPromises)
                     .then(() => {
-                      console.log('successfully posted stop market sell order');
+                      if (freeCoins > 0) {
+                        postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
+                        .then(() => {
+                          console.log('successfully posted stop market sell order');
+                        })
+                        .catch(err => console.log(err))
+                      } else { console.log('no free coins') }
                     })
                     .catch(err => console.log(err))
-                  } else { console.log('no free coins') }
+                  }
                 })
                 .catch(err => console.log(err))
                 .then(() => {

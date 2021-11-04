@@ -4,21 +4,7 @@ import { Line } from "react-chartjs-2";
 import { Col, Row } from 'react-bootstrap';
 
 
-const Dashboard = ({ credential }) => (
-
-  var data = {
-    labels: ["Sunday", "Monday", "Tuesday",
-      "Wednesday", "Thursday", "Friday", "Saturday"],
-    datasets: [
-      {
-        label: "Hours Studied in Geeksforgeeks",
-        data: [2, 5, 7, 9, 7, 6, 4],
-        fill: true,
-        backgroundColor: "rgba(6, 156,51, .3)",
-        borderColor: "#02b844",
-      }
-    ]
-  }
+const Dashboard = ({ credential, data }) => (
 
   return (
     <Row>

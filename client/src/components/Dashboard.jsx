@@ -125,8 +125,6 @@ const Dashboard = ({ credential }) => (
       </Col>
       <Col className="border">
         <Chart
-          width={'600px'}
-          height={'400px'}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
           data={[
@@ -146,7 +144,7 @@ const Dashboard = ({ credential }) => (
           ]}
           options={{
             hAxis: {
-              title: 'Week',
+              title: 'Day',
             },
             vAxis: {
               title: 'USD',

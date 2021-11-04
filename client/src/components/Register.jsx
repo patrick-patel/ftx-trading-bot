@@ -2,6 +2,9 @@ import React from 'react';
 import $ from 'jquery';
 import { Redirect } from 'react-router';
 
+import { Container, ButtonGroup, Button, Form } from 'react-bootstrap';
+
+
 class Register extends React.Component {
   constructor(props) {
     super(props);
@@ -46,6 +49,7 @@ class Register extends React.Component {
     }
     return (
       <div>
+        <br></br>
         <Container>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">

@@ -57,6 +57,7 @@ class Login extends React.Component {
     }
     return (
       <div>
+        <br></br>
         <Container>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -71,9 +72,7 @@ class Login extends React.Component {
               <Form.Label>Password</Form.Label>
               <Form.Control type="password"  placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
+
             <Button variant="primary" type="submit" onClick={this.login.bind(this)}>
               Login
             </Button>

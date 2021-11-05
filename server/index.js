@@ -8,6 +8,7 @@ if (!process.env.API_KEY) {
 
 // auth
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const validateRegisterInput = require("./auth/register");
 const validateLoginInput = require("./auth/login");
@@ -29,6 +30,7 @@ const cancelOrder = require('../lib/ftx.js').cancelOrder;
 const getMarket = require('../lib/ftx.js').getMarket;
 const getOpenTriggerOrders = require('../lib/ftx.js').getOpenTriggerOrders;
 
+const sendEmail = require('../lib/sendEmail.js').sendEmail;
 
 // database calls
 const saveCandle = require('../database/index.js').saveCandle;
@@ -39,6 +41,10 @@ const fetchAllUsers = require('../database/index.js').fetchAllUsers;
 const fetchUser = require('../database/index.js').fetchUser;
 const fetchUserByID = require('../database/index.js').fetchUserByID;
 const updateUserByID = require('../database/index.js').updateUserByID;
+const saveToken = require('../database/index.js').saveToken;
+const fetchToken = require('../database/index.js').fetchToken;
+
+
 
 // middleware
 app.use(bodyParser.json());
@@ -264,6 +270,7 @@ app.post('/tradingview', function (req, res) {
   }
 });
 
+// accounts
 app.post('/register', (req, res) => {
   // Form validation
   // console.log(req.body);
@@ -346,6 +353,76 @@ app.post('/login', (req, res) => {
   })
 });
 
+app.post('/forgotPassword', (req, res) => {
+  console.log(req.body);
+  let email = req.body.email;
+  fetchUser(email)
+  .then(user => {
+    if (!user) {
+      console.log("user with given email does not exist");
+      return res.status(400).send("user with given email does not exist");
+    }
+    fetchToken(user)
+    .then(userToken => {
+      if (!userToken) {
+        var userID = user._id;
+        var token = crypto.randomBytes(32).toString("hex");
+        const link = `${process.env.BASE_URL}/password-reset/${userID}/${token}`;
+        saveToken(userID, token)
+        .then(() => {
+          sendEmail(email, "Password Reset", link)
+          .then(() => {
+            console.log('password reset sent to email');
+          })
+          .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err))
+      }
+    })
+    .catch(err => console.log(err))
+  })
+  .catch(err => console.log(err))
+})
+
+app.post('/:userID/:token', (req, res) => {
+  console.log(req.body);
+  if (req.params.userID){
+    let userID = req.params.userID;
+    let token = req.params.token;
+    let password = req.body.password;
+    fetchUserByID(userID)
+    .then(user => {
+      if (!user) {
+        console.log('(1) invalid link or expired - unable to fetch user');
+      } else {
+        fetchToken(userID, token)
+        .then(fetchedToken => {
+          if (!fetchedToken) {
+            console.log('(2) invalid link or expired - unable to fetch token')
+          } else {
+            bcrypt.genSalt(10, (err, salt) => {
+              bcrypt.hash(password, salt, (err, hashedPassword) => {
+                console.log('hashedPassword: ', hashedPassword);
+                user.password = hashedPassword
+                updateUserByID(user)
+                .then(() => {
+                  console.log('successfully updated password');
+                })
+                .catch(err => console.log(err))
+              });
+            });
+          }
+        })
+        .catch(err => console.log(err))
+      }
+    })
+    .catch(err => console.log(err))
+  }
+
+
+})
+
+// apis
 app.post('/postAPI', verifyJWT, (req, res) => {
   // Form validation
   // console.log(req.body);

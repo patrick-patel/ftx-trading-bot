@@ -180,7 +180,6 @@ let tokenSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: "user",
   },
   token: {
     type: String,
@@ -192,7 +191,25 @@ let tokenSchema = new mongoose.Schema({
     expires: 3600,// this is the expiry time in seconds
   },
 });
-module.exports = mongoose.model("Token", tokenSchema);
+
+let Token = mongoose.model("Token", tokenSchema);
+
+let saveToken = (userID, token) => {
+  console.log('saving token for userID: ', userID)
+  var tokenInstance = new Token({
+    userID: userID,
+    token: token
+  })
+  tokenInstance.save()
+    .then(data => {
+      console.log('saved token!');
+      return data;
+    })
+}
+
+let fetchToken = (userID, token) => {
+  return Token.findOne({"userID": userID, "token": token}).exec();
+}
 
 module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
@@ -202,5 +219,7 @@ module.exports.fetchAllUsers = fetchAllUsers;
 module.exports.fetchUser = fetchUser;
 module.exports.fetchUserByID = fetchUserByID;
 module.exports.updateUserByID = updateUserByID;
+module.exports.saveToken = saveToken;
+module.exports.fetchToken = fetchToken;
 module.exports.User = User;
 

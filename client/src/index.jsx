@@ -5,6 +5,9 @@ import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Settings from './components/Settings.jsx';
 import Dashboards from './components/Dashboards.jsx';
+import ForgotPassword from './components/ForgotPassword.jsx';
+import PasswordReset from './components/PasswordReset.jsx';
+
 import { Redirect } from 'react-router';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
@@ -77,6 +80,12 @@ class App extends React.Component {
           </Route>
           <Route path="/settings">
             {this.state.isLoggedIn ? <Settings /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/forgot-password">
+            <ForgotPassword />
+          </Route>
+          <Route path="/password-reset">
+            <PasswordReset />
           </Route>
         </Switch>
       </div>

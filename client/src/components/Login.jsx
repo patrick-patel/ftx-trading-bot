@@ -10,7 +10,8 @@ class Login extends React.Component {
     this.state = {
       "email": "",
       "password": "",
-      redirect: false
+      redirectHome: false,
+      redirectForgotPassword: false,
     };
   }
 
@@ -37,7 +38,7 @@ class Login extends React.Component {
           },
           'success': function(data) {
             console.log(data);
-            this.setState({ redirect: true });
+            this.setState({ redirectHome: true });
           },
           'error': function(error) {
             console.log(error);
@@ -50,10 +51,17 @@ class Login extends React.Component {
     })
   }
 
+  forgotPassword() {
+    this.setState({ redirectResetPassword: true });
+  }
+
   render() {
     const redirect = this.state.redirect;
-    if (redirect) {
+    if (redirectHome) {
       return <Redirect to="/" />
+    }
+    if (redirectForgotPassword) {
+      return <Redirect to="/forgot-password" />
     }
     return (
       <div>
@@ -77,16 +85,10 @@ class Login extends React.Component {
               Login
             </Button>
           </Form>
+          <Button variant="primary" type="submit" onClick={this.forgotPassword.bind(this)}>
+              Forgot Password
+          </Button>
         </Container>
-        {/* <div>
-          <label for="email"><b>Email</b></label>
-          <input type="text" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange.bind(this)} required></input>
-
-          <label for="password"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required></input>
-
-          <button type="submit" onClick={this.login.bind(this)}>Login</button>
-        </div> */}
       </div>
     )
   }

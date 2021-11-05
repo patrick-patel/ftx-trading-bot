@@ -114,9 +114,13 @@ app.post('/tradingview', function (req, res) {
     var high = req.body.high;
     var low = req.body.low
     var event = req.body.event;
-    var coin = req.body.coin;
     var pair = req.body.pair;
     var hr = req.body.hr;
+    var pairSplit = pair.split('/');
+    var base = pairSplit[1];
+    var coin = pairSplit[0];
+    console.log('base: ', base);
+    console.log('coin: ', coin);
 
     fetchAllUsers()
     .then(users => {
@@ -130,8 +134,7 @@ app.post('/tradingview', function (req, res) {
             .then(wallet => {
               console.log('wallet: ', wallet);
               var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === coin);
-              var btcWalletEntity = wallet.result.find(btcWalletEntity => btcWalletEntity.coin === "BTC");
-              var usdWalletEntity = wallet.result.find(usdWalletEntity => usdWalletEntity.coin === "USD");
+              var baseWalletEntity = wallet.result.find(baseWalletEntity => baseWalletEntity.coin === base);
 
               if (walletEntity) {
                 var freeCoins = walletEntity.free;
@@ -139,22 +142,11 @@ app.post('/tradingview', function (req, res) {
               } else {
                 var freeCoins = 0;
               }
-              if (btcWalletEntity) {
-                var freeBTC = btcWalletEntity.free;
-                console.log('btcWalletEntity: ', btcWalletEntity)
+              if (baseWalletEntity) {
+                var freeBase = baseWalletEntity.free;
+                console.log('baseWalletEntity: ', baseWalletEntity)
               } else {
-                var freeBTC = 0;
-              }
-              if (usdWalletEntity) {
-                var freeUSD = usdWalletEntity.free;
-                console.log('usdWalletEntity: ', usdWalletEntity)
-              } else {
-                var freeUSD = 0;
-              }
-              if (coin === "USD") {
-                var freeBase = freeUSD;
-              } else {
-                var freeBase = freeBTC;
+                var freeBase = 0;
               }
 
               if (event === 'bullish reversal' && freeBase > 0) {
@@ -274,7 +266,7 @@ app.post('/tradingview', function (req, res) {
 
 app.post('/register', (req, res) => {
   // Form validation
-  console.log(req.body);
+  // console.log(req.body);
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
   if (!isValid) {
@@ -284,7 +276,7 @@ app.post('/register', (req, res) => {
   const password = req.body.password;
   fetchUser(email)
   .then(user => {
-    console.log('user: ', user);
+    // console.log('user: ', user);
     if (user) {
       return res.status(400).json({ email: "Email already exists" });
     } else {
@@ -309,7 +301,7 @@ app.post('/login', (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
   // Check validation
-  console.log('req.body: ', req.body);
+  // console.log('req.body: ', req.body);
   if (!isValid) {
     return res.status(400).json(errors);
   }
@@ -323,7 +315,7 @@ app.post('/login', (req, res) => {
       return res.status(404).json({ emailnotfound: "Email not found" });
     }
     // Check password
-    console.log('user: ', user);
+    // console.log('user: ', user);
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         console.log('isMatch');
@@ -356,7 +348,7 @@ app.post('/login', (req, res) => {
 
 app.post('/postAPI', verifyJWT, (req, res) => {
   // Form validation
-  console.log(req.body);
+  // console.log(req.body);
   const { errors, isValid } = validateAPIInput(req.body);
   // Check validation
   if (!isValid) {
@@ -376,7 +368,7 @@ app.post('/postAPI', verifyJWT, (req, res) => {
       }
     })
     if (!duplicateFlag) {
-      console.log('user: ', user);
+      // console.log('user: ', user);
       var credential = {
         api_key: api_key,
         secret: secret,

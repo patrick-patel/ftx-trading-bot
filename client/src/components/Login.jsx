@@ -52,7 +52,7 @@ class Login extends React.Component {
   }
 
   forgotPassword() {
-    this.setState({ redirectResetPassword: true });
+    this.setState({ redirectForgotPassword: true });
   }
 
   render() {

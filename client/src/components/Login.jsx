@@ -56,7 +56,8 @@ class Login extends React.Component {
   }
 
   render() {
-    const redirect = this.state.redirect;
+    const redirectHome = this.state.redirectHome;
+    const redirectForgotPassword = this.state.redirectForgotPassword;
     if (redirectHome) {
       return <Redirect to="/" />
     }

@@ -82,11 +82,11 @@ class Login extends React.Component {
               <Form.Control type="password"  placeholder="Enter Password" name="password" value={this.state.password} onChange={this.onChange.bind(this)} required />
             </Form.Group>
 
-            <Button variant="primary" type="submit" onSubmit={this.login.bind(this)}>
+            <Button variant="primary" type="submit" style={cursor: "pointer"} onClick={this.login.bind(this)}>
               Login
             </Button>
           </Form>
-          <Button variant="primary" type="submit" onSubmit={this.forgotPassword.bind(this)}>
+          <Button variant="primary" type="submit" style={cursor: "pointer"} onClick={this.forgotPassword.bind(this)}>
               Forgot Password
           </Button>
         </Container>

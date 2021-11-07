@@ -57,7 +57,7 @@ class Login extends React.Component {
               <Form.Control type="password"  placeholder="Confirm New Password" name="password2" value={this.state.password2} onChange={this.onChange.bind(this)} required />
             </Form.Group>
 
-            <Button variant="primary" type="submit" onClick={this.resetPassword.bind(this)}>
+            <Button variant="primary" type="submit" onSubmit={this.resetPassword.bind(this)}>
               Submit
             </Button>
           </Form>

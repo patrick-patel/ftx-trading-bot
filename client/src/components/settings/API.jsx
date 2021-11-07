@@ -137,9 +137,9 @@ class API extends React.Component {
         <h6 className="display-6">{this.state["subAccountName"]}</h6>
         <p className="lead">{this.state["api_key"]}</p>
         {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
-        {this.state.edit ? <Button className="btn-secondary me-2" onClick={this.onEdit.bind(this)}>Cancel Edit</Button> : <Button className="me-2" onClick={this.onEdit.bind(this)}>Edit Pairs</Button>}
-        {this.state.removeAPI ? <Button className="btn-secondary me-2" onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button className="btn-danger" onClick={this.onRemove.bind(this)}>Remove API</Button>}
-        {this.state.removeAPI ? <Button className="btn-warning" onClick={this.deleteAPI.bind(this)}>Confirm Removal of API</Button> : null}
+        {this.state.edit ? <Button className="btn-secondary me-2" onSubmit={this.onEdit.bind(this)}>Cancel Edit</Button> : <Button className="me-2" onSubmit={this.onEdit.bind(this)}>Edit Pairs</Button>}
+        {this.state.removeAPI ? <Button className="btn-secondary me-2" onSubmit={this.onRemove.bind(this)}>Cancel</Button> : <Button className="btn-danger" onSubmit={this.onRemove.bind(this)}>Remove API</Button>}
+        {this.state.removeAPI ? <Button className="btn-warning" onSubmit={this.deleteAPI.bind(this)}>Confirm Removal of API</Button> : null}
         {this.state.removeAPI ? <p>You must <a href="#">delete the API Key from your FTX Account</a> to fully disable the bot</p> : null}
         <hr></hr>
       </div>

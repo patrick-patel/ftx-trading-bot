@@ -51,7 +51,7 @@ class ForgotPassword extends React.Component {
               </Form.Text>
             </Form.Group>
 
-            <Button variant="primary" type="submit" onClick={this.submitEmail.bind(this)}>
+            <Button variant="primary" type="submit" onSubmit={this.submitEmail.bind(this)}>
               Submit
             </Button>
           </Form>

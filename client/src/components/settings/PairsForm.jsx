@@ -152,7 +152,7 @@ const PairsForm = (props) => (
         </ButtonGroup>
       </Row>
     </div>
-    <Button className="mb-2 mt-2" type="submit" onClick={props.submitPairs}>Submit</Button>
+    <Button className="mb-2 mt-2" type="submit" onSubmit={props.submitPairs}>Submit</Button>
   </div>
 
 )

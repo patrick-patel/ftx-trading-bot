@@ -147,7 +147,7 @@ const Dashboard = ({ credential }) => (
           ]}
           options={{
             hAxis: {
-              title: 'Hour',
+              title: 'Day',
             },
             vAxis: {
               title: 'USD',

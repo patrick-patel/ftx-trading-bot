@@ -115,7 +115,7 @@ class Settings extends React.Component {
             <Form.Group className="mb-3">
               <Form.Check type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} label="FTX US" />
             </Form.Group>
-            <Button type="submit" style={{cursor: "pointer"}} onClick={this.submitAPI.bind(this)}>
+            <Button type="submit" style={cursor: "pointer"} onClick={this.submitAPI.bind(this)}>
               Submit
             </Button>
           </Form>

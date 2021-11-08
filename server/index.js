@@ -370,8 +370,8 @@ app.post('/forgotPassword', (req, res) => {
         saveToken(userID, token);
 
         console.log('inside server just before sendEmail')
-        const link = `${process.env.BASE_URL}/password-reset/${userID}/${token}`;
-        sendEmail(email, "Password Reset", link)
+        const msg = `userID: ${userID}\ntoken: ${token}`;
+        sendEmail(email, "Password Reset", msg)
         .then(() => {
           console.log('password reset sent to email');
           res.end();
@@ -387,11 +387,11 @@ app.post('/forgotPassword', (req, res) => {
   .catch(err => console.log(err))
 })
 
-app.post('/password-reset/:userID/:token', (req, res) => {
+app.post('/password-reset', (req, res) => {
   console.log(req.body);
-  if (req.params.userID){
-    let userID = req.params.userID;
-    let token = req.params.token;
+  if (req.body.userID){
+    let userID = req.body.userID;
+    let token = req.body.token;
     let password = req.body.password;
     fetchUserByID(userID)
     .then(user => {

@@ -25,6 +25,7 @@ class ForgotPassword extends React.Component {
       'context': this,
       'data': json,
       'success': function(data) {
+        this.setState({redirectResetPassword: true})
         console.log(data);
       },
       'error': function(error) {
@@ -51,7 +52,7 @@ class ForgotPassword extends React.Component {
               </Form.Text>
             </Form.Group>
 
-            <Button variant="primary" type="submit" style={{cursor: "pointer"}} onClick={this.submitEmail.bind(this)}>
+            <Button variant="primary" type="submit" style={cursor: "pointer"} onClick={this.submitEmail.bind(this)}>
               Submit
             </Button>
           </Form>

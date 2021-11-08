@@ -62,7 +62,7 @@ class App extends React.Component {
                 {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
                 {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register">Register</Link></Nav.Link>}
                 {this.state.isLoggedIn ? <Nav.Link><Link to="/settings">Settings</Link></Nav.Link> : null}
-                {this.state.isLoggedIn ? <Nav.Link style={cursor: "pointer"}><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link style={{cursor: "pointer"}}><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
               </Nav>
             </Navbar.Collapse>
           </Container>

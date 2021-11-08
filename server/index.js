@@ -365,7 +365,7 @@ app.post('/forgotPassword', (req, res) => {
     fetchToken(user)
     .then(userToken => {
       if (!userToken) {
-        var userID = user._id;
+        var userID = user._id.toString();
         var token = crypto.randomBytes(32).toString("hex");
         const link = `${process.env.BASE_URL}/password-reset/${userID}/${token}`;
         saveToken(userID, token)
@@ -377,6 +377,8 @@ app.post('/forgotPassword', (req, res) => {
           .catch(err => console.log(err))
         })
         .catch(err => console.log(err))
+      } else {
+        console.log('token already exists for this user');
       }
     })
     .catch(err => console.log(err))

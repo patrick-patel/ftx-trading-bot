@@ -374,10 +374,12 @@ app.post('/forgotPassword', (req, res) => {
         sendEmail(email, "Password Reset", link)
         .then(() => {
           console.log('password reset sent to email');
+          res.end();
         })
         .catch(err => console.log(err))
       } else {
         console.log('token already exists for this user');
+        res.end();
       }
     })
     .catch(err => console.log(err))
@@ -385,7 +387,7 @@ app.post('/forgotPassword', (req, res) => {
   .catch(err => console.log(err))
 })
 
-app.post('/:userID/:token', (req, res) => {
+app.post('/password-reset/:userID/:token', (req, res) => {
   console.log(req.body);
   if (req.params.userID){
     let userID = req.params.userID;
@@ -419,8 +421,6 @@ app.post('/:userID/:token', (req, res) => {
     })
     .catch(err => console.log(err))
   }
-
-
 })
 
 // apis

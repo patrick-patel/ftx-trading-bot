@@ -177,7 +177,7 @@ let updateUserByID = (user) => {
 
 // Token store
 let tokenSchema = new mongoose.Schema({
-  userId: {
+  userID: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
   },

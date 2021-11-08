@@ -474,7 +474,7 @@ app.post('/postAPI', verifyJWT, (req, res) => {
 });
 
 app.post('/setPairs', verifyJWT, (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const api_key = req.body["api_key"];
   const ethbtc = req.body["ETH/BTC"];
   const linkbtc = req.body["LINK/BTC"];
@@ -535,12 +535,12 @@ app.post('/setPairs', verifyJWT, (req, res) => {
 });
 
 app.post('/deleteAPI', verifyJWT, (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const api_key = req.body["api_key"];
 
   fetchUserByID(req.user.id)
   .then(user => {
-    console.log('user: ', user);
+    // console.log('user: ', user);
     let credentialIndex = user.credentials.findIndex(credential => credential.api_key === api_key)
     user.credentials.splice(credentialIndex, 1);
     updateUserByID(user)

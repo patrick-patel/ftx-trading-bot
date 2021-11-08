@@ -149,10 +149,10 @@ let saveUser = (email, password) => {
     password: password
   })
   userInstance.save()
-    .then(data => {
-      console.log('saved user!');
-      return data;
-    })
+  .then(data => {
+    console.log('saved user!');
+    return data;
+  })
 }
 
 let fetchAllUsers = () => {
@@ -201,10 +201,11 @@ let saveToken = (userID, token) => {
     token: token
   })
   tokenInstance.save()
-    .then(data => {
-      console.log('saved token!');
-      return data;
-    })
+  .then(data => {
+    console.log('saved token!');
+    return data;
+  })
+  .catch(err => console.log(err))
 }
 
 let fetchToken = (userID, token) => {

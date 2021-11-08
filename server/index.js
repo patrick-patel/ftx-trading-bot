@@ -365,16 +365,15 @@ app.post('/forgotPassword', (req, res) => {
     fetchToken(user)
     .then(userToken => {
       if (!userToken) {
-        var userID = user._id.toString();
+        var userID = user._id;
         var token = crypto.randomBytes(32).toString("hex");
+        saveToken(userID, token);
+
+        console.log('inside server just before sendEmail')
         const link = `${process.env.BASE_URL}/password-reset/${userID}/${token}`;
-        saveToken(userID, token)
+        sendEmail(email, "Password Reset", link)
         .then(() => {
-          sendEmail(email, "Password Reset", link)
-          .then(() => {
-            console.log('password reset sent to email');
-          })
-          .catch(err => console.log(err))
+          console.log('password reset sent to email');
         })
         .catch(err => console.log(err))
       } else {

@@ -205,7 +205,6 @@ let saveToken = (userID, token) => {
     console.log('saved token!');
     return data;
   })
-  .catch(err => console.log(err))
 }
 
 let fetchToken = (userID, token) => {

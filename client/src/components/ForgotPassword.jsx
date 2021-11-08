@@ -25,10 +25,12 @@ class ForgotPassword extends React.Component {
       'context': this,
       'data': json,
       'success': function(data) {
-        this.setState({redirectResetPassword: true})
+        console.log('response success');
+        this.setState({redirectResetPassword: true});
         console.log(data);
       },
       'error': function(error) {
+        console.log('response error');
         console.log(error);
       }
     })

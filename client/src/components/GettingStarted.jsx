@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router';
 import $ from 'jquery';
 
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
 class GettingStarted extends React.Component {
   constructor(props) {

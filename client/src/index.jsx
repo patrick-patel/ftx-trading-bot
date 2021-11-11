@@ -82,10 +82,10 @@ class App extends React.Component {
             {this.state.isLoggedIn ? <Settings /> : <Redirect to="/login" />}
           </Route>
           <Route path="/forgot-password">
-            {this.state.isLoggedIn ? <Redirect to="/" /> : <ForgotPassword />}
+            {!this.state.isLoggedIn ? <ForgotPassword /> : <Redirect to="/" />}
           </Route>
           <Route path="/password-reset">
-            {this.state.isLoggedIn ? <Redirect to="/" /> : <PasswordReset />}
+            {!this.state.isLoggedIn ? <PasswordReset /> : <Redirect to="/" />}
 
           </Route>
         </Switch>

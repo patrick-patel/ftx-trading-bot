@@ -13,6 +13,9 @@ const Dashboard = ({ credential }) => (
         </Row>
         <Row>
           <Col className="border-end border-top">
+            <p className="lead">Coin</p>
+          </Col>
+          <Col className="border-end border-top">
             <p className="lead">ETH: {credential["ETH"]}</p>
           </Col>
           <Col className="border-end border-top">
@@ -29,6 +32,9 @@ const Dashboard = ({ credential }) => (
           </Col>
         </Row>
         <Row>
+          <Col className="border-end border-top">
+            <p className="lead">Subscription</p>
+          </Col>
           <Col className="border-end border-top">
             <div>
               {credential.isSubscribedTo["ETH/BTC"]["1hr"] ? <p className="lead">BTC 1hr</p> : null}

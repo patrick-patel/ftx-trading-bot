@@ -3,7 +3,7 @@ import {Col, ButtonGroup, Button, Row} from 'react-bootstrap';
 
 const PairsForm = (props) => (
   <div>
-    <p><label for="ETH"><b>ETH - Set To: {props.state["ETH/BTC"] === "off" ? props.state["ETH/USD"] : props.state["ETH/BTC"]}</b></label></p>
+    <p><label for="ETH"><b>ETH - Set To: {props.state["ETH/BTC"] === "off" ? props.state["ETH/USD"] : props.state["ETH/USD"] === "off" ? props.state["ETH/BTC"] : "off"}</b></label></p>
     <div>
       <Row>
         <ButtonGroup className="d-grid gap-2 mb-2" size="sm">

@@ -3,7 +3,7 @@ import {Col, ButtonGroup, Button, Row} from 'react-bootstrap';
 
 const PairsForm = (props) => (
   <div>
-    <p><label for="ETH"><b>ETH - Set To: {props.state["ETH/BTC"] === "off" ? props.state["ETH/USD"] : props.state["ETH/USD"] === "off" ? props.state["ETH/BTC"] : "off"}</b></label></p>
+    <p><label for="ETH"><b>ETH Trading Set To: {props.state["ETH/BTC"] === "off" ? "USD" props.state["ETH/USD"] : props.state["ETH/USD"] === "off" ? "BTC" props.state["ETH/BTC"] : "off"}</b></label></p>
     <div>
       <Row>
         <ButtonGroup className="d-grid gap-2 mb-2" size="sm">
@@ -33,7 +33,7 @@ const PairsForm = (props) => (
       </Row>
     </div>
 
-    <p><label for="LINK"><b>LINK - Set To: {props.state["LINK/BTC"]}</b></label></p>
+    <p><label for="LINK"><b>LINK Trading Set To: {props.state["LINK/BTC"] === "off" ? "USD" props.state["LINK/USD"] : props.state["LINK/USD"] === "off" ? "BTC" props.state["LINK/BTC"] : "off"}</b></label></p>
     <div>
       <Row>
         <ButtonGroup className="d-grid gap-2 mb-2" size="sm">
@@ -63,7 +63,7 @@ const PairsForm = (props) => (
       </Row>
     </div>
 
-    <p><label for="MATIC"><b>MATIC - Set To: {props.state["MATIC/BTC"]}</b></label></p>
+    <p><label for="MATIC">MATIC Trading Set To: {props.state["MATIC/BTC"] === "off" ? "USD" props.state["MATIC/USD"] : props.state["MATIC/USD"] === "off" ? "BTC" props.state["MATIC/BTC"] : "off"}</b></label></p>
     <div>
       <Row>
         <ButtonGroup className="d-grid gap-2 mb-2" size="sm">
@@ -93,7 +93,7 @@ const PairsForm = (props) => (
       </Row>
     </div>
 
-    <p><label for="SOL"><b>SOL - Set To: {props.state["SOL/BTC"]}</b></label></p>
+    <p><label for="SOL"><b>SOL Trading Set To: {props.state["SOL/BTC"] === "off" ? "USD" props.state["SOL/USD"] : props.state["SOL/USD"] === "off" ? "BTC" props.state["SOL/BTC"] : "off"}</b></label></p>
     <div>
       <Row>
         <ButtonGroup className="d-grid gap-2 mb-2" size="sm">
@@ -123,7 +123,7 @@ const PairsForm = (props) => (
       </Row>
     </div>
 
-    <p><label for="UNI"><b>UNI - Set To: {props.state["UNI/BTC"]}</b></label></p>
+    <p><label for="UNI"><b>UNI Trading Set To: {props.state["UNI/BTC"] === "off" ? "USD" props.state["UNI/USD"] : props.state["UNI/USD"] === "off" ? "BTC" props.state["UNI/BTC"] : "off"}</b></label></p>
     <div>
       <Row>
         <ButtonGroup className="d-grid gap-2 mb-2" size="sm">

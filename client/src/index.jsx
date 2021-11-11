@@ -4,6 +4,7 @@ import $ from 'jquery';
 import Login from './components/Login.jsx';
 import Register from './components/Register.jsx';
 import Settings from './components/Settings.jsx';
+import GettingStarted from './components/GettingStarted.jsx';
 import Dashboards from './components/Dashboards.jsx';
 import ForgotPassword from './components/ForgotPassword.jsx';
 import PasswordReset from './components/PasswordReset.jsx';
@@ -59,6 +60,7 @@ class App extends React.Component {
               <Nav className="me-auto">
                 <br></br>
                 {this.state.isLoggedIn ? <Nav.Link><Link to="/">Dashboard</Link></Nav.Link> : null}
+                <Nav.Link><Link to="/gettingStarted">Getting Started</Link></Nav.Link>
                 {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
                 {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register">Register</Link></Nav.Link>}
                 {this.state.isLoggedIn ? <Nav.Link><Link to="/settings">Settings</Link></Nav.Link> : null}
@@ -71,6 +73,9 @@ class App extends React.Component {
         <Switch>
           <Route path="/" exact={true}>
             {this.state.isLoggedIn ? <Dashboards credentials={this.state.credentials} data={this.state.data} /> : <Redirect to="/login" />}
+          </Route>
+          <Route path="/gettingStarted">
+            <GettingStarted />
           </Route>
           <Route path="/login">
             {this.state.isLoggedIn ? <Redirect to="/" /> : <Login />}
@@ -86,7 +91,6 @@ class App extends React.Component {
           </Route>
           <Route path="/password-reset">
             {!this.state.isLoggedIn ? <PasswordReset /> : <Redirect to="/" />}
-
           </Route>
         </Switch>
       </div>

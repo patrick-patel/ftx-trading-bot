@@ -63,7 +63,7 @@ const PairsForm = (props) => (
       </Row>
     </div>
 
-    <p><label for="MATIC">MATIC Trading Set To: {props.state["MATIC/BTC"] === "off" ? "USD " + props.state["MATIC/USD"] : props.state["MATIC/USD"] === "off" ? "BTC " + props.state["MATIC/BTC"] : "off"}</b></label></p>
+    <p><label for="MATIC"><b>MATIC Trading Set To: {props.state["MATIC/BTC"] === "off" ? "USD " + props.state["MATIC/USD"] : props.state["MATIC/USD"] === "off" ? "BTC " + props.state["MATIC/BTC"] : "off"}</b></label></p>
     <div>
       <Row>
         <ButtonGroup className="d-grid gap-2 mb-2" size="sm">

@@ -373,12 +373,12 @@ app.post('/forgotPassword', (req, res) => {
         sendEmail(email, "Password Reset", msg)
         .then(() => {
           console.log('password reset sent to email');
-          return res.end();
+          return res.send({});
         })
         .catch(err => console.log(err))
       } else {
         console.log('token already exists for this user');
-        return res.end();
+        return res.send({});
       }
     })
     .catch(err => console.log(err))

@@ -21,10 +21,8 @@ class API extends React.Component {
       "MATIC/USD": "off",
       "SOL/USD": "off",
       "UNI/USD": "off",
-      ethActiveButton: '',
       edit: false,
       removeAPI: false,
-      redirect: false
     }
   }
 
@@ -52,9 +50,6 @@ class API extends React.Component {
       },
       'data': params,
       'success': function(data) {
-        this.setState({
-          redirect: true
-        })
         console.log('success');
       },
       'error': function(error) {
@@ -128,10 +123,6 @@ class API extends React.Component {
   }
 
   render() {
-    const redirect = this.state.redirect;
-    if (redirect) {
-      return <Redirect to='/settings' />
-    }
     return (
       <div>
         <h6 className="display-6">{this.state["subAccountName"]}</h6>

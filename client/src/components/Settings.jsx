@@ -17,6 +17,7 @@ class Settings extends React.Component {
       "subAccounts": [],
       redirect: false
     };
+    this.submitAPI = this.submitAPI.bind(this);
   }
 
   componentDidMount() {
@@ -48,7 +49,8 @@ class Settings extends React.Component {
     this.setState({ [target.name]: target.value });
   }
 
-  submitAPI() {
+  submitAPI(e) {
+    e.preventDefault();
     var params = {
       api_key: this.state.api_key,
       secret: this.state.secret,
@@ -115,7 +117,7 @@ class Settings extends React.Component {
             <Form.Group className="mb-3">
               <Form.Check type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} label="FTX US" />
             </Form.Group>
-            <Button type="submit" style={{cursor: "pointer"}} onClick={this.submitAPI.bind(this)}>
+            <Button type="submit" style={{cursor: "pointer"}} onClick={(e) => this.submitAPI(e)}>
               Submit
             </Button>
           </Form>

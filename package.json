@@ -29,6 +29,7 @@
     "concurrently": "^6.3.0",
     "crypto-js": "^4.1.1",
     "express": "^4.15.0",
+    "file-loader": "^6.2.0",
     "ftx-api": "^1.0.14",
     "hmac": "^1.0.1",
     "isempty": "0.0.1",

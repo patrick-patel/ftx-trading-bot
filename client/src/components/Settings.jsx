@@ -79,6 +79,7 @@ class Settings extends React.Component {
               "api_key": "",
               "secret": "",
               "subAccountName": "",
+              "isFTXUS": false,
             });
           },
           'error': function(error) {

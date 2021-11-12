@@ -59,12 +59,12 @@ class App extends React.Component {
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 <br></br>
-                {this.state.isLoggedIn ? <Nav.Link><Link to="/">Dashboard</Link></Nav.Link> : null}
-                <Nav.Link><Link to="/gettingStarted">Getting Started</Link></Nav.Link>
-                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login">Login</Link></Nav.Link>}
-                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register">Register</Link></Nav.Link>}
-                {this.state.isLoggedIn ? <Nav.Link><Link to="/settings">Settings</Link></Nav.Link> : null}
-                {this.state.isLoggedIn ? <Nav.Link style={{cursor: "pointer"}}><Link to="/login" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/" className="btn btn-link ms-auto">Dashboard</Link></Nav.Link> : null}
+                <Nav.Link><Link to="/gettingStarted" className="btn btn-link ms-auto">Getting Started</Link></Nav.Link>
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login" className="btn btn-link ms-auto">Login</Link></Nav.Link>}
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register" className="btn btn-link ms-auto">Register</Link></Nav.Link>}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/settings" className="btn btn-link ms-auto">Settings</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link style={{cursor: "pointer"}}><Link to="/login" className="btn btn-link ms-auto" onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
               </Nav>
             </Navbar.Collapse>
           </Container>

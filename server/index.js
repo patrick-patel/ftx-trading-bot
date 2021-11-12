@@ -2,9 +2,8 @@ const express = require('express');
 let app = express();
 var bodyParser = require('body-parser');
 const chartSnap = require('../lib/chartSnap.js')
-if (!process.env.API_KEY) {
-  const config = require('../config.js');
-}
+/* --------REMOVE-------*/
+// const config = require('../config.js');
 
 // auth
 const bcrypt = require("bcryptjs");

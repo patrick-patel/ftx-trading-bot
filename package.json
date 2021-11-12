@@ -4,7 +4,7 @@
   "description": "nom-nom",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack --mode development --watch",
+    "react-dev": "webpack --mode development --watch live-server",
     "server-dev": "npx nodemon server/index.js",
     "dev": "npx nodemon server/index.js & webpack --mode development --watch",
     "build": "webpack --mode production",

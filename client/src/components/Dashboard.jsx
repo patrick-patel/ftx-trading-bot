@@ -1,6 +1,6 @@
 import React from 'react';
 import { Chart } from "react-google-charts";
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Table } from 'react-bootstrap';
 
 
 const Dashboard = ({ credential }) => (

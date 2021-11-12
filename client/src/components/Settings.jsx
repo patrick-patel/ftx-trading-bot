@@ -98,7 +98,8 @@ class Settings extends React.Component {
       <div>
         <Container>
           <br></br>
-          <Form className="bg-dark">
+          <h5 className="display-5">API Keys</h5>
+          <Form className="bg-dark p-4">
             <Form.Group className="mb-3">
               <Form.Label className="text-white">API Key</Form.Label>
               <Form.Control type="text" placeholder="Enter API Key" name="api_key" value={this.state.api_key} onChange={this.onChange.bind(this)} required />

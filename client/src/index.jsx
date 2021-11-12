@@ -89,7 +89,7 @@ class App extends React.Component {
           <Route path="/forgot-password">
             {!this.state.isLoggedIn ? <ForgotPassword /> : <Redirect to="/" />}
           </Route>
-          <Route path="/password-reset">
+          <Route path="/passwordReset">
             {!this.state.isLoggedIn ? <PasswordReset /> : <Redirect to="/" />}
           </Route>
         </Switch>

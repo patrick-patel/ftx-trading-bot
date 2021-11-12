@@ -44,7 +44,7 @@ class PasswordReset extends React.Component {
 
   render() {
     const redirectHome = this.state.redirectHome;
-    if (redirectHome) {
+    if (redirectHome === true) {
       return <Redirect to="/" />
     }
     return (

@@ -39,7 +39,7 @@ class ForgotPassword extends React.Component {
   render() {
     const redirectResetPassword = this.state.redirectResetPassword;
     if (redirectResetPassword) {
-      return <Redirect to="/password-reset" />
+      return <Redirect to="/passwordReset" />
     }
     return (
       <div>

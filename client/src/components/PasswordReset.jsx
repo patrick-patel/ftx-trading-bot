@@ -4,7 +4,7 @@ import $ from 'jquery';
 
 import { Container, ButtonGroup, Button, Form } from 'react-bootstrap';
 
-class Login extends React.Component {
+class PasswordReset extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -28,7 +28,7 @@ class Login extends React.Component {
       password2: this.state.password2
     };
     $.ajax({
-      'url': '/login',
+      'url': '/password-reset',
       'type': 'POST',
       'context': this,
       'data': params,
@@ -79,4 +79,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default PasswordReset;

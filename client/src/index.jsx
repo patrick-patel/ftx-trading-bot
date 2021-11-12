@@ -56,15 +56,15 @@ class App extends React.Component {
           <Container fluid>
             <Navbar.Brand href="/">FTX Trading Bot</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
+            <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
               <Nav className="me-auto">
                 <br></br>
-                {this.state.isLoggedIn ? <Nav.Link><Link to="/" className="btn btn-link ms-auto" style={{color: "white", textDecoration: "none"}}>Dashboard</Link></Nav.Link> : null}
-                <Nav.Link><Link to="/gettingStarted" className="btn btn-link ms-auto" style={{color: "white", textDecoration: "none"}}>Getting Started</Link></Nav.Link>
-                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login" className="btn btn-link ms-auto" style={{color: "white", textDecoration: "none"}}>Login</Link></Nav.Link>}
-                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register" className="btn btn-link ms-auto" style={{color: "white", textDecoration: "none"}}>Register</Link></Nav.Link>}
-                {this.state.isLoggedIn ? <Nav.Link><Link to="/settings" className="btn btn-link ms-auto" style={{color: "white", textDecoration: "none"}}>Settings</Link></Nav.Link> : null}
-                {this.state.isLoggedIn ? <Nav.Link style={{cursor: "pointer"}}><Link to="/login" className="btn btn-link ms-auto" style={{color: "white", textDecoration: "none"}} onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/" className="btn btn-link" style={{color: "white", textDecoration: "none"}}>Dashboard</Link></Nav.Link> : null}
+                <Nav.Link><Link to="/gettingStarted" className="btn btn-link" style={{color: "white", textDecoration: "none"}}>Getting Started</Link></Nav.Link>
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/login" className="btn btn-link" style={{color: "white", textDecoration: "none"}}>Login</Link></Nav.Link>}
+                {this.state.isLoggedIn ? null : <Nav.Link><Link to="/register" className="btn btn-link" style={{color: "white", textDecoration: "none"}}>Register</Link></Nav.Link>}
+                {this.state.isLoggedIn ? <Nav.Link><Link to="/settings" className="btn btn-link" style={{color: "white", textDecoration: "none"}}>Settings</Link></Nav.Link> : null}
+                {this.state.isLoggedIn ? <Nav.Link style={{cursor: "pointer"}}><Link to="/login" className="btn btn-link" style={{color: "white", textDecoration: "none"}} onClick={this.logout.bind(this)}>Logout</Link></Nav.Link> : null}
               </Nav>
             </Navbar.Collapse>
           </Container>

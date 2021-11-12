@@ -9,123 +9,149 @@ const Dashboard = ({ credential }) => (
       <Col className="border">
         <Row>
           <h6 className="display-6">{credential.subAccountName}</h6>
-          <p className="lead">{credential.api_key}</p>
+          <td>{credential.api_key}</td>
         </Row>
         <Row>
-          <Col className="border-end border-top">
-            <p className="lead">Coin</p>
-          </Col>
-          <Col className="border-end border-top">
-            <p className="lead">ETH: {credential["ETH"]}</p>
-          </Col>
-          <Col className="border-end border-top">
-            <p className="lead">LINK: {credential["LINK"]}</p>
-          </Col>
-          <Col className="border-end border-top">
-            <p className="lead">MATIC: {credential["MATIC"]}</p>
-          </Col>
-          <Col className="border-end border-top">
-            <p className="lead">SOL: {credential["SOL"]}</p>
-          </Col>
-          <Col className="border-top">
-            <p className="lead">UNI: {credential["UNI"]}</p>
-          </Col>
+          <Table striped bordered hover variant="dark">
+            <thead>
+              <tr>
+                <th></th>
+                <th>ETH</th>
+                <th>LINK</th>
+                <th>MATIC</th>
+                <th>SOL</th>
+                <th>UNI</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Balance</td>
+                <td>{credential["ETH"]}</td>
+                <td>{credential["LINK"]}</td>
+                <td>{credential["MATIC"]}</td>
+                <td>{credential["SOL"]}</td>
+                <td>{credential["UNI"]}</td>
+              </tr>
+              <tr>
+                <td>Pair</td>
+                {credential.isSubscribedTo["ETH/BTC"]["1hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["2hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["4hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["6hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["12hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["1hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["2hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["4hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["6hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["12hr"] ? <td>USD</td> : null}
+
+                {credential.isSubscribedTo["LINK/BTC"]["1hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["2hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["4hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["6hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["12hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["1hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["2hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["4hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["6hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["12hr"] ? <td>USD</td> : null}
+
+                {credential.isSubscribedTo["MATIC/BTC"]["1hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["2hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["4hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["6hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["12hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["1hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["2hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["4hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["6hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["12hr"] ? <td>USD</td> : null}
+
+                {credential.isSubscribedTo["SOL/BTC"]["1hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["2hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["4hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["6hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["12hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["1hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["2hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["4hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["6hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["12hr"] ? <td>USD</td> : null}
+
+                {credential.isSubscribedTo["UNI/BTC"]["1hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["2hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["4hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["6hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["12hr"] ? <td>BTC</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["1hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["2hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["4hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["6hr"] ? <td>USD</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["12hr"] ? <td>USD</td> : null}
+              </tr>
+              <tr>
+                <td>Time Frame</td>
+                {credential.isSubscribedTo["ETH/BTC"]["1hr"] ? <td> 1hr</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["2hr"] ? <td> 2hr</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["4hr"] ? <td> 4hr</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["6hr"] ? <td> 6hr</td> : null}
+                {credential.isSubscribedTo["ETH/BTC"]["12hr"] ? <td>12hr</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["ETH/USD"]["12hr"] ? <td>12hr</td> : null}
+
+                {credential.isSubscribedTo["LINK/BTC"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["LINK/BTC"]["12hr"] ? <td>12hr</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["LINK/USD"]["12hr"] ? <td>12hr</td> : null}
+
+                {credential.isSubscribedTo["MATIC/BTC"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["MATIC/BTC"]["12hr"] ? <td>12hr</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["MATIC/USD"]["12hr"] ? <td>12hr</td> : null}
+
+                {credential.isSubscribedTo["SOL/BTC"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["SOL/BTC"]["12hr"] ? <td>12hr</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["SOL/USD"]["12hr"] ? <td>12hr</td> : null}
+
+                {credential.isSubscribedTo["UNI/BTC"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["UNI/BTC"]["12hr"] ? <td>12hr</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["1hr"] ? <td>1hr</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["2hr"] ? <td>2hr</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["4hr"] ? <td>4hr</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["6hr"] ? <td>6hr</td> : null}
+                {credential.isSubscribedTo["UNI/USD"]["12hr"] ? <td>12hr</td> : null}
+              </tr>
+            </tbody>
+          </Table>
         </Row>
         <Row>
-          <Col className="border-end border-top">
-            <p className="lead">Subscription</p>
-          </Col>
-          <Col className="border-end border-top">
-            <div>
-              {credential.isSubscribedTo["ETH/BTC"]["1hr"] ? <p className="lead">BTC 1hr</p> : null}
-              {credential.isSubscribedTo["ETH/BTC"]["2hr"] ? <p className="lead">BTC 2hr</p> : null}
-              {credential.isSubscribedTo["ETH/BTC"]["4hr"] ? <p className="lead">BTC 4hr</p> : null}
-              {credential.isSubscribedTo["ETH/BTC"]["6hr"] ? <p className="lead">BTC 6hr</p> : null}
-              {credential.isSubscribedTo["ETH/BTC"]["12hr"] ? <p className="lead">BTC 12hr</p> : null}
-
-              {credential.isSubscribedTo["ETH/USD"]["1hr"] ? <p className="lead">USD 1hr</p> : null}
-              {credential.isSubscribedTo["ETH/USD"]["2hr"] ? <p className="lead">USD 2hr</p> : null}
-              {credential.isSubscribedTo["ETH/USD"]["4hr"] ? <p className="lead">USD 4hr</p> : null}
-              {credential.isSubscribedTo["ETH/USD"]["6hr"] ? <p className="lead">USD 6hr</p> : null}
-              {credential.isSubscribedTo["ETH/USD"]["12hr"] ? <p className="lead">USD 12hr</p> : null}
-            </div>
-          </Col>
-          <Col className="border-end border-top">
-            <div>
-              {credential.isSubscribedTo["LINK/BTC"]["1hr"] ? <p className="lead">BTC 1hr</p> : null}
-              {credential.isSubscribedTo["LINK/BTC"]["2hr"] ? <p className="lead">BTC 2hr</p> : null}
-              {credential.isSubscribedTo["LINK/BTC"]["4hr"] ? <p className="lead">BTC 4hr</p> : null}
-              {credential.isSubscribedTo["LINK/BTC"]["6hr"] ? <p className="lead">BTC 6hr</p> : null}
-              {credential.isSubscribedTo["LINK/BTC"]["12hr"] ? <p className="lead">BTC 12hr</p> : null}
-
-              {credential.isSubscribedTo["LINK/USD"]["1hr"] ? <p className="lead">USD 1hr</p> : null}
-              {credential.isSubscribedTo["LINK/USD"]["2hr"] ? <p className="lead">USD 2hr</p> : null}
-              {credential.isSubscribedTo["LINK/USD"]["4hr"] ? <p className="lead">USD 4hr</p> : null}
-              {credential.isSubscribedTo["LINK/USD"]["6hr"] ? <p className="lead">USD 6hr</p> : null}
-              {credential.isSubscribedTo["LINK/USD"]["12hr"] ? <p className="lead">USD 12hr</p> : null}
-            </div>
-          </Col>
-          <Col className="border-end border-top">
-            <div>
-              {credential.isSubscribedTo["MATIC/BTC"]["1hr"] ? <p className="lead">BTC 1hr</p> : null}
-              {credential.isSubscribedTo["MATIC/BTC"]["2hr"] ? <p className="lead">BTC 2hr</p> : null}
-              {credential.isSubscribedTo["MATIC/BTC"]["4hr"] ? <p className="lead">BTC 4hr</p> : null}
-              {credential.isSubscribedTo["MATIC/BTC"]["6hr"] ? <p className="lead">BTC 6hr</p> : null}
-              {credential.isSubscribedTo["MATIC/BTC"]["12hr"] ? <p className="lead">BTC 12hr</p> : null}
-
-              {credential.isSubscribedTo["MATIC/USD"]["1hr"] ? <p className="lead">USD 1hr</p> : null}
-              {credential.isSubscribedTo["MATIC/USD"]["2hr"] ? <p className="lead">USD 2hr</p> : null}
-              {credential.isSubscribedTo["MATIC/USD"]["4hr"] ? <p className="lead">USD 4hr</p> : null}
-              {credential.isSubscribedTo["MATIC/USD"]["6hr"] ? <p className="lead">USD 6hr</p> : null}
-              {credential.isSubscribedTo["MATIC/USD"]["12hr"] ? <p className="lead">USD 12hr</p> : null}
-            </div>
-          </Col>
-          <Col className="border-end border-top">
-            <div>
-              {credential.isSubscribedTo["SOL/BTC"]["1hr"] ? <p className="lead">BTC 1hr</p> : null}
-              {credential.isSubscribedTo["SOL/BTC"]["2hr"] ? <p className="lead">BTC 2hr</p> : null}
-              {credential.isSubscribedTo["SOL/BTC"]["4hr"] ? <p className="lead">BTC 4hr</p> : null}
-              {credential.isSubscribedTo["SOL/BTC"]["6hr"] ? <p className="lead">BTC 6hr</p> : null}
-              {credential.isSubscribedTo["SOL/BTC"]["12hr"] ? <p className="lead">BTC 12hr</p> : null}
-
-              {credential.isSubscribedTo["SOL/USD"]["1hr"] ? <p className="lead">USD 1hr</p> : null}
-              {credential.isSubscribedTo["SOL/USD"]["2hr"] ? <p className="lead">USD 2hr</p> : null}
-              {credential.isSubscribedTo["SOL/USD"]["4hr"] ? <p className="lead">USD 4hr</p> : null}
-              {credential.isSubscribedTo["SOL/USD"]["6hr"] ? <p className="lead">USD 6hr</p> : null}
-              {credential.isSubscribedTo["SOL/USD"]["12hr"] ? <p className="lead">USD 12hr</p> : null}
-            </div>
-          </Col>
           <Col className="border-top">
-            <div>
-              {credential.isSubscribedTo["UNI/BTC"]["1hr"] ? <p className="lead">BTC 1hr</p> : null}
-              {credential.isSubscribedTo["UNI/BTC"]["2hr"] ? <p className="lead">BTC 2hr</p> : null}
-              {credential.isSubscribedTo["UNI/BTC"]["4hr"] ? <p className="lead">BTC 4hr</p> : null}
-              {credential.isSubscribedTo["UNI/BTC"]["6hr"] ? <p className="lead">BTC 6hr</p> : null}
-              {credential.isSubscribedTo["UNI/BTC"]["12hr"] ? <p className="lead">BTC 12hr</p> : null}
-
-              {credential.isSubscribedTo["UNI/USD"]["1hr"] ? <p className="lead">USD 1hr</p> : null}
-              {credential.isSubscribedTo["UNI/USD"]["2hr"] ? <p className="lead">USD 2hr</p> : null}
-              {credential.isSubscribedTo["UNI/USD"]["4hr"] ? <p className="lead">USD 4hr</p> : null}
-              {credential.isSubscribedTo["UNI/USD"]["6hr"] ? <p className="lead">USD 6hr</p> : null}
-              {credential.isSubscribedTo["UNI/USD"]["12hr"] ? <p className="lead">USD 12hr</p> : null}
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="border-end border-top">
-            <div>
-              <p className="lead">BTC: {credential["BTC"]}</p>
-            </div>
-          </Col>
-          <Col className="border-top">
-            <div>
-              <p className="lead">USD: {credential["USD"]}</p>
-            </div>
-          </Col>
-        </Row>
-        <Row>
-          <Col className="border-top">
-            <p className="lead">Account Value in USD: {credential.total}</p>
+            <td>Account Value in USD: {credential.total}</td>
           </Col>
         </Row>
       </Col>

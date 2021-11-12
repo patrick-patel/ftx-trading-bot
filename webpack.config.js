@@ -9,6 +9,11 @@ module.exports = {
     publicPath: '/',
     filename: "bundle.js",
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+  },
   module: {
     rules: [
       {

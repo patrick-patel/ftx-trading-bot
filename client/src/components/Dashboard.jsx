@@ -5,9 +5,9 @@ import { Col, Row, Table } from 'react-bootstrap';
 
 const Dashboard = ({ credential }) => (
   <>
-    <Row variant="dark">
+    <Row bg="dark" text="white">
       <h6 className="display-6">{credential.subAccountName}</h6>
-      <td>{credential.api_key}</td>
+      <p className="lead">{credential.api_key}</p>
     </Row>
     <Row>
       <Table striped bordered hover variant="dark">
@@ -147,12 +147,20 @@ const Dashboard = ({ credential }) => (
         </tbody>
       </Table>
     </Row>
-    <Row variant="dark">
+    <Row bg="dark" text="white">
       <Col className="border-top">
-        <td>Account Value in USD: {credential.total}</td>
+        <p className="lead">BTC: {credential["BTC"]}</p>
+      </Col>
+      <Col className="border-top">
+        <p className="lead">USD: {credential["USD"]}</p>
       </Col>
     </Row>
-    <Row variant="dark">
+    <Row bg="dark" text="white">
+      <Col className="border-top">
+        <p className="lead">Account Value in USD: {credential.total}</p>
+      </Col>
+    </Row>
+    <Row  bg="dark" text="white">
       <Chart
         height={'300px'}
         chartType="LineChart"

@@ -23,6 +23,7 @@ class API extends React.Component {
       "UNI/USD": "off",
       edit: false,
       removeAPI: false,
+      deletedAPI: false,
     }
   }
 
@@ -73,7 +74,7 @@ class API extends React.Component {
       'data': params,
       'success': function(data) {
         this.setState({
-          redirect: true
+          deletedAPI: true
         })
         console.log('success');
       },
@@ -125,14 +126,16 @@ class API extends React.Component {
   render() {
     return (
       <div>
-        <h6 className="display-6">{this.state["subAccountName"]}</h6>
-        <p className="lead">{this.state["api_key"]}</p>
-        {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
-        {this.state.edit ? <Button className="btn-secondary me-2" style={{cursor: "pointer"}} onClick={this.onEdit.bind(this)}>Cancel Edit</Button> : <Button className="me-2" style={{cursor: "pointer"}} onClick={this.onEdit.bind(this)}>Edit Pairs</Button>}
-        {this.state.removeAPI ? <Button className="btn-secondary me-2" style={{cursor: "pointer"}} onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button className="btn-danger" style={{cursor: "pointer"}} onClick={this.onRemove.bind(this)}>Remove API</Button>}
-        {this.state.removeAPI ? <Button className="btn-warning" style={{cursor: "pointer"}} onClick={this.deleteAPI.bind(this)}>Confirm Removal of API</Button> : null}
-        {this.state.removeAPI ? <p>You must <a href="#">delete the API Key from your FTX Account</a> to fully disable the bot</p> : null}
-        <hr></hr>
+        {!this.state.deletedAPI &&
+          <h6 className="display-6">{this.state["subAccountName"]}</h6>
+          <p className="lead">{this.state["api_key"]}</p>
+          {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}
+          {this.state.edit ? <Button className="btn-secondary me-2" style={{cursor: "pointer"}} onClick={this.onEdit.bind(this)}>Cancel Edit</Button> : <Button className="me-2" style={{cursor: "pointer"}} onClick={this.onEdit.bind(this)}>Edit Pairs</Button>}
+          {this.state.removeAPI ? <Button className="btn-secondary me-2" style={{cursor: "pointer"}} onClick={this.onRemove.bind(this)}>Cancel</Button> : <Button className="btn-danger" style={{cursor: "pointer"}} onClick={this.onRemove.bind(this)}>Remove API</Button>}
+          {this.state.removeAPI ? <Button className="btn-warning" style={{cursor: "pointer"}} onClick={this.deleteAPI.bind(this)}>Confirm Removal of API</Button> : null}
+          {this.state.removeAPI ? <p>You must <a href="#">delete the API Key from your FTX Account</a> to fully disable the bot</p> : null}
+          <hr></hr>
+        }
       </div>
     )
   }

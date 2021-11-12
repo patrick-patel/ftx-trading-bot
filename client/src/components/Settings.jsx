@@ -74,7 +74,12 @@ class Settings extends React.Component {
             'x-access-token': localStorage.getItem('token')
           },
           'success': function(subAccounts) {
-            this.setState({ "subAccounts": subAccounts });
+            this.setState({
+              "subAccounts": subAccounts,
+              "api_key": "",
+              "secret": "",
+              "subAccountName": "",
+            });
           },
           'error': function(error) {
             console.log(error);

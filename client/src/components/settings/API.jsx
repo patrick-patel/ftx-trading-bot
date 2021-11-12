@@ -132,7 +132,7 @@ class API extends React.Component {
         )
     } else {
       return (
-        <div className="bg-dark p-4">
+        <div className="mb-2 bg-dark pt-2 ps-4 pe-4">
           <h6 className="display-6 text-white">{this.state["subAccountName"]}</h6>
           <p className="lead text-white">{this.state["api_key"]}</p>
           {this.state.edit ? <PairsForm state={this.state} onPairChange={this.onPairChange.bind(this)} submitPairs={this.submitPairs.bind(this)} /> : null}

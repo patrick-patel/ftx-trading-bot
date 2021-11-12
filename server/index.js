@@ -108,9 +108,9 @@ app.get('/userAPI', verifyJWT, (req, res) => {
   }
 })
 
-app.get('*', (req, res) => {
-  res.redirect('/');
-});
+// app.get('*', (req, res) => {
+//   res.redirect('/');
+// });
 
 // post requests
 app.post('/tradingview', function (req, res) {

@@ -5,9 +5,9 @@ import { Col, Row, Table } from 'react-bootstrap';
 
 const Dashboard = ({ credential }) => (
   <>
-    <Row bg="dark" text="white">
-      <h6 className="display-6">{credential.subAccountName}</h6>
-      <p className="lead">{credential.api_key}</p>
+    <Row className="bg-dark">
+      <h6 className="display-6 text-white">{credential.subAccountName}</h6>
+      <p className="lead text-white">{credential.api_key}</p>
     </Row>
     <Row>
       <Table striped bordered hover variant="dark">
@@ -147,20 +147,20 @@ const Dashboard = ({ credential }) => (
         </tbody>
       </Table>
     </Row>
-    <Row bg="dark" text="white">
+    <Row className="bg-dark">
       <Col className="border-top">
-        <p className="lead">BTC: {credential["BTC"]}</p>
+        <p className="lead text-white">BTC: {credential["BTC"]}</p>
       </Col>
       <Col className="border-top">
-        <p className="lead">USD: {credential["USD"]}</p>
-      </Col>
-    </Row>
-    <Row bg="dark" text="white">
-      <Col className="border-top">
-        <p className="lead">Account Value in USD: {credential.total}</p>
+        <p className="lead text-white">USD: {credential["USD"]}</p>
       </Col>
     </Row>
-    <Row  bg="dark" text="white">
+    <Row className="bg-dark">
+      <Col className="border-top">
+        <p className="lead text-white">Account Value in USD: {credential.total}</p>
+      </Col>
+    </Row>
+    <Row className="bg-dark">
       <Chart
         height={'300px'}
         chartType="LineChart"

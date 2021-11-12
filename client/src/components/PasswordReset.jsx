@@ -12,7 +12,7 @@ class PasswordReset extends React.Component {
       "token": "",
       "password": "",
       "password2": "",
-      redirectHome: false,
+      redirectLogin: false,
     };
   }
 
@@ -34,7 +34,7 @@ class PasswordReset extends React.Component {
       'data': params,
       'success': function(data) {
         console.log(data);
-        this.setState({redirectHome: true})
+        this.setState({redirectLogin: true})
       },
       'error': function(error) {
         console.log(error);
@@ -43,9 +43,9 @@ class PasswordReset extends React.Component {
   }
 
   render() {
-    const redirectHome = this.state.redirectHome;
-    if (redirectHome === true) {
-      return <Redirect to="/" />
+    const redirectLogin = this.state.redirectLogin;
+    if (redirectLogin) {
+      return <Redirect to="/login" />
     }
     return (
       <div>

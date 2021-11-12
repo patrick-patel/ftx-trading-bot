@@ -9,20 +9,12 @@ const Dashboard = ({ credential }) => (
       <h6 className="display-6 text-white mt-2">{credential.subAccountName}</h6>
       <p className="lead text-white">{credential.api_key}</p>
     </Row>
-    <Row className="border bg-dark p-2">
+    <Row className="border bg-dark p-2 justify-content-center">
       <Col>
-        <p className="lead text-white">BTC: {credential["BTC"]}</p>
-      </Col>
-      <Col>
-        <p className="lead text-white">USD: {credential["USD"]}</p>
+        <p className="lead text-white">Account Value {'(USD)'}: {credential.total}</p>
       </Col>
     </Row>
-    <Row className="border bg-dark p-2">
-      <Col>
-        <p className="lead text-white">Account Value in USD: {credential.total}</p>
-      </Col>
-    </Row>
-    <Row className="bg-dark pb-2 ps-4 pe-4">
+    <Row className="bg-dark pb-2 ps-4 pe-4 pt-4">
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -32,6 +24,8 @@ const Dashboard = ({ credential }) => (
             <th>MATIC</th>
             <th>SOL</th>
             <th>UNI</th>
+            <th>BTC</th>
+            <th>USD</th>
           </tr>
         </thead>
         <tbody>
@@ -42,6 +36,8 @@ const Dashboard = ({ credential }) => (
             <td>{credential["MATIC"]}</td>
             <td>{credential["SOL"]}</td>
             <td>{credential["UNI"]}</td>
+            <td>{credential["BTC"]}</td>
+            <td>{credential["USD"]}</td>
           </tr>
           <tr>
             <td>Pair</td>

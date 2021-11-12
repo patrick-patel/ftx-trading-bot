@@ -15,7 +15,6 @@ class Settings extends React.Component {
       "subAccountName": "",
       "isFTXUS": false,
       "subAccounts": [],
-      redirect: false
     };
     this.submitAPI = this.submitAPI.bind(this);
   }
@@ -75,7 +74,7 @@ class Settings extends React.Component {
             'x-access-token': localStorage.getItem('token')
           },
           'success': function(subAccounts) {
-            this.setState({ "subAccounts": subAccounts, redirect: true });
+            this.setState({ "subAccounts": subAccounts });
           },
           'error': function(error) {
             console.log(error);
@@ -89,10 +88,6 @@ class Settings extends React.Component {
   }
 
   render() {
-    const redirect = this.state.redirect;
-    if (redirect) {
-      return <Redirect to='/settings' />
-    }
     return (
       <div>
         <Container>

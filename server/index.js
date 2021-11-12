@@ -373,7 +373,7 @@ app.post('/forgotPassword', (req, res) => {
         sendEmail(email, "Password Reset", msg)
         .then(() => {
           console.log('password reset sent to email');
-          return res.send('password reset sent to email');
+          return res.end();
         })
         .catch(err => console.log(err))
       } else {

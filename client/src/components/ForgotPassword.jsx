@@ -50,7 +50,7 @@ class ForgotPassword extends React.Component {
               <Form.Label>Email address</Form.Label>
               <Form.Control type="email" placeholder="Enter Email" name="email" value={this.state.email} onChange={this.onChange.bind(this)} required />
               <Form.Text className="text-muted">
-                You will receive an email with a password reset link and will have 1 before the link expires.
+                You will receive an email with a password reset link and will have 1 hr before the link expires.
               </Form.Text>
             </Form.Group>
 

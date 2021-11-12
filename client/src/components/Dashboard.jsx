@@ -5,12 +5,25 @@ import { Col, Row, Table } from 'react-bootstrap';
 
 const Dashboard = ({ credential }) => (
   <>
-    <Row className="bg-dark">
-      <h6 className="display-6 text-white">{credential.subAccountName}</h6>
+    <Row className="bg-dark p-2">
+      <h6 className="display-6 text-white mt-2">{credential.subAccountName}</h6>
       <p className="lead text-white">{credential.api_key}</p>
     </Row>
+    <Row className="bg-dark p-2">
+      <Col>
+        <p className="lead text-white">BTC: {credential["BTC"]}</p>
+      </Col>
+      <Col>
+        <p className="lead text-white">USD: {credential["USD"]}</p>
+      </Col>
+    </Row>
+    <Row className="bg-dark p-2">
+      <Col>
+        <p className="lead text-white">Account Value in USD: {credential.total}</p>
+      </Col>
+    </Row>
     <Row>
-      <Table striped bordered hover variant="dark">
+      <Table striped bordered hover variant="dark" className="p-2">
         <thead>
           <tr>
             <th></th>
@@ -147,20 +160,7 @@ const Dashboard = ({ credential }) => (
         </tbody>
       </Table>
     </Row>
-    <Row className="bg-dark">
-      <Col className="border-top">
-        <p className="lead text-white">BTC: {credential["BTC"]}</p>
-      </Col>
-      <Col className="border-top">
-        <p className="lead text-white">USD: {credential["USD"]}</p>
-      </Col>
-    </Row>
-    <Row className="bg-dark">
-      <Col className="border-top">
-        <p className="lead text-white">Account Value in USD: {credential.total}</p>
-      </Col>
-    </Row>
-    <Row className="bg-dark">
+    <Row className="bg-dark p-2 mb-2">
       <Chart
         height={'300px'}
         chartType="LineChart"

@@ -11,13 +11,15 @@ class ForgotPassword extends React.Component {
       "email": "",
       redirectResetPassword: false,
     };
+    this.submitEmail = this.submitEmail.bind(this);
   }
 
   onChange({ target }) {
     this.setState({ [target.name]: target.value });
   }
 
-  submitEmail() {
+  submitEmail(e) {
+    e.preventDefault();
     var json = {"email": this.state.email};
     $.ajax({
       'url': '/forgotPassword',
@@ -54,7 +56,7 @@ class ForgotPassword extends React.Component {
               </Form.Text>
             </Form.Group>
 
-            <Button variant="primary" type="submit" style={{cursor: "pointer"}} onClick={this.submitEmail.bind(this)}>
+            <Button variant="primary" type="submit" style={{cursor: "pointer"}} onClick={(e) => this.submitEmail(e)}>
               Submit
             </Button>
           </Form>

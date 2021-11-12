@@ -211,6 +211,12 @@ let fetchToken = (userID, token) => {
   return Token.findOne({"userID": userID, "token": token}).exec();
 }
 
+let deleteToken = (userID) => {
+  console.log('deleting token for userID: ', userID);
+  console.log('...and hr: ', hr);
+  return Token.deleteMany({"userID": userID}).exec();
+}
+
 module.exports.saveCandle = saveCandle;
 module.exports.fetchCandle = fetchCandle;
 module.exports.deleteCandle = deleteCandle;
@@ -221,5 +227,6 @@ module.exports.fetchUserByID = fetchUserByID;
 module.exports.updateUserByID = updateUserByID;
 module.exports.saveToken = saveToken;
 module.exports.fetchToken = fetchToken;
+module.exports.deleteToken = deleteToken;
 module.exports.User = User;
 

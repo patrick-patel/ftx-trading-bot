@@ -42,8 +42,7 @@ const fetchUserByID = require('../database/index.js').fetchUserByID;
 const updateUserByID = require('../database/index.js').updateUserByID;
 const saveToken = require('../database/index.js').saveToken;
 const fetchToken = require('../database/index.js').fetchToken;
-
-
+const deleteToken = require('../database/index.js').deleteToken;
 
 // middleware
 app.use(bodyParser.json());
@@ -409,6 +408,7 @@ app.post('/password-reset', (req, res) => {
                 updateUserByID(user)
                 .then(() => {
                   console.log('successfully updated password');
+                  deleteToken(userID);
                 })
                 .catch(err => console.log(err))
               });

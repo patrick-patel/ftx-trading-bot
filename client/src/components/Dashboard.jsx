@@ -5,11 +5,11 @@ import { Col, Row, Table } from 'react-bootstrap';
 
 const Dashboard = ({ credential }) => (
   <>
-    <Row className="bg-dark p-2">
+    <Row className="border bg-dark p-2">
       <h6 className="display-6 text-white mt-2">{credential.subAccountName}</h6>
       <p className="lead text-white">{credential.api_key}</p>
     </Row>
-    <Row className="bg-dark p-2">
+    <Row className="border bg-dark p-2">
       <Col>
         <p className="lead text-white">BTC: {credential["BTC"]}</p>
       </Col>
@@ -17,12 +17,12 @@ const Dashboard = ({ credential }) => (
         <p className="lead text-white">USD: {credential["USD"]}</p>
       </Col>
     </Row>
-    <Row className="bg-dark p-2">
+    <Row className="border bg-dark p-2">
       <Col>
         <p className="lead text-white">Account Value in USD: {credential.total}</p>
       </Col>
     </Row>
-    <Row className="bg-dark p-2">
+    <Row className="bg-dark pb-2 ps-4 pe-4">
       <Table striped bordered hover variant="dark">
         <thead>
           <tr>
@@ -160,7 +160,7 @@ const Dashboard = ({ credential }) => (
         </tbody>
       </Table>
     </Row>
-    <Row>
+    <Row className="border">
       <Chart
         height={'300px'}
         chartType="LineChart"
@@ -188,7 +188,7 @@ const Dashboard = ({ credential }) => (
             title: 'USD',
           },
           fontName: 'Verdana',
-          fontSize: 14,
+          fontSize: 16,
         }}
         rootProps={{ 'data-testid': '1' }}
       />

@@ -116,7 +116,7 @@ class Settings extends React.Component {
               <Form.Control type="text" placeholder="Enter Sub Account Name" name="subAccountName" value={this.state.subAccountName} onChange={this.onChange.bind(this)} required />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check type="radio" name="isFTXUS" value={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} label="FTX US" />
+              <Form.Check type="radio" name="isFTXUS" value={this.state.isFTXUS} checked={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} label="FTX US" />
             </Form.Group>
             <Button type="submit" style={{cursor: "pointer"}} onClick={(e) => this.submitAPI(e)}>
               Submit

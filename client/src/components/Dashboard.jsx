@@ -22,8 +22,8 @@ const Dashboard = ({ credential }) => (
         <p className="lead text-white">Account Value in USD: {credential.total}</p>
       </Col>
     </Row>
-    <Row>
-      <Table striped bordered hover variant="dark" className="p-2">
+    <Row className="bg-dark p-2">
+      <Table striped bordered hover variant="dark">
         <thead>
           <tr>
             <th></th>
@@ -160,7 +160,7 @@ const Dashboard = ({ credential }) => (
         </tbody>
       </Table>
     </Row>
-    <Row className="bg-dark p-2 mb-2">
+    <Row>
       <Chart
         height={'300px'}
         chartType="LineChart"
@@ -187,6 +187,8 @@ const Dashboard = ({ credential }) => (
           vAxis: {
             title: 'USD',
           },
+          fontName: 'Verdana',
+          fontSize: 14,
         }}
         rootProps={{ 'data-testid': '1' }}
       />

@@ -98,25 +98,25 @@ class Settings extends React.Component {
       <div>
         <Container>
           <br></br>
-          <Form>
+          <Form className="bg-dark">
             <Form.Group className="mb-3">
-              <Form.Label>API Key</Form.Label>
+              <Form.Label className="text-white">API Key</Form.Label>
               <Form.Control type="text" placeholder="Enter API Key" name="api_key" value={this.state.api_key} onChange={this.onChange.bind(this)} required />
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Password</Form.Label>
+              <Form.Label className="text-white">Password</Form.Label>
               <Form.Control type="text" placeholder="Enter Secret" name="secret" value={this.state.secret} onChange={this.onChange.bind(this)} required />
-              <Form.Text className="text-muted">
+              <Form.Text className="text-muted text-white">
                 API Secrets are encrypted before storage
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>Sub Account Name</Form.Label>
+              <Form.Label className="text-white">Sub Account Name</Form.Label>
               <Form.Control type="text" placeholder="Enter Sub Account Name" name="subAccountName" value={this.state.subAccountName} onChange={this.onChange.bind(this)} required />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Check type="radio" name="isFTXUS" value={this.state.isFTXUS} checked={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} label="FTX US" />
+              <Form.Check className="text-white" type="radio" name="isFTXUS" value={this.state.isFTXUS} checked={this.state.isFTXUS} onChange={this.onChangeRadio.bind(this)} label="FTX US" />
             </Form.Group>
             <Button type="submit" style={{cursor: "pointer"}} onClick={(e) => this.submitAPI(e)}>
               Submit

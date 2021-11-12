@@ -11,24 +11,24 @@ const PairsForm = (props) => (
                                   props.onPairChange("ETH/BTC", "off");
                                   props.onPairChange("ETH/USD", "off");
                                 }} active={props.state["ETH/BTC"] === "off" && props.state["ETH/USD"] === "off"}>Off</Button>
-          <Row>
-            <ButtonGroup className="mb-2" size="sm">
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "1hr")} active={props.state["ETH/BTC"] === "1hr"}>ETH/BTC 1hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "2hr")} active={props.state["ETH/BTC"] === "2hr"}>ETH/BTC 2hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "4hr")} active={props.state["ETH/BTC"] === "4hr"}>ETH/BTC 4hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "6hr")} active={props.state["ETH/BTC"] === "6hr"}>ETH/BTC 6hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "12hr")} active={props.state["ETH/BTC"] === "12hr"}>ETH/BTC 12hr</Button>
-            </ButtonGroup>
-          </Row>
-          <Row>
-            <ButtonGroup className="mb-2" size="sm">
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "1hr")} active={props.state["ETH/USD"] === "1hr"}>ETH/USD 1hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "2hr")} active={props.state["ETH/USD"] === "2hr"}>ETH/USD 2hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "4hr")} active={props.state["ETH/USD"] === "4hr"}>ETH/USD 4hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "6hr")} active={props.state["ETH/USD"] === "6hr"}>ETH/USD 6hr</Button>
-              <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "12hr")} active={props.state["ETH/USD"] === "12hr"}>ETH/USD 12hr</Button>
-            </ButtonGroup>
-          </Row>
+        </ButtonGroup>
+      </Row>
+      <Row>
+        <ButtonGroup className="mb-2" size="sm">
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "1hr")} active={props.state["ETH/BTC"] === "1hr"}>ETH/BTC 1hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "2hr")} active={props.state["ETH/BTC"] === "2hr"}>ETH/BTC 2hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "4hr")} active={props.state["ETH/BTC"] === "4hr"}>ETH/BTC 4hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "6hr")} active={props.state["ETH/BTC"] === "6hr"}>ETH/BTC 6hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/BTC", "12hr")} active={props.state["ETH/BTC"] === "12hr"}>ETH/BTC 12hr</Button>
+        </ButtonGroup>
+      </Row>
+      <Row>
+        <ButtonGroup className="mb-2" size="sm">
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "1hr")} active={props.state["ETH/USD"] === "1hr"}>ETH/USD 1hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "2hr")} active={props.state["ETH/USD"] === "2hr"}>ETH/USD 2hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "4hr")} active={props.state["ETH/USD"] === "4hr"}>ETH/USD 4hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "6hr")} active={props.state["ETH/USD"] === "6hr"}>ETH/USD 6hr</Button>
+          <Button style={{cursor: "pointer"}} onClick={() => props.onPairChange("ETH/USD", "12hr")} active={props.state["ETH/USD"] === "12hr"}>ETH/USD 12hr</Button>
         </ButtonGroup>
       </Row>
     </div>

@@ -136,7 +136,7 @@ app.post('/tradingview', function (req, res) {
             const connection = establishRESTConnection(credential);
             promises.push(getAccountValue(connection)
             .then(wallet => {
-              console.log('wallet: ', wallet);
+              // console.log('wallet: ', wallet);
               var walletEntity = wallet.result.find(walletEntity => walletEntity.coin === coin);
               var baseWalletEntity = wallet.result.find(baseWalletEntity => baseWalletEntity.coin === base);
 

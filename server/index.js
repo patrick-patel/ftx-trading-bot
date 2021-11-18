@@ -162,7 +162,7 @@ app.post('/tradingview', function (req, res) {
                 getOpenTriggerOrders(connection.client, getOpenTriggerOrdersParams)
                 .then(orders => {
                   console.log('order: ', orders);
-                  if (orders.result[0].id) {
+                  if (orders.result[0]) {
                     console.log('canceling order');
                     var openTriggerOrderPromises = [];
                     orders.result.forEach(order => {
@@ -224,7 +224,7 @@ app.post('/tradingview', function (req, res) {
                 getOpenTriggerOrders(connection.client, getOpenTriggerOrdersParams)
                 .then(orders => {
                   console.log('order: ', orders);
-                  if (orders.result[0].id) {
+                  if (orders.result[0]) {
                     console.log('canceling order');
                     var openTriggerOrderPromises = [];
                     orders.result.forEach(order => {

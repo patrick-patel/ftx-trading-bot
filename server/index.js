@@ -191,6 +191,26 @@ app.post('/tradingview', function (req, res) {
                       .catch(err => console.log(err))
                     })
                     .catch(err => console.log(err))
+                  } else {
+                    getMarket(connection.client, pair)
+                    .then(marketData => {
+                      console.log('marketData: ', marketData)
+                      var currentPrice = marketData.result.price;
+                      console.log('posting stop market buy order')
+                      postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
+                      .then(() => {
+                        console.log('successfully posted stop market buy order');
+                        if (freeCoins > 0) {
+                          postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
+                          .then(() => {
+                            console.log('successfully posted stop market sell order');
+                          })
+                          .catch(err => console.log(err))
+                        }
+                      })
+                      .catch(err => console.log(err))
+                    })
+                    .catch(err => console.log(err))
                   }
                 })
                 .catch(err => console.log(err))
@@ -238,6 +258,28 @@ app.post('/tradingview', function (req, res) {
                       }
                     })
                     .catch(err => console.log(err))
+                  } else {
+                    if (freeCoins > 0) {
+                      postStopMarketSellOrder(connection.client, low, freeCoins, pair, connection.orderAdj)
+                      .then(() => {
+                        console.log('successfully posted stop market sell order');
+                      })
+                      .catch(err => console.log(err))
+                    } else { console.log('no free coins') }
+                    if (freeBase > 0) {
+                      getMarket(connection.client, pair)
+                      .then(marketData => {
+                        console.log('marketData: ', marketData)
+                        var currentPrice = marketData.result.price;
+                        console.log('test: posting stop market buy order')
+                        postStopMarketBuyOrder(connection.client, high, freeBase, currentPrice, pair, connection.orderAdj, connection.freeBaseScaler)
+                        .then(() => {
+                          console.log('successfully posted stop market buy order');
+                        })
+                        .catch(err => console.log(err))
+                      })
+                      .catch(err => console.log(err))
+                    }
                   }
                 })
                 .catch(err => console.log(err))

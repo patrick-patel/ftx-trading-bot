@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router';
 import $ from 'jquery';
+import step1 from "../media/step1.png";
 
 import { Container, Image, Row } from 'react-bootstrap';
 
@@ -24,7 +25,7 @@ class GettingStarted extends React.Component {
           <h5 className="display-5">Getting Started</h5>
           <Row>
             <p className="lead">Step 1: Create a subaccount on FTX</p>
-            <img src={require("../media/step1.png")} />
+            <Image src={step1} />
             <Image src={require("../media/step1-1.png")} fluid />
             <p className="fw-light fst-italic">You can setup multiple subaccounts to run different trading pairs or time frames.</p>
           </Row>

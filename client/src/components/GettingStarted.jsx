@@ -32,28 +32,29 @@ class GettingStarted extends React.Component {
           <Row>
             <p className="lead">Step 1: Create a subaccount on FTX</p>
             <Image src={step1} />
+            <br />
             <Image src={step11} />
-            <p className="fw-light fst-italic">You can setup multiple subaccounts to run different trading pairs or time frames.</p>
+            <p className="fw-light fst-italic mt-4">You can setup multiple subaccounts to run different trading pairs or time frames.</p>
           </Row>
           <Row>
             <p className="lead">Step 2: Create an API Key</p>
             <Image src={step2} />
-            <p className="fw-light fst-italic">Only create one api key per subaccount you setup with this bot.</p>
+            <p className="fw-light fst-italic mt-4">Only create one api key per subaccount you setup with this bot.</p>
           </Row>
           <Row>
             <p className="lead">Step 3: Enter API Key under the settings tab</p>
             <Image src={step3} />
-            <p className="fw-light fst-italic">If you are using FTX US make sure to check next to "FTX US".</p>
+            <p className="fw-light fst-italic mt-4">If you are using FTX US make sure to check next to "FTX US".</p>
           </Row>
           <Row>
             <p className="lead">Step 4: Define your trading pairs</p>
             <Image src={step4} />
-            <p className="fw-light fst-italic">You can setup the bot to trade as many or as few coins as you'd like, but must choose between USD or BTC for each coin.</p>
+            <p className="fw-light fst-italic mt-4">You can setup the bot to trade as many or as few coins as you'd like, but must choose between USD or BTC for each coin.</p>
           </Row>
           <Row>
             <p className="lead">Step 5: Fund your subaccount with USD, BTC or Both</p>
             <Image src={step5} />
-            <p className="fw-light fst-italic">Make sure to add the appropriate base asset depending on the pairs you subscribed to.</p>
+            <p className="fw-light fst-italic mt-4">Make sure to add the appropriate base asset depending on the pairs you subscribed to.</p>
           </Row>
           <Row>
             <p className="lead">Step 6: Sit back and let the bot grow your account</p>

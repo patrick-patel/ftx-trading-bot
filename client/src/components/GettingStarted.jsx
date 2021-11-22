@@ -32,8 +32,7 @@ class GettingStarted extends React.Component {
           <Row>
             <p className="lead">Step 1: Create a subaccount on FTX</p>
             <Image src={step1} />
-            <br />
-            <Image src={step11} />
+            <Image src={step11} className="mt-4" />
             <p className="fw-light fst-italic mt-4">You can setup multiple subaccounts to run different trading pairs or time frames.</p>
           </Row>
           <Row>

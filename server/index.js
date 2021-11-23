@@ -142,13 +142,15 @@ app.post('/tradingview', function (req, res) {
 
               if (walletEntity) {
                 var freeCoins = walletEntity.free;
-                console.log('walletEntity: ', walletEntity)
+                console.log('walletEntity: ', walletEntity.coin);
+                console.log('walletEntity freeCoins: ', freeCoins);
               } else {
                 var freeCoins = 0;
               }
               if (baseWalletEntity) {
                 var freeBase = baseWalletEntity.free;
-                console.log('baseWalletEntity: ', baseWalletEntity)
+                console.log('baseWalletEntity: ', baseWalletEntity.coin);
+                console.log('baseWalletEntity freeBase: ', freeBase);
               } else {
                 var freeBase = 0;
               }
